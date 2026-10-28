@@ -88,6 +88,7 @@ figcaption{font-size:.88rem;color:var(--muted);margin-top:6px;line-height:1.45}
 .opt.wrong{border-color:var(--ko);box-shadow:inset 0 0 0 1.5px var(--ko)}
 .opt.wrong::before{content:"✗ ";color:var(--ko);font-weight:700}
 .locked .opt{cursor:default}
+.ol{font-weight:800;color:var(--accent);margin-right:2px}
 .vert .opts{flex-direction:column}
 .vert .opt{width:100%}
 .inline{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
@@ -860,7 +861,7 @@ function renderChoice(ex, body){
   ex.items.forEach((it,i)=>{
     const div = document.createElement("div"); div.className = "item" + (ex.inline ? " inline" : "");
     div.innerHTML = '<p class="q">'+(ex.num?'<span class="num">'+(i+1)+'.</span> ':"")+it.q+'</p><div class="opts" role="group">'
-      + it.opts.map((o,k)=>'<button type="button" class="opt" aria-pressed="false" data-k="'+k+'">'+o+'</button>').join("") + '</div>'
+      + it.opts.map((o,k)=>'<button type="button" class="opt" aria-pressed="false" data-k="'+k+'"><span class="ol">'+"abcdefgh"[k]+')</span> '+o+'</button>').join("") + '</div>'
       + (it.note ? '<div class="note" hidden>💡 '+it.note+'</div>' : "");
     div.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
       if(div.classList.contains("locked")) return;
