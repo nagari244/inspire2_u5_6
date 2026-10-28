@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le plus-que-parfait · FLE B1</title>
+<style>
+:root{
+  --violet:#6b2c91; --bleu:#0b6fb8; --rouge:#d22630; --jaune:#f2a900; --vert:#2f9b48; --or:#a86d00;
+  --ink:#1e2330; --muted:#5b6274; --line:#e2e5eb; --soft:#f7f8fa;
+  --ok:#23853f; --ko:#c62828; --warn:#a85f00;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+img{max-width:100%;height:auto;display:block}
+.stripe{display:flex;height:6px}.stripe i{flex:1}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.hrow{max-width:900px;margin:0 auto;padding:10px 16px 8px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+h1{font-size:1.08rem;margin:0;line-height:1.3}
+h1 small{display:block;font-weight:500;color:var(--muted);font-size:.8rem}
+.total{flex:none;border:2px solid var(--violet);color:var(--violet);border-radius:999px;padding:4px 12px;font-weight:700;font-size:.92rem;white-space:nowrap}
+nav{max-width:900px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:0 16px 10px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:none;font:inherit;font-size:.9rem;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer;min-height:40px}
+.tab[aria-selected="true"]{border-color:var(--c);color:var(--c);font-weight:700;box-shadow:inset 0 0 0 1px var(--c)}
+.tab .ts{font-size:.78rem;color:var(--muted);margin-left:4px;font-weight:600}
+[data-part="1"]{--c:var(--violet)} [data-part="2"]{--c:var(--bleu)} [data-part="3"]{--c:var(--or)} [data-part="4"]{--c:var(--vert)} [data-part="5"]{--c:var(--rouge)}
+main{max-width:900px;margin:0 auto;padding:4px 16px 120px}
+.part{--accent:var(--c)}
+.part-head{border-left:6px solid var(--accent);padding:4px 0 4px 14px;margin:22px 0 8px}
+.part-head h2{margin:0;font-size:1.45rem;line-height:1.25;color:var(--accent)}
+.part-head p{margin:4px 0 0;color:var(--muted)}
+h3{font-size:1.12rem;margin:0 0 6px;line-height:1.3}
+h4{margin:14px 0 4px;font-size:1rem}
+.card{border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0;background:#fff}
+.theory{background:var(--soft);border-left:5px solid var(--accent)}
+.consigne{color:var(--muted);margin:0 0 6px}
+.muted{color:var(--muted);font-size:.93rem}
+.formula{font-weight:700;text-align:center;padding:10px;border:1.5px dashed var(--accent);border-radius:10px;background:#fff;margin:10px 0}
+.formula span{white-space:nowrap}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.94rem;background:#fff}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{color:var(--accent)}
+ul{padding-left:1.2em;margin:6px 0}
+li{margin:3px 0}
+.c-pqp{color:var(--violet);font-weight:700}
+.c-pc{color:var(--bleu);font-weight:700}
+.c-imp{color:var(--or);font-weight:700}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;border:1.5px solid currentColor;border-radius:6px;padding:0 6px;margin-left:4px;vertical-align:1px}
+
+/* illustrations */
+figure{margin:14px 0 4px}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:6px;line-height:1.45}
+.ill{width:100%;max-width:560px;margin:0 auto;display:block;background:#fff;border-radius:12px}
+.ill text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:12px}
+.strip figure{margin:0}
+.big-sentence{text-align:center;font-size:1.05rem;margin:12px 0 0}
+
+/* items */
+.item{padding:10px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.num{font-weight:700;color:var(--accent);margin-right:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0 18px}
+.grid .item{border-bottom:1px dashed var(--line)}
+.bw{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 5px;max-width:100%;vertical-align:middle;margin:2px 0}
+.blank{font:inherit;font-size:16px;color:var(--ink);padding:5px 8px;min-height:38px;border:1.5px solid #b3bac8;border-radius:8px;background:#fff;max-width:100%;min-width:5ch;-webkit-appearance:none;appearance:none}
+.blank:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(11,111,184,.15)}
+.blank.ok{border-color:var(--ok);border-width:2px}
+.blank.ko{border-color:var(--ko);border-width:2px}
+.blank.warn{border-color:var(--warn);border-width:2px}
+.hint{color:var(--muted);font-size:.9rem;font-style:italic}
+.fb{font-size:.92rem;font-weight:600}
+.fb .y{color:var(--ok)} .fb .n{color:var(--ko)}
+.fb .corr{color:var(--ink);font-weight:700;border-bottom:2px solid var(--ok)}
+.fb .acc{color:var(--warn);font-weight:600}
+.note,.info{margin-top:6px;font-size:.92rem;padding:7px 10px;border-radius:8px;background:var(--soft);border-left:3px solid var(--jaune)}
+.info{border-left-color:var(--bleu)}
+
+.q{margin:0 0 6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:inherit;font-size:.95rem;text-align:left;border:1.5px solid #b3bac8;background:#fff;color:var(--ink);border-radius:10px;padding:7px 13px;min-height:42px;cursor:pointer}
+.opt.sel{border-color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent);font-weight:600}
+.opt.right{border-color:var(--ok);box-shadow:inset 0 0 0 1.5px var(--ok)}
+.opt.right::before{content:"✓ ";color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--ko);box-shadow:inset 0 0 0 1.5px var(--ko)}
+.opt.wrong::before{content:"✗ ";color:var(--ko);font-weight:700}
+.locked .opt{cursor:default}
+.vert .opts{flex-direction:column}
+.vert .opt{width:100%}
+.inline{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.inline .q{margin:0;font-weight:600}
+.inline .note{flex-basis:100%}
+
+.ex-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.btn{font:inherit;font-size:.95rem;font-weight:600;border-radius:10px;padding:9px 18px;min-height:44px;cursor:pointer;border:1.5px solid var(--accent)}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.ghost{background:#fff;color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+.ex-score{font-weight:700}
+.ex-msg{color:var(--warn);font-size:.92rem;flex-basis:100%}
+.ex-msg:empty{display:none}
+.next{display:flex;justify-content:flex-end;margin:20px 0}
+
+/* partie 2 : ligne du temps */
+.tl{margin:16px 0 6px}
+.tl-axis{position:relative;height:28px;margin:0 8% 0 6%}
+.tl-axis::before{content:"";position:absolute;left:0;right:0;top:12px;height:3px;background:#9aa1b0;border-radius:2px}
+.tl-axis::after{content:"";position:absolute;right:-12px;top:6px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #9aa1b0}
+.dot{position:absolute;top:4px;width:19px;height:19px;border-radius:50%;transform:translateX(-50%);background:currentColor;border:3px solid #fff;box-shadow:0 0 0 2px currentColor}
+.d1{left:16.6%;color:var(--violet)} .d2{left:50%;color:var(--bleu)} .d3{left:83.3%;color:#7a8090}
+.tl-labels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;font-size:.86rem;line-height:1.35;margin-top:4px}
+.tl-labels b{display:block}
+.tl-arrow{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin:0 6%}
+
+/* partie 3 */
+.present{background:var(--soft);border-radius:10px;padding:10px 12px;font-style:italic;margin:6px 0 10px}
+.present u{text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+.para .item{line-height:2.35}
+.write{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.write p{margin:0}
+.model{border:1.5px solid var(--ok);border-radius:10px;padding:10px 12px;margin-top:10px;background:#fff}
+
+/* partie 4 */
+.vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:6px 18px;margin:6px 0 0;padding:0;list-style:none}
+.vocab li{font-size:.95rem}
+.photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:10px}
+.photos figure{margin:0}
+.photo{border-radius:10px;overflow:hidden;border:1px solid var(--line);position:relative}
+.photo img{width:100%}
+.lbl{position:absolute;transform:translate(-50%,-50%);background:rgba(255,255,255,.93);border:2px solid var(--accent);color:var(--ink);font-size:.8rem;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.lbl.main{border-color:var(--violet);color:var(--violet);font-size:.9rem}
+audio{width:100%;margin:6px 0}
+.transcript p{margin:.55em 0}
+.sp{font-weight:700;color:var(--accent)}
+mark.pqp{background:none;color:inherit}
+.hl mark.pqp{background:#fde9a8;border-radius:3px;padding:0 2px;font-weight:700}
+.locknote{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.93rem;margin:0}
+.discuss li{margin:6px 0}
+
+/* partie 5 : fiches */
+.fc{display:block;width:100%;perspective:1200px;cursor:pointer;outline:none;margin-top:10px;-webkit-tap-highlight-color:transparent}
+.fc-inner{display:grid;transition:transform .5s;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc.noanim .fc-inner{transition:none}
+.fc-face{grid-area:1/1;min-height:210px;-webkit-backface-visibility:hidden;backface-visibility:hidden;border:2px solid var(--accent);border-radius:16px;padding:20px 18px 26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:#fff;position:relative}
+.fc-back{transform:rotateY(180deg);border-color:var(--ok)}
+.fc:focus-visible .fc-face{box-shadow:0 0 0 4px rgba(11,111,184,.2)}
+.fc-n{position:absolute;top:10px;left:14px;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.fc-q{font-size:1.2rem;font-weight:700;margin:6px 0}
+.fc-cue{font-size:1rem;color:var(--accent);font-style:italic;margin:0}
+.fc-a{font-size:1.15rem;margin:6px 0}
+.fc-a b{color:var(--violet)}
+.fc-tap{position:absolute;bottom:8px;right:14px;font-size:.75rem;color:var(--muted)}
+.fc-ctrl{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.fc-count{font-weight:700;color:var(--muted)}
+
+/* partie 5 : dialogues */
+.dlg{border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
+.dlg h4{margin:0 0 8px;color:var(--accent)}
+.bub{max-width:88%;padding:8px 12px;border-radius:14px;margin:6px 0;font-size:.97rem;line-height:1.45}
+.bub b.who{display:inline-block;min-width:1.4em;font-weight:800}
+.bub.a{background:#fff;border:1.5px solid var(--bleu);border-top-left-radius:4px}
+.bub.a b.who{color:var(--bleu)}
+.bub.b{margin-left:auto;background:#fff;border:1.5px dashed var(--rouge);border-top-right-radius:4px}
+.bub.b b.who{color:var(--rouge)}
+.cue{color:var(--muted);font-style:italic}
+.mod{display:block;margin-top:4px;padding-top:4px;border-top:1px dotted var(--line);font-weight:600}
+.mod em{font-style:normal;color:var(--violet)}
+
+#accents{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);display:none;padding:6px 8px calc(6px + env(safe-area-inset-bottom));gap:5px;overflow-x:auto;justify-content:safe center}
+#accents.show{display:flex}
+#accents button{flex:none;font:inherit;font-size:1.05rem;min-width:40px;min-height:40px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);cursor:pointer}
+footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font-size:.85rem}
+@media (max-width:520px){
+  body{font-size:16px}
+  .card{padding:13px}
+  .part-head h2{font-size:1.25rem}
+  .tl-labels{font-size:.78rem}
+  .lbl{font-size:.68rem;padding:1px 6px}
+  .lbl.main{font-size:.75rem}
+  .fc-q{font-size:1.08rem}
+  .bub{max-width:94%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="stripe" aria-hidden="true"><i style="background:var(--violet)"></i><i style="background:var(--bleu)"></i><i style="background:var(--vert)"></i><i style="background:var(--jaune)"></i><i style="background:var(--rouge)"></i></div>
+  <div class="hrow">
+    <h1>Le plus-que-parfait<small>FLE · Niveau B1 · Découverte et pratique</small></h1>
+    <div class="total" id="total" aria-live="polite">0 / 0 pts</div>
+  </div>
+  <nav role="tablist" aria-label="Parties de l'activité">
+    <button class="tab" role="tab" data-part="1" aria-selected="true">1 · Formation<span class="ts" id="ts1"></span></button>
+    <button class="tab" role="tab" data-part="2" aria-selected="false">2 · Utilisation<span class="ts" id="ts2"></span></button>
+    <button class="tab" role="tab" data-part="3" aria-selected="false">3 · Écriture<span class="ts" id="ts3"></span></button>
+    <button class="tab" role="tab" data-part="4" aria-selected="false">4 · Écoute<span class="ts" id="ts4"></span></button>
+    <button class="tab" role="tab" data-part="5" aria-selected="false">5 · Oral</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ===================== PARTIE 1 ===================== -->
+<section class="part" data-part="1">
+  <div class="part-head">
+    <h2>1. Comment se forme le plus-que-parfait ?</h2>
+    <p>Auxiliaire, participe passé, accord : les trois clés.</p>
+  </div>
+
+  <div class="card theory">
+    <h3>📐 La formule</h3>
+    <div class="formula"><span>sujet</span> + <span>avoir / être à l'imparfait</span> + <span>participe passé</span></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th></th><th>avec AVOIR</th><th>avec ÊTRE</th></tr></thead>
+        <tbody>
+          <tr><td>je / j'</td><td>j'<b>avais</b> fini</td><td>j'<b>étais</b> parti(e)</td></tr>
+          <tr><td>tu</td><td>tu <b>avais</b> fini</td><td>tu <b>étais</b> parti(e)</td></tr>
+          <tr><td>il / elle / on</td><td>il <b>avait</b> fini</td><td>elle <b>était</b> partie</td></tr>
+          <tr><td>nous</td><td>nous <b>avions</b> fini</td><td>nous <b>étions</b> parti(e)s</td></tr>
+          <tr><td>vous</td><td>vous <b>aviez</b> fini</td><td>vous <b>étiez</b> parti(e)(s)</td></tr>
+          <tr><td>ils / elles</td><td>ils <b>avaient</b> fini</td><td>elles <b>étaient</b> parties</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>💡 Astuce : même auxiliaire, même participe passé</h4>
+    <p style="margin:0 0 6px">Si vous connaissez le passé composé, vous connaissez déjà le plus-que-parfait : on garde le même auxiliaire et le même participe ; seul l'auxiliaire passe à l'imparfait.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Passé composé</th><th>Plus-que-parfait</th></tr></thead>
+        <tbody>
+          <tr><td>nous <b>avons</b> envoyé</td><td>nous <b>avions</b> envoyé</td></tr>
+          <tr><td>elle <b>est</b> venue</td><td>elle <b>était</b> venue</td></tr>
+          <tr><td>ils <b>se sont</b> levés</td><td>ils <b>s'étaient</b> levés</td></tr>
+          <tr><td>je <b>n'ai pas</b> compris</td><td>je <b>n'avais pas</b> compris</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card theory">
+    <h3>🔁 Rappel : les participes passés</h3>
+    <ul>
+      <li><b>-é</b> : tous les verbes en -er (parler → parlé), + aller → allé, naître → né</li>
+      <li><b>-i</b> : finir → fini, choisir → choisi, partir → parti, dormir → dormi</li>
+      <li><b>-u</b> : voir → vu, lire → lu, venir → venu, pouvoir → pu, boire → bu…</li>
+      <li><b>-is</b> : prendre → pris, mettre → mis, apprendre → appris</li>
+      <li><b>-it</b> : dire → dit, écrire → écrit, faire → fait</li>
+      <li><b>Irréguliers</b> : être → été, avoir → eu, mourir → mort, ouvrir → ouvert</li>
+    </ul>
+  </div>
+
+  <section class="card ex" id="p1a">
+    <h3>Exercice 1 · Écrivez le participe passé</h3>
+    <p class="consigne">Écrivez le participe passé de chaque verbe (attention aux accents !).</p>
+    <div class="ex-body grid"></div>
+  </section>
+
+  <div class="card theory">
+    <h3>🏠 Rappel : la « maison d'être »</h3>
+    <figure>
+      <svg class="ill" viewBox="0 0 420 340" role="img" aria-labelledby="t-maison">
+        <title id="t-maison">La maison des verbes qui se conjuguent avec être</title>
+        <defs><marker id="ah1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#6b2c91"/></marker></defs>
+        <line x1="10" y1="270" x2="410" y2="270" stroke="#9aa1b0" stroke-width="2"/>
+        <polygon points="118,112 210,42 302,112" fill="#fff" stroke="#6b2c91" stroke-width="2.5" stroke-linejoin="round"/>
+        <text x="210" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">naître · mourir</text>
+        <path d="M130,270V112H290V200" fill="none" stroke="#1e2330" stroke-width="2.5"/>
+        <rect x="124" y="132" width="12" height="34" fill="#fff" stroke="#1e2330" stroke-width="2"/>
+        <line x1="212" y1="180" x2="290" y2="180" stroke="#1e2330" stroke-width="2"/>
+        <polyline points="140,270 152,270 152,255 164,255 164,240 176,240 176,225 188,225 188,210 200,210 200,195 212,195 212,180" fill="none" stroke="#1e2330" stroke-width="2"/>
+        <text x="251" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">monter ↑</text>
+        <text x="240" y="222" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">descendre ↓</text>
+        <text x="245" y="256" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">rester</text>
+        <path d="M120,150C96,168 92,220 96,258" fill="none" stroke="#6b2c91" stroke-width="2" marker-end="url(#ah1)"/>
+        <text x="58" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">tomber</text>
+        <line x1="372" y1="222" x2="298" y2="222" stroke="#6b2c91" stroke-width="2" marker-end="url(#ah1)"/>
+        <text x="335" y="213" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">entrer</text>
+        <line x1="298" y1="248" x2="372" y2="248" stroke="#6b2c91" stroke-width="2" marker-end="url(#ah1)"/>
+        <text x="335" y="264" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">sortir</text>
+        <text x="210" y="293" text-anchor="middle" font-size="13" font-weight="700" fill="#1e2330">arriver · partir · aller · venir · passer · retourner</text>
+        <text x="210" y="312" text-anchor="middle" font-size="12.5" fill="#1e2330">+ les dérivés : revenir, devenir, rentrer, remonter…</text>
+        <text x="210" y="331" text-anchor="middle" font-size="12.5" fill="#1e2330">+ tous les verbes pronominaux : se lever, se promener…</text>
+      </svg>
+      <figcaption>On entre, on sort, on monte, on descend, on reste, on tombe par la fenêtre… On naît et on meurt dans la maison. Tous ces verbes se conjuguent avec <b>être</b>.</figcaption>
+    </figure>
+    <p style="margin:10px 0 0">Avec <b>être</b>, le participe s'accorde avec le sujet : <i>elles <b>étaient</b> arrivé<b>es</b></i>.</p>
+    <p class="muted" style="margin:6px 0 0">⚠️ Attention : beaucoup de verbes de mouvement prennent <b>avoir</b> (marcher, courir, voyager, nager…). Et <i>monter, descendre, sortir, passer</i> prennent <b>avoir</b> quand ils ont un COD : <i>il <b>avait</b> descendu la valise</i>.</p>
+  </div>
+
+  <section class="card ex" id="p1b">
+    <h3>Exercice 2 · Avoir ou être ?</h3>
+    <p class="consigne">Choisissez l'auxiliaire de chaque verbe au plus-que-parfait.</p>
+    <div class="ex-body"></div>
+  </section>
+
+  <section class="card ex" id="p1c">
+    <h3>Exercice 3 · Conjuguez au plus-que-parfait</h3>
+    <p class="consigne">Conjuguez le verbe entre parenthèses. Pour les verbes pronominaux, écrivez aussi le pronom (<i>nous nous étions…</i>).</p>
+    <div class="ex-body"></div>
+  </section>
+
+  <div class="next"><button class="btn ghost" data-go="2">Partie 2 : Quand l'utiliser ? →</button></div>
+</section>
+
+<!-- ===================== PARTIE 2 ===================== -->
+<section class="part" data-part="2" hidden>
+  <div class="part-head">
+    <h2>2. Quand utiliser le plus-que-parfait ?</h2>
+    <p>Le « passé du passé ».</p>
+  </div>
+
+  <div class="card theory">
+    <h3>🎬 Une histoire en deux images</h3>
+    <div class="strip">
+      <figure>
+        <svg class="ill" viewBox="0 0 240 178" role="img" aria-labelledby="t-c1">
+          <title id="t-c1">21 h 00 : le film commence, la place de Lucie est vide</title>
+          <rect x="1" y="1" width="238" height="176" rx="12" fill="#fff" stroke="#e2e5eb" stroke-width="2"/>
+          <circle cx="28" cy="28" r="15" fill="#fff" stroke="#1e2330" stroke-width="2"/>
+          <line x1="28" y1="28" x2="19" y2="28" stroke="#1e2330" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="28" y1="28" x2="28" y2="16" stroke="#1e2330" stroke-width="2" stroke-linecap="round"/>
+          <text x="50" y="33" font-size="14" font-weight="700" fill="#1e2330">21 h 00</text>
+          <rect x="70" y="46" width="150" height="62" rx="4" fill="#f1f5fb" stroke="#0b6fb8" stroke-width="2"/>
+          <polygon points="136,56 136,84 160,70" fill="#6b2c91"/>
+          <text x="145" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6b2c91">DÉBUT DU FILM</text>
+          <rect x="14" y="100" width="30" height="68" fill="none" stroke="#9aa1b0" stroke-width="2"/>
+          <g fill="#e2e5eb"><rect x="66" y="124" width="18" height="12" rx="3"/><rect x="88" y="124" width="18" height="12" rx="3"/><rect x="110" y="124" width="18" height="12" rx="3"/><rect x="154" y="124" width="18" height="12" rx="3"/><rect x="176" y="124" width="18" height="12" rx="3"/><rect x="198" y="124" width="18" height="12" rx="3"/>
+          <rect x="66" y="156" width="18" height="12" rx="3"/><rect x="88" y="156" width="18" height="12" rx="3"/><rect x="110" y="156" width="18" height="12" rx="3"/><rect x="132" y="156" width="18" height="12" rx="3"/><rect x="154" y="156" width="18" height="12" rx="3"/><rect x="176" y="156" width="18" height="12" rx="3"/><rect x="198" y="156" width="18" height="12" rx="3"/></g>
+          <rect x="132" y="124" width="18" height="12" rx="3" fill="#fff" stroke="#6b2c91" stroke-width="2" stroke-dasharray="3 2"/>
+          <g fill="#9aa1b0"><circle cx="75" cy="118" r="6"/><circle cx="97" cy="118" r="6"/><circle cx="119" cy="118" r="6"/><circle cx="163" cy="118" r="6"/><circle cx="185" cy="118" r="6"/><circle cx="207" cy="118" r="6"/>
+          <circle cx="75" cy="150" r="6"/><circle cx="97" cy="150" r="6"/><circle cx="119" cy="150" r="6"/><circle cx="141" cy="150" r="6"/><circle cx="163" cy="150" r="6"/><circle cx="185" cy="150" r="6"/><circle cx="207" cy="150" r="6"/></g>
+        </svg>
+        <figcaption><b class="c-pqp">① 21 h 00</b> : le film commence. La place de Lucie est vide.</figcaption>
+      </figure>
+      <figure>
+        <svg class="ill" viewBox="0 0 240 178" role="img" aria-labelledby="t-c2">
+          <title id="t-c2">21 h 20 : Lucie arrive, le film a commencé depuis longtemps</title>
+          <rect x="1" y="1" width="238" height="176" rx="12" fill="#fff" stroke="#e2e5eb" stroke-width="2"/>
+          <circle cx="28" cy="28" r="15" fill="#fff" stroke="#1e2330" stroke-width="2"/>
+          <line x1="28" y1="28" x2="19.5" y2="26.5" stroke="#1e2330" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="28" y1="28" x2="38.4" y2="34" stroke="#1e2330" stroke-width="2" stroke-linecap="round"/>
+          <text x="50" y="33" font-size="14" font-weight="700" fill="#1e2330">21 h 20</text>
+          <rect x="70" y="46" width="150" height="62" rx="4" fill="#f1f5fb" stroke="#0b6fb8" stroke-width="2"/>
+          <path d="M72,106 L104,74 L124,92 L156,62 L218,106 Z" fill="#dbe6f3"/>
+          <circle cx="196" cy="64" r="8" fill="#f2a900"/>
+          <rect x="14" y="100" width="30" height="68" fill="none" stroke="#9aa1b0" stroke-width="2"/>
+          <g fill="#e2e5eb"><rect x="66" y="124" width="18" height="12" rx="3"/><rect x="88" y="124" width="18" height="12" rx="3"/><rect x="110" y="124" width="18" height="12" rx="3"/><rect x="154" y="124" width="18" height="12" rx="3"/><rect x="176" y="124" width="18" height="12" rx="3"/><rect x="198" y="124" width="18" height="12" rx="3"/>
+          <rect x="66" y="156" width="18" height="12" rx="3"/><rect x="88" y="156" width="18" height="12" rx="3"/><rect x="110" y="156" width="18" height="12" rx="3"/><rect x="132" y="156" width="18" height="12" rx="3"/><rect x="154" y="156" width="18" height="12" rx="3"/><rect x="176" y="156" width="18" height="12" rx="3"/><rect x="198" y="156" width="18" height="12" rx="3"/></g>
+          <rect x="132" y="124" width="18" height="12" rx="3" fill="#fff" stroke="#6b2c91" stroke-width="2" stroke-dasharray="3 2"/>
+          <g fill="#9aa1b0"><circle cx="75" cy="118" r="6"/><circle cx="97" cy="118" r="6"/><circle cx="119" cy="118" r="6"/><circle cx="163" cy="118" r="6"/><circle cx="185" cy="118" r="6"/><circle cx="207" cy="118" r="6"/>
+          <circle cx="75" cy="150" r="6"/><circle cx="97" cy="150" r="6"/><circle cx="119" cy="150" r="6"/><circle cx="141" cy="150" r="6"/><circle cx="163" cy="150" r="6"/><circle cx="185" cy="150" r="6"/><circle cx="207" cy="150" r="6"/></g>
+          <circle cx="50" cy="110" r="7" fill="#0b6fb8"/>
+          <path d="M50,117V140M50,124L41,134M50,124L60,129M50,140L43,158M50,140L57,158" stroke="#0b6fb8" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M30,118H37M28,128H35M30,138H37" stroke="#0b6fb8" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <figcaption><b class="c-pc">② 21 h 20</b> : Lucie arrive… trop tard !</figcaption>
+      </figure>
+    </div>
+    <p class="big-sentence">Quand Lucie <span class="c-pc">est arrivée</span> ②, le film <span class="c-pqp">avait déjà commencé</span> ①.</p>
+  </div>
+
+  <div class="card theory">
+    <h3>🧭 Un repère dans le passé</h3>
+    <p style="margin:0 0 6px">Le plus-que-parfait exprime une action <b>terminée avant une autre action passée</b>. Il a toujours besoin d'un <b>repère</b> dans le passé, en général un verbe au <span class="c-pc">passé composé</span> (ou à l'imparfait). À partir de ce repère, le plus-que-parfait permet de <b>revenir en arrière</b>.</p>
+    <div class="tl" aria-hidden="true">
+      <div class="tl-arrow"><span>← plus tôt</span><span>plus tard →</span></div>
+      <div class="tl-axis"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span></div>
+      <div class="tl-labels">
+        <div class="c-pqp"><b>① AVANT</b>le film avait commencé<br><span class="tag">PQP</span></div>
+        <div class="c-pc"><b>② REPÈRE</b>Lucie est arrivée<br><span class="tag">PC</span></div>
+        <div style="color:#7a8090"><b>MAINTENANT</b>je raconte</div>
+      </div>
+    </div>
+    <h4>Sans repère, pas de plus-que-parfait</h4>
+    <ul>
+      <li>❌ <i>Hier, j'avais mangé une pizza.</i> (aucun repère : on dit <i>j'<b>ai mangé</b></i>)</li>
+      <li>✅ <i>Quand tu <span class="c-pc">as téléphoné</span>, j'<span class="c-pqp">avais déjà mangé</span>.</i></li>
+    </ul>
+    <h4>L'ordre des mots ≠ l'ordre des actions</h4>
+    <p style="margin:0">Dans <i>Paul <span class="c-pc">n'est pas venu</span> car il <span class="c-pqp">avait déjà vu</span> le film</i>, l'action racontée en second (voir le film) s'est passée en premier. C'est le plus-que-parfait qui montre l'ordre réel.</p>
+    <h4>Des mots qui aident</h4>
+    <ul>
+      <li><b>déjà</b>, <b>ne… pas encore</b> : <i>le train était <b>déjà</b> parti</i></li>
+      <li><b>quand / lorsque</b> : <i><b>lorsqu'</b>il avait fini, il est sorti</i></li>
+      <li><b>parce que / car</b> (explication) : <i>elle était fatiguée <b>car</b> elle avait mal dormi</i></li>
+      <li><b>que / qui</b> (relatifs) : <i>le livre <b>que</b> j'avais lu</i></li>
+      <li><b>dire que, expliquer que</b> (discours rapporté) : <i>il <b>a dit qu'</b>il avait oublié</i></li>
+    </ul>
+    <figure>
+      <svg class="ill" viewBox="0 0 360 170" role="img" aria-labelledby="t-train">
+        <title id="t-train">Un voyageur arrive sur le quai : le train est déjà loin</title>
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="#0b6fb8"/></marker></defs>
+        <rect x="1" y="1" width="358" height="168" rx="12" fill="#fff" stroke="#e2e5eb" stroke-width="2"/>
+        <circle cx="28" cy="28" r="15" fill="#fff" stroke="#1e2330" stroke-width="2"/>
+        <line x1="28" y1="28" x2="32" y2="20" stroke="#1e2330" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="28" y1="28" x2="33" y2="38" stroke="#1e2330" stroke-width="2" stroke-linecap="round"/>
+        <text x="50" y="33" font-size="14" font-weight="700" fill="#1e2330">8 h 05</text>
+        <rect x="138" y="18" width="96" height="22" rx="4" fill="#fff" stroke="#9aa1b0" stroke-width="1.5"/>
+        <text x="186" y="34" text-anchor="middle" font-size="11" font-weight="700" fill="#5b6274">Départ 8 h 00</text>
+        <rect x="0" y="120" width="225" height="14" fill="#e2e5eb"/>
+        <line x1="0" y1="150" x2="360" y2="150" stroke="#9aa1b0" stroke-width="2"/>
+        <line x1="0" y1="158" x2="360" y2="158" stroke="#9aa1b0" stroke-width="2"/>
+        <rect x="262" y="114" width="84" height="34" rx="7" fill="#0b6fb8"/>
+        <rect x="270" y="121" width="14" height="10" rx="2" fill="#fff"/><rect x="290" y="121" width="14" height="10" rx="2" fill="#fff"/><rect x="310" y="121" width="14" height="10" rx="2" fill="#fff"/>
+        <path d="M232,124H252M236,133H254M232,142H250" stroke="#0b6fb8" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="110" cy="78" r="8" fill="#6b2c91"/>
+        <path d="M110,86V104M110,92L99,84M110,92L121,99M110,104L103,120M110,104L117,120" stroke="#6b2c91" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <rect x="122" y="100" width="14" height="18" rx="2" fill="#a86d00"/>
+        <text x="82" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#6b2c91">Oh non !</text>
+      </svg>
+      <figcaption>Lorsqu'il <span class="c-pc">est arrivé</span> sur le quai, le train <span class="c-pqp">était déjà parti</span>.</figcaption>
+    </figure>
+  </div>
+
+  <div class="card theory">
+    <h3>🧩 Les trois temps du récit</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Temps</th><th>Rôle dans le récit</th><th>Exemple</th></tr></thead>
+        <tbody>
+          <tr><td class="c-pc">Passé composé</td><td>actions principales, événements</td><td><i>Lucie est arrivée.</i></td></tr>
+          <tr><td class="c-imp">Imparfait</td><td>décor, description, habitudes</td><td><i>Il pleuvait.</i></td></tr>
+          <tr><td class="c-pqp">Plus-que-parfait</td><td>action terminée avant une autre action passée</td><td><i>Le film avait commencé.</i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <section class="card ex" id="p2a">
+    <h3>Exercice 4 · Qu'est-ce qui s'est passé en premier ?</h3>
+    <p class="consigne">Lisez la phrase et choisissez l'action qui a eu lieu en premier.</p>
+    <div class="ex-body"></div>
+  </section>
+
+  <section class="card ex" id="p2b">
+    <h3>Exercice 5 · Plus-que-parfait ou passé composé ?</h3>
+    <p class="consigne">Mettez les verbes entre parenthèses au plus-que-parfait ou au passé composé. Écrivez tout le verbe conjugué (avec la négation ou <i>déjà</i> si nécessaire).</p>
+    <div class="ex-body"></div>
+  </section>
+
+  <div class="next"><button class="btn ghost" data-go="3">Partie 3 : À vous d'écrire →</button></div>
+</section>
+
+<!-- ===================== PARTIE 3 ===================== -->
+<section class="part" data-part="3" hidden>
+  <div class="part-head">
+    <h2>3. Raconter au passé</h2>
+    <p>Trois petits textes à transposer du présent au passé.</p>
+  </div>
+
+  <div class="card theory">
+    <h3>🎭 Le théâtre du récit</h3>
+    <figure>
+      <svg class="ill" viewBox="0 0 420 262" role="img" aria-labelledby="t-theatre">
+        <title id="t-theatre">Une scène de théâtre : le décor, l'action et les coulisses</title>
+        <rect x="70" y="40" width="280" height="160" fill="#fdf6e6" stroke="#a86d00" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <circle cx="312" cy="72" r="14" fill="#f2a900"/>
+        <path d="M70,178Q140,128 210,172Q280,132 350,170V200H70Z" fill="#f1e3c0"/>
+        <rect x="252" y="146" width="30" height="24" fill="#fff" stroke="#a86d00" stroke-width="1.5"/>
+        <polygon points="248,146 267,131 286,146" fill="#fff" stroke="#a86d00" stroke-width="1.5"/>
+        <text x="82" y="64" font-size="14" font-weight="800" fill="#a86d00">DÉCOR</text>
+        <text x="82" y="82" font-size="12.5" font-weight="700" fill="#a86d00">→ imparfait</text>
+        <text x="82" y="98" font-size="11" fill="#a86d00">il faisait beau…</text>
+        <path d="M14,32H62Q50,110 58,200H14Z" fill="#f6dfe1" stroke="#d22630" stroke-width="1.5"/>
+        <path d="M406,32H358Q370,110 362,200H406Z" fill="#f6dfe1" stroke="#d22630" stroke-width="1.5"/>
+        <rect x="14" y="10" width="392" height="24" rx="4" fill="#f6dfe1" stroke="#d22630" stroke-width="1.5"/>
+        <polygon points="14,200 406,200 390,236 30,236" fill="#f7f8fa" stroke="#e2e5eb" stroke-width="1.5"/>
+        <circle cx="190" cy="150" r="10" fill="#0b6fb8"/>
+        <path d="M190,160V186M190,168L172,156M190,168L210,160M190,186L180,206M190,186L200,206" stroke="#0b6fb8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <path d="M216,148H232M218,158H236" stroke="#0b6fb8" stroke-width="2" stroke-linecap="round"/>
+        <text x="210" y="225" text-anchor="middle" font-size="13" font-weight="800" fill="#0b6fb8">ACTION → passé composé</text>
+        <circle cx="36" cy="118" r="7" fill="#6b2c91"/>
+        <path d="M36,125V146" stroke="#6b2c91" stroke-width="3" stroke-linecap="round"/>
+        <text x="14" y="256" font-size="12" font-weight="800" fill="#6b2c91">COULISSES (avant le spectacle) → plus-que-parfait</text>
+      </svg>
+      <figcaption>Dans un récit au passé, l'<span class="c-imp">imparfait</span> peint le décor, le <span class="c-pc">passé composé</span> fait avancer l'action sur scène et le <span class="c-pqp">plus-que-parfait</span> raconte ce qui s'était passé avant, en coulisses.</figcaption>
+    </figure>
+    <ul>
+      <li>Le <span class="c-imp">décor</span>, la description, l'état, l'habitude → <span class="c-imp">imparfait</span> <i>(il faisait beau, tous les étés je passais…)</i></li>
+      <li>Les <span class="c-pc">événements</span>, les actions principales → <span class="c-pc">passé composé</span> <i>(soudain, le vent s'est levé)</i></li>
+      <li>Une action <span class="c-pqp">antérieure</span> à une autre action passée → <span class="c-pqp">plus-que-parfait</span> <i>(elle avait oublié son téléphone)</i></li>
+    </ul>
+    <p class="muted" style="margin:6px 0 0">Mots-signaux : <i>soudain, tout à coup, un jour</i> → passé composé · <i>tous les jours, d'habitude, souvent</i> → imparfait.</p>
+  </div>
+
+  <section class="card ex para" id="p3a">
+    <h3>Texte 1 · Un dimanche à Saint-Malo</h3>
+    <p class="consigne">Passé composé et imparfait. Lisez le texte au présent, puis écrivez les verbes au passé.</p>
+    <div class="present" data-src="p3a"></div>
+    <div class="ex-body"></div>
+    <div class="write" data-model="p3a"></div>
+  </section>
+
+  <section class="card ex para" id="p3b">
+    <h3>Texte 2 · Un lundi difficile <span class="tag" style="color:var(--violet)">défi PQP</span></h3>
+    <p class="consigne">Passé composé, imparfait… et deux plus-que-parfaits cachés !</p>
+    <div class="present" data-src="p3b"></div>
+    <div class="ex-body"></div>
+    <div class="write" data-model="p3b"></div>
+  </section>
+
+  <section class="card ex para" id="p3c">
+    <h3>Texte 3 · Les étés chez ma grand-mère</h3>
+    <p class="consigne">Habitudes à l'imparfait, événements au passé composé.</p>
+    <div class="present" data-src="p3c"></div>
+    <div class="ex-body"></div>
+    <div class="write" data-model="p3c"></div>
+  </section>
+
+  <div class="next"><button class="btn ghost" data-go="4">Partie 4 : Compréhension orale →</button></div>
+</section>
+
+<!-- ===================== PARTIE 4 ===================== -->
+<section class="part" data-part="4" hidden>
+  <div class="part-head">
+    <h2>4. Compréhension orale</h2>
+    <p>Émission « Les pierres racontent » : la reconstruction de Saint-Malo et de Brest après 1944.</p>
+  </div>
+
+  <div class="card theory">
+    <h3>🏰 Avant d'écouter : qu'est-ce qu'une ville « intra-muros » ?</h3>
+    <figure>
+      <div class="photo">
+        <img src="img/saint-malo-avant-guerre.jpg" alt="Vue aérienne de Saint-Malo avant la guerre : une ville très dense entourée de murs, au bord de la mer, avec le port à droite" loading="lazy" width="1400" height="1022">
+        <span class="lbl main" style="left:44%;top:36%">ville intra-muros</span>
+        <span class="lbl" style="left:24%;top:59%">les remparts</span>
+        <span class="lbl" style="left:74%;top:31%">le port</span>
+        <span class="lbl" style="left:14%;top:84%">la mer</span>
+      </div>
+      <figcaption><b>Saint-Malo avant la guerre.</b> <i>Intra-muros</i> veut dire « à l'intérieur des murs » en latin : c'est la vieille ville, protégée par les <b>remparts</b>, ces grands murs de pierre qui l'entourent.</figcaption>
+    </figure>
+    <h4>Été 1944 : deux villes détruites</h4>
+    <div class="photos">
+      <figure>
+        <div class="photo"><img src="img/saint-malo-ruines-1944.jpg" alt="Saint-Malo vue d'en haut après les combats : des maisons en ruines, des rues dégagées entre les décombres" loading="lazy" width="712" height="640"></div>
+        <figcaption><b>Saint-Malo, 1944.</b> La ville intra-muros après les combats et l'incendie : il ne reste que des murs.</figcaption>
+      </figure>
+      <figure>
+        <div class="photo"><img src="img/brest-ruines-1944.jpg" alt="Une rue de Brest en ruines en 1944 : des soldats marchent sur un tas de pierres entre des immeubles détruits" loading="lazy" width="930" height="620"></div>
+        <figcaption><b>Brest, 1944.</b> Une rue détruite par les bombardements : des montagnes de pierres.</figcaption>
+      </figure>
+    </div>
+    <h4 style="margin-top:16px">Quelques mots utiles</h4>
+    <ul class="vocab">
+      <li><b>les remparts</b> : les grands murs qui entourent une ville ancienne</li>
+      <li><b>intra-muros</b> : à l'intérieur des remparts</li>
+      <li><b>un siège</b> : encercler une ville pour la prendre</li>
+      <li><b>se rendre</b> : arrêter de combattre, capituler</li>
+      <li><b>une baraque</b> : une petite maison provisoire, souvent en bois</li>
+      <li><b>le granit</b> : une pierre très dure, typique de la Bretagne</li>
+      <li><b>le béton</b> : un matériau de construction moderne, gris</li>
+      <li><b>aplanir</b> : rendre plat</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🎧 Écoutez l'émission <span class="muted" style="font-weight:500">(3 min 19)</span></h3>
+    <audio id="audio" controls preload="metadata"></audio>
+    <p id="audio-msg" class="info" hidden>Impossible de charger l'enregistrement. Vérifiez votre connexion et rechargez la page.</p>
+    <p class="muted" style="margin:6px 0 0">Conseil : écoutez une première fois sans lire les questions, puis une deuxième et une troisième fois pour répondre.</p>
+  </div>
+
+  <section class="card ex vert" id="p4">
+    <h3>Exercice 6 · Questionnaire (15 questions)</h3>
+    <p class="consigne">Choisissez la bonne réponse, puis cliquez sur « Vérifier ».</p>
+    <div class="ex-body"></div>
+  </section>
+
+  <div class="card">
+    <h3>📄 Transcription</h3>
+    <p class="locknote" id="tr-lock">🔒 La transcription sera disponible quand vous aurez vérifié le questionnaire.</p>
+    <div class="ex-actions" id="tr-actions" hidden>
+      <button type="button" id="btn-tr" class="btn ghost">Afficher la transcription</button>
+      <button type="button" id="btn-hl" class="btn ghost" hidden>Surligner les plus-que-parfaits</button>
+    </div>
+    <div id="transcript" class="transcript" hidden>
+      <p><span class="sp">Claire :</span> Bonjour à toutes et à tous, et bienvenue dans « Les pierres racontent », l'émission qui raconte l'histoire des villes à travers leurs bâtiments. Aujourd'hui, nous partons en Bretagne avec l'historien Yann Le Goff. Bonjour Yann !</p>
+      <p><span class="sp">Yann :</span> Bonjour Claire.</p>
+      <p><span class="sp">Claire :</span> Yann, en 1944, au moment de la Libération, deux villes bretonnes ont beaucoup souffert : Saint-Malo et Brest. Qu'est-ce qui s'est passé ?</p>
+      <p><span class="sp">Yann :</span> Commençons par Saint-Malo. Au mois d'août 1944, les soldats américains sont arrivés devant la ville. Les Allemands l'occupaient et ils refusaient de se rendre. Pendant deux semaines, il y a eu des combats et des bombardements, et un énorme incendie a brûlé la vieille ville. Quand les combats se sont terminés, près de 80 % de la ville intra-muros <mark class="pqp">avait disparu</mark>.</p>
+      <p><span class="sp">Claire :</span> Intra-muros, c'est-à-dire la ville à l'intérieur des remparts ?</p>
+      <p><span class="sp">Yann :</span> Exactement. Et le plus étonnant, c'est que les remparts, eux, <mark class="pqp">avaient résisté</mark>. Beaucoup d'habitants, qui <mark class="pqp">avaient quitté</mark> la ville avant les combats, sont revenus quelques semaines plus tard. Ils n'ont pas reconnu leur quartier : leurs maisons <mark class="pqp">avaient brûlé</mark> et les rues étaient pleines de pierres.</p>
+      <p><span class="sp">Claire :</span> Et à Brest ?</p>
+      <p><span class="sp">Yann :</span> À Brest, c'était encore pire. Le port était une base très importante pour les sous-marins allemands, alors la ville <mark class="pqp">avait déjà subi</mark> de nombreux bombardements pendant toute la guerre. En septembre 1944, après un long siège, Brest était presque entièrement détruite.</p>
+      <p><span class="sp">Claire :</span> Alors, comment a-t-on reconstruit ces deux villes ?</p>
+      <p><span class="sp">Yann :</span> C'est là que l'histoire devient intéressante : on a fait deux choix très différents. À Saint-Malo, l'architecte Louis Arretche a voulu garder l'esprit de l'ancienne ville. On a réutilisé une partie des vieilles pierres de granit, on a gardé les toits très pentus et les hautes cheminées. Mais attention, ce n'est pas une copie exacte ! À l'intérieur, les appartements étaient modernes, plus clairs, avec l'eau courante, et certaines rues étaient plus larges qu'avant.</p>
+      <p><span class="sp">Claire :</span> Donc, quand on se promène aujourd'hui dans Saint-Malo, on a l'impression de visiter une ville très ancienne…</p>
+      <p><span class="sp">Yann :</span> Oui ! Et beaucoup de touristes ne savent pas que la plupart des maisons ont été construites après la guerre.</p>
+      <p><span class="sp">Claire :</span> Et à Brest, on a fait la même chose ?</p>
+      <p><span class="sp">Yann :</span> Pas du tout. À Brest, l'architecte Jean-Baptiste Mathon a préféré une ville moderne : de grandes avenues droites, des immeubles en béton, presque tous de la même hauteur. On a même utilisé les ruines pour aplanir le terrain.</p>
+      <p><span class="sp">Claire :</span> Et pendant les travaux, où vivaient les Brestois ?</p>
+      <p><span class="sp">Yann :</span> Dans des baraques en bois. Normalement, c'était une solution provisoire… mais le provisoire a duré longtemps : certaines familles y ont vécu pendant de longues années.</p>
+      <p><span class="sp">Claire :</span> Et les Brestois, est-ce qu'ils ont aimé leur nouvelle ville ?</p>
+      <p><span class="sp">Yann :</span> Au début, beaucoup la trouvaient froide et grise. Ils regrettaient la ville qu'ils <mark class="pqp">avaient connue</mark> avant la guerre. Mais aujourd'hui, on regarde ce patrimoine autrement : les architectes et les historiens s'intéressent de plus en plus à l'architecture de la Reconstruction.</p>
+      <p><span class="sp">Claire :</span> Pour finir, Yann, quelle reconstruction préférez-vous ?</p>
+      <p><span class="sp">Yann :</span> Je ne vais pas choisir ! Ces deux villes racontent la même histoire, mais de deux façons différentes : Saint-Malo a voulu retrouver son passé, Brest a voulu regarder vers l'avenir.</p>
+      <p><span class="sp">Claire :</span> Merci beaucoup, Yann. Et vous, chers auditeurs, quelle ville aimeriez-vous visiter ? Rendez-vous la semaine prochaine dans « Les pierres racontent ».</p>
+    </div>
+  </div>
+
+  <div class="card theory">
+    <h3>🏗️ Après l'écoute : deux reconstructions</h3>
+    <p class="locknote" id="apres-lock">🔒 Disponible quand vous aurez vérifié le questionnaire.</p>
+    <div id="apres" hidden>
+      <div class="photos">
+        <figure>
+          <div class="photo"><img src="img/saint-malo-reconstruit.jpg" alt="Saint-Malo reconstruit : de hautes maisons de granit aux toits pentus et grandes cheminées, derrière les remparts, au bord du port" loading="lazy" width="650" height="548"></div>
+          <figcaption><b>Saint-Malo reconstruit.</b> Granit, toits pentus, hautes cheminées : l'esprit de la vieille ville derrière les remparts.</figcaption>
+        </figure>
+        <figure>
+          <div class="photo"><img src="img/brest-reconstruit.jpg" alt="Brest reconstruit vu du ciel : des immeubles en béton de même hauteur le long de rues droites et larges" loading="lazy" width="720" height="540"></div>
+          <figcaption><b>Brest reconstruit.</b> Béton, avenues droites, immeubles de même hauteur : une ville moderne.</figcaption>
+        </figure>
+      </div>
+      <h4>À l'oral, en petits groupes</h4>
+      <ul class="discuss">
+        <li>Comparez les deux photos : quelles différences voyez-vous ?</li>
+        <li>Racontez avec le plus-que-parfait : qu'est-ce qui <b>s'était passé</b> dans ces villes avant la reconstruction ? <i>(Quand les habitants sont revenus, …)</i></li>
+        <li>Quelle reconstruction préférez-vous ? Pourquoi ?</li>
+        <li>Dans votre pays, connaissez-vous une ville ou un quartier qui a été reconstruit ? Qu'est-ce qui s'était passé ?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📊 Bilan</h3>
+    <div class="tw">
+      <table id="bilan">
+        <thead><tr><th>Partie</th><th>Score</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="next"><button class="btn ghost" data-go="5">Partie 5 : À l'oral →</button></div>
+</section>
+
+<!-- ===================== PARTIE 5 ===================== -->
+<section class="part" data-part="5" hidden>
+  <div class="part-head">
+    <h2>5. À l'oral !</h2>
+    <p>Fiches recto-verso et micro-dialogues, en binôme.</p>
+  </div>
+
+  <div class="card">
+    <h3>🃏 20 fiches recto-verso</h3>
+    <p class="consigne">Lisez la phrase au recto et complétez-la <b>à voix haute</b> avec le plus-que-parfait, à l'aide des indices. Touchez la fiche pour voir la réponse au verso. En binôme : l'un complète, l'autre vérifie, puis on échange les rôles.</p>
+    <div class="fc" id="fc" role="button" tabindex="0" aria-label="Retourner la fiche">
+      <div class="fc-inner">
+        <div class="fc-face fc-front" id="fcFront"></div>
+        <div class="fc-face fc-back" id="fcBack"></div>
+      </div>
+    </div>
+    <div class="fc-ctrl">
+      <button type="button" class="btn ghost" id="fcPrev">← Précédente</button>
+      <span class="fc-count" id="fcCount" aria-live="polite"></span>
+      <button type="button" class="btn ghost" id="fcNext">Suivante →</button>
+    </div>
+    <div class="fc-ctrl" style="justify-content:center">
+      <button type="button" class="btn primary" id="fcFlip">Retourner la fiche</button>
+      <button type="button" class="btn ghost" id="fcShuffle">Mélanger</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💬 10 micro-dialogues</h3>
+    <p class="consigne">En binôme. <b style="color:var(--bleu)">A</b> lit ses répliques ; <b style="color:var(--rouge)">B</b> répond à l'oral à partir des indices, avec le passé composé et le plus-que-parfait. Comparez avec le modèle, puis changez de rôle. <b>Défi :</b> ajoutez deux répliques de votre invention.</p>
+    <div id="dialogues"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>Activité de FLE · Niveau B1 · Le plus-que-parfait</footer>
+
+<div id="accents" aria-label="Lettres accentuées">
+  <button type="button">é</button><button type="button">è</button><button type="button">ê</button><button type="button">ë</button><button type="button">à</button><button type="button">â</button><button type="button">ç</button><button type="button">î</button><button type="button">ï</button><button type="button">ô</button><button type="button">û</button><button type="button">ù</button><button type="button">œ</button><button type="button">É</button><button type="button">À</button>
+</div>
+
+<script>
+"use strict";
+const AUDIO_SRC = "audio/les-pierres-racontent-saint-malo-brest.mp3";
+
+/* Syntaxe des trous : [[réponse|variante acceptée::indice affiché]] */
+const PP = [["envoyer","envoyé"],["voir","vu"],["courir","couru"],["pouvoir","pu"],["mourir","mort"],["tenir","tenu"],["vouloir","voulu"],["devoir","dû"],["recevoir","reçu"],["pleuvoir","plu"],["savoir","su"],["avoir","eu"],["être","été"],["faire","fait"],["lire","lu"],["écrire","écrit"],["prendre","pris"],["connaître","connu"],["dire","dit"],["choisir","choisi"]];
+const NOTES_PP = {"devoir":"dû prend un accent circonflexe (au féminin : due).","recevoir":"Attention à la cédille : reçu.","mourir":"Participe irrégulier : mort (elle était morte).","être":"être → été (et il se conjugue avec avoir : j'avais été)."};
+
+const AUX = [
+  ["partir",1],["manger",0],["se promener",1,"Verbe pronominal → toujours être."],["naître",1,"naître / mourir se conjuguent avec être."],
+  ["voyager",0,"C'est un verbe de mouvement, mais il se conjugue avec avoir : j'avais voyagé."],["tomber",1],
+  ["courir",0,"Mouvement, mais avoir : il avait couru."],["devenir",1,"Dérivé de venir → être."],
+  ["se réveiller",1,"Verbe pronominal → toujours être."],["rester",1,"rester se conjugue avec être : elle était restée."],
+  ["marcher",0,"Mouvement, mais avoir : nous avions marché."],["arriver",1]
+];
+
+const EXS = {
+  p1a:{type:"fill", items: PP.map(([i,p])=>({t:"<b>"+i+"</b> → [["+p+"]]", note:NOTES_PP[i]}))},
+  p1b:{type:"choice", inline:true, items: AUX.map(([v,a,n])=>({q:v, opts:["avoir","être"], a:a, note:n}))},
+  p1c:{type:"fill", num:true, items:[
+    {t:"Tout [[s'était::se passer]] bien [[passé]].", note:"se passer est pronominal : s'était passé."},
+    {t:"Elles [[étaient arrivées::arriver]] à la réception en retard.", note:"Auxiliaire être + accord avec elles : arrivées."},
+    {t:"[[J'avais dîné::je + dîner]] avec mes parents.", note:"je + avais → j'avais (élision)."},
+    {t:"Nous [[nous étions promenés|nous étions promenées::se promener]] dans les jardins en ville.", note:"Verbe pronominal : nous nous étions promené(e)s."},
+    {t:"Nous [[nous étions réveillés|nous étions réveillées::se réveiller]] à l'aube.", note:"Verbe pronominal : nous nous étions réveillé(e)s."},
+    {t:"Vous [[étiez partis|étiez parties|étiez parti|étiez partie::partir]] plus tôt.", note:"partir → être. Accord selon « vous » : parti, partie, partis ou parties."},
+    {t:"Nous [[avions été::être]] très contents.", note:"Le verbe être se conjugue avec avoir : nous avions été."},
+    {t:"Tu [[t'étais demandé::se demander]] s'il était allergique.", note:"Pas d'accord ici : on demande quelque chose À soi-même (te = complément indirect)."},
+    {t:"Il [[avait pris::prendre]] un cachet d'aspirine."},
+    {t:"Elle [[avait expliqué::expliquer]] la situation en détail."}
+  ]},
+  p2a:{type:"choice", num:true, items:[
+    {q:"Quand je suis arrivé à la fête, Marc était déjà parti.", opts:["Mon arrivée à la fête","Le départ de Marc"], a:1},
+    {q:"Elle m'a rendu le livre que je lui avais prêté.", opts:["Je prête le livre","Elle rend le livre"], a:0},
+    {q:"Ils étaient fatigués parce qu'ils avaient travaillé toute la nuit.", opts:["Ils sont fatigués","Ils travaillent toute la nuit"], a:1},
+    {q:"Quand nous sommes entrés dans le musée, la visite guidée avait déjà commencé.", opts:["Nous entrons dans le musée","La visite commence"], a:1},
+    {q:"Le guide nous a expliqué que la ville avait été détruite en 1944.", opts:["La ville est détruite","Le guide explique"], a:0}
+  ]},
+  p2b:{type:"fill", num:true, items:[
+    {t:"Quand Lucie [[est arrivée::arriver]], le film [[avait déjà commencé::déjà commencer]].", note:"Le film commence AVANT l'arrivée de Lucie → PQP."},
+    {t:"Lorsqu'il [[avait vérifié::vérifier]] toutes les fenêtres, il [[a quitté::quitter]] la maison.", note:"D'abord il vérifie, ensuite il part : l'action antérieure est au PQP."},
+    {t:"Paul [[n'est pas venu::ne pas venir]] au cinéma avec nous car il [[avait déjà vu::déjà voir]] le film.", note:"Négation : n' + auxiliaire + pas + participe. « Déjà » se place entre l'auxiliaire et le participe."},
+    {t:"Laura [[n'a pas réussi::ne pas réussir]] son examen car elle [[n'avait pas révisé::ne pas réviser]].", note:"Elle n'a pas révisé AVANT l'examen → PQP."},
+    {t:"Suzanne [[s'est sentie::se sentir]] mieux car elle [[avait pris::prendre]] un cachet d'aspirine.", note:"se sentir est pronominal → être + accord : sentie."},
+    {t:"Lorsqu'ils [[sont arrivés::arriver]] à la gare, le train [[était déjà parti::déjà partir]].", note:"partir → être : le train était parti."},
+    {t:"La pluie [[s'était arrêtée|s'est arrêtée::s'arrêter]] quand nous [[sommes arrivés|sommes arrivées::arriver]] à la plage.", info:"Deux réponses possibles : « s'était arrêtée » = avant notre arrivée ; « s'est arrêtée » = au moment de notre arrivée."},
+    {t:"Quand Valérie [[a allumé::allumer]] la télé, son programme [[était déjà terminé|s'était déjà terminé::déjà terminer]].", note:"Le programme se termine AVANT : était déjà terminé (ou s'était déjà terminé)."},
+    {t:"Emma [[avait déjà commencé::déjà commencer]] son repas quand sa maman lui [[a téléphoné::téléphoner]].", note:"Le repas commence avant l'appel."},
+    {t:"Quand le policier [[est arrivé::arriver]], le voleur [[avait déjà pris::déjà prendre]] l'argent dans la caisse."},
+    {t:"Le médecin [[a rassuré::rassurer]] les parents quand il [[avait terminé|a terminé::terminer]] l'intervention de leur fils.", info:"On attend surtout le PQP (l'intervention est finie avant). Le passé composé est aussi accepté : les deux actions se suivent."},
+    {t:"Maria [[est sortie::sortir]] en courant me raconter ce qu'elle [[avait vu::voir]].", note:"Elle a vu quelque chose AVANT de sortir."},
+    {t:"Les enfants [[ont mangé::manger]] tous les gâteaux que leur père [[avait achetés::acheter]].", note:"Accord : le COD « que » (= les gâteaux) est placé avant le verbe → achetés."},
+    {t:"Danielle [[a été::être]] surprise de voir que son ami [[avait quitté::quitter]] la ville sans lui dire au revoir.", note:"L'ami part AVANT que Danielle le découvre."},
+    {t:"Le spécialiste lui [[a dit::dire]] que le cancer [[avait disparu::disparaître]].", note:"Discours rapporté au passé : il a dit que + plus-que-parfait."}
+  ]},
+  p3a:{type:"fill", items:[
+    {t:"[[C'était::C'est]] dimanche. Il [[faisait::fait]] beau et la plage [[était::est]] pleine de monde. Nous [[marchions::marchons]] sur les remparts quand, soudain, le vent [[s'est levé::se lève]]. Les enfants [[ont couru::courent]] vers la digue et les parents [[ont ramassé::ramassent]] vite les serviettes. En dix minutes, la plage [[s'est vidée::se vide]].",
+     note:"Décor (dimanche, beau temps, action en cours) → imparfait. Événements après « soudain » → passé composé. Pronominaux → être : s'est levé, s'est vidée."}
+  ]},
+  p3b:{type:"fill", items:[
+    {t:"Lundi, Inès [[est arrivée::arrive]] au bureau en retard. Elle [[était::est]] fatiguée parce qu'elle [[avait mal dormi::a mal dormi]]. Elle [[a cherché::cherche]] son téléphone dans son sac, mais il [[n'était pas::n'est pas]] là : elle l'[[avait oublié::a oublié]] chez elle ! Alors, elle [[a emprunté::emprunte]] l'ordinateur d'un collègue et elle [[a envoyé::envoie]] un message à sa sœur.",
+     note:"Les verbes déjà au passé composé dans le texte au présent (a mal dormi, a oublié) racontent des actions antérieures : au passé, ils deviennent des plus-que-parfaits."}
+  ]},
+  p3c:{type:"fill", items:[
+    {t:"[[J'avais::J'ai]] dix ans. Tous les étés, je [[passais::passe]] mes vacances chez ma grand-mère, à la campagne. Elle [[habitait::habite]] une vieille maison et elle [[préparait::prépare]] des confitures délicieuses. Un jour, je [[suis tombé|suis tombée::tombe]] d'un arbre et je [[me suis cassé::me casse]] le bras. Ma grand-mère [[a appelé::appelle]] le médecin, qui [[est arrivé::arrive]] tout de suite.",
+     note:"« Tous les étés » = habitude → imparfait. « Un jour » = événement → passé composé. « Je me suis cassé le bras » : pas d'accord, car le COD (le bras) est après le verbe."}
+  ]},
+  p4:{type:"choice", num:true, items:[
+    {q:"De quoi parle principalement l'émission ?", opts:["Du tourisme en Bretagne aujourd'hui","De la reconstruction de deux villes après la guerre","De la vie de deux architectes célèbres"], a:1},
+    {q:"Quand les soldats américains sont-ils arrivés devant Saint-Malo ?", opts:["En juin 1944","En septembre 1945","En août 1944"], a:2},
+    {q:"Quand les combats se sont terminés, quelle partie de la ville intra-muros avait disparu ?", opts:["Près de 80 %","Environ la moitié","Presque rien"], a:0},
+    {q:"Qu'est-ce qui avait résisté aux combats à Saint-Malo ?", opts:["Le port","Les remparts","Les maisons en bois"], a:1},
+    {q:"Quand les habitants sont revenus à Saint-Malo…", opts:["la ville avait déjà été reconstruite.","les combats n'avaient pas encore commencé.","leurs maisons avaient brûlé."], a:2},
+    {q:"Pourquoi Brest avait-elle déjà été bombardée avant 1944 ?", opts:["Parce que c'était la capitale de la Bretagne.","Parce qu'il y avait une grande usine d'avions.","Parce que son port était une base pour les sous-marins allemands."], a:2},
+    {q:"Qu'a voulu faire l'architecte Louis Arretche à Saint-Malo ?", opts:["Garder l'esprit de l'ancienne ville","Construire des tours modernes","Déplacer la ville plus loin de la mer"], a:0},
+    {q:"Qu'est-ce qu'on a réutilisé pour reconstruire Saint-Malo ?", opts:["Le bois des baraques","Une partie des vieilles pierres de granit","Le béton des bunkers allemands"], a:1},
+    {q:"Selon l'historien, le Saint-Malo reconstruit…", opts:["est une copie exacte de l'ancienne ville.","a été construit entièrement en béton.","ressemble à l'ancienne ville, mais avec des logements modernes."], a:2},
+    {q:"Qu'est-ce que beaucoup de touristes ne savent pas ?", opts:["Que la plupart des maisons ont été construites après la guerre","Que les remparts ont été détruits","Que Saint-Malo est au bord de la mer"], a:0},
+    {q:"Comment est le Brest de Jean-Baptiste Mathon ?", opts:["Des rues étroites et des maisons en granit","De grandes avenues droites et des immeubles en béton","Des maisons en bois entourées de jardins"], a:1},
+    {q:"À Brest, à quoi ont servi les ruines ?", opts:["À aplanir le terrain","À construire des baraques","À réparer les remparts"], a:0},
+    {q:"Où vivaient les Brestois pendant les travaux ?", opts:["Chez des familles de Saint-Malo","Dans des baraques en bois","Dans les hôtels de la ville"], a:1},
+    {q:"Au début, que pensaient beaucoup de Brestois de leur nouvelle ville ?", opts:["Qu'elle était trop petite","Qu'elle était très colorée","Qu'elle était froide et grise"], a:2},
+    {q:"Pour conclure, l'historien dit que Brest a voulu…", opts:["retrouver son passé.","regarder vers l'avenir.","copier Saint-Malo."], a:1}
+  ]}
+};
+
+/* Fiches recto-verso : [début de phrase, indices, réponse] */
+const CARDS = [
+  ["Il est parti à 23 h parce que…","le dîner / finir une heure avant","Il est parti à 23 h parce que le dîner <b>avait fini</b> une heure avant."],
+  ["Quand nous sommes arrivés au cinéma, …","le film / déjà commencer","Quand nous sommes arrivés au cinéma, le film <b>avait déjà commencé</b>."],
+  ["Elle n'a pas pu entrer chez elle parce que…","elle / oublier ses clés au bureau","Elle n'a pas pu entrer chez elle parce qu'elle <b>avait oublié</b> ses clés au bureau."],
+  ["J'ai réussi l'examen parce que…","je / beaucoup réviser","J'ai réussi l'examen parce que j'<b>avais beaucoup révisé</b>."],
+  ["Quand je suis arrivé(e) à la gare, …","le train / déjà partir","Quand je suis arrivé(e) à la gare, le train <b>était déjà parti</b>."],
+  ["Ils ont visité Saint-Malo, une ville que…","leurs parents / visiter en 1980","Ils ont visité Saint-Malo, une ville que leurs parents <b>avaient visitée</b> en 1980."],
+  ["Marie était fatiguée parce que…","elle / se coucher très tard","Marie était fatiguée parce qu'elle <b>s'était couchée</b> très tard."],
+  ["Le professeur nous a dit que…","il / corriger nos copies","Le professeur nous a dit qu'il <b>avait corrigé</b> nos copies."],
+  ["Quand les pompiers sont arrivés, …","le feu / s'éteindre tout seul","Quand les pompiers sont arrivés, le feu <b>s'était éteint</b> tout seul."],
+  ["Nous n'avons pas eu faim au restaurant parce que…","nous / prendre un gros goûter","Nous n'avons pas eu faim au restaurant parce que nous <b>avions pris</b> un gros goûter."],
+  ["Tu as aimé le livre que… ?","je / te prêter","Tu as aimé le livre que je t'<b>avais prêté</b> ?"],
+  ["Paul a trouvé un travail à Brest, la ville où…","il / naître","Paul a trouvé un travail à Brest, la ville où il <b>était né</b>."],
+  ["Quand ma sœur m'a téléphoné, …","je / ne pas encore se réveiller","Quand ma sœur m'a téléphoné, je <b>ne m'étais pas encore réveillé(e)</b>."],
+  ["Les touristes ne savaient pas que…","la ville / être reconstruite après la guerre","Les touristes ne savaient pas que la ville <b>avait été reconstruite</b> après la guerre."],
+  ["Il n'avait plus d'argent parce que…","il / tout dépenser en vacances","Il n'avait plus d'argent parce qu'il <b>avait tout dépensé</b> en vacances."],
+  ["Quand nous sommes sortis du musée, …","la pluie / s'arrêter","Quand nous sommes sortis du musée, la pluie <b>s'était arrêtée</b>."],
+  ["Elle était triste parce que…","son chat / disparaître","Elle était triste parce que son chat <b>avait disparu</b>."],
+  ["Je n'ai pas reconnu mon quartier : …","tout / changer","Je n'ai pas reconnu mon quartier : tout <b>avait changé</b>."],
+  ["Ils sont arrivés en retard parce que…","ils / se perdre en route","Ils sont arrivés en retard parce qu'ils <b>s'étaient perdus</b> en route."],
+  ["Ma grand-mère m'a raconté que…","mes grands-parents / se rencontrer à un bal","Ma grand-mère m'a raconté que mes grands-parents <b>s'étaient rencontrés</b> à un bal."]
+];
+
+/* Micro-dialogues : A = réplique complète ; B = [indices, modèle] */
+const DIAL = [
+  {t:"Le rendez-vous manqué", l:[
+    ["A","Quand je suis arrivé(e) au café, tu étais déjà parti(e) !"],
+    ["B","attendre une heure / tu / ne pas répondre au téléphone","Je t'<em>avais attendu(e)</em> pendant une heure, et tu n'<em>avais pas répondu</em> au téléphone !"],
+    ["A","Désolé(e), j'ai raté le bus…"],
+    ["B","pourtant / tu / me promettre d'être à l'heure","Pourtant, tu m'<em>avais promis</em> d'être à l'heure !"]]},
+  {t:"Le gâteau d'anniversaire", l:[
+    ["A","Tu as goûté le gâteau d'anniversaire ?"],
+    ["B","non / quand j'arrive / les enfants / déjà tout manger","Non ! Quand je suis arrivé(e), les enfants <em>avaient déjà tout mangé</em>."],
+    ["A","Dommage ! Tu avais faim ?"],
+    ["B","oui / je / ne rien manger depuis le matin","Oui, je n'<em>avais rien mangé</em> depuis le matin !"]]},
+  {t:"L'examen", l:[
+    ["A","Alors, ton examen de français ?"],
+    ["B","réussir / parce que / réviser tous les soirs","Je l'ai réussi parce que j'<em>avais révisé</em> tous les soirs."],
+    ["A","Bravo ! Et Lucas ?"],
+    ["B","il / échouer / il / ne pas ouvrir ses livres","Il a échoué : il n'<em>avait pas ouvert</em> ses livres !"]]},
+  {t:"Le voyage à Saint-Malo", l:[
+    ["A","Tu as aimé Saint-Malo ?"],
+    ["B","beaucoup / je / ne jamais voir une ville fortifiée avant","Beaucoup ! Je n'<em>avais jamais vu</em> de ville fortifiée avant."],
+    ["A","Tu savais que la ville avait été détruite en 1944 ?"],
+    ["B","oui / je / lire un article avant de partir","Oui, j'<em>avais lu</em> un article avant de partir."]]},
+  {t:"Les clés", l:[
+    ["A","Pourquoi tu as dormi chez ta sœur hier ?"],
+    ["B","parce que / je / perdre mes clés","Parce que j'<em>avais perdu</em> mes clés."],
+    ["A","Et tu les as retrouvées ?"],
+    ["B","oui / je / les laisser au bureau","Oui, je les <em>avais laissées</em> au bureau !"]]},
+  {t:"Le film", l:[
+    ["A","Pourquoi tu n'es pas venu(e) au cinéma avec nous ?"],
+    ["B","parce que / je / déjà voir ce film","Parce que j'<em>avais déjà vu</em> ce film."],
+    ["A","Ah bon ? Quand ?"],
+    ["B","mon frère / m'inviter la semaine d'avant","Mon frère m'<em>avait invité(e)</em> la semaine d'avant."]]},
+  {t:"Le retard", l:[
+    ["A","Tu es arrivé(e) en retard au travail ce matin ?"],
+    ["B","oui / je / ne pas entendre le réveil","Oui, je n'<em>avais pas entendu</em> le réveil."],
+    ["A","Tu t'étais couché(e) tard ?"],
+    ["B","oui / je / regarder une série jusqu'à 2 h","Oui, j'<em>avais regardé</em> une série jusqu'à deux heures du matin."]]},
+  {t:"La fête surprise", l:[
+    ["A","Tu as aimé ta fête surprise ?"],
+    ["B","oui, mais / je / tout deviner","Oui, mais j'<em>avais tout deviné</em> !"],
+    ["A","Comment ?"],
+    ["B","ma mère / laisser la liste des invités sur la table","Ma mère <em>avait laissé</em> la liste des invités sur la table."]]},
+  {t:"L'ancien quartier", l:[
+    ["A","Tu es retourné(e) dans ton ancien quartier ?"],
+    ["B","oui / je / ne pas le reconnaître / tout changer","Oui, et je ne l'ai pas reconnu : tout <em>avait changé</em> !"],
+    ["A","Et ta boulangerie préférée ?"],
+    ["B","elle / fermer deux ans avant","Elle <em>avait fermé</em> deux ans avant."]]},
+  {t:"Le colis", l:[
+    ["A","Tu as reçu ton colis ?"],
+    ["B","non / quand le livreur passe / je / déjà partir","Non, quand le livreur est passé, j'<em>étais déjà parti(e)</em>."],
+    ["A","Il a laissé un message ?"],
+    ["B","oui / il / le déposer chez la voisine","Oui : il l'<em>avait déposé</em> chez la voisine."]]}
+];
+
+const PART_NAMES = {1:"1 · Formation",2:"2 · Utilisation",3:"3 · Écriture",4:"4 · Compréhension orale"};
+const state = {};
+
+/* ---------- utilitaires ---------- */
+const norm = s => s.toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*'\s*/g,"'").replace(/\s+/g," ").replace(/[.,;:!?…]+$/,"").trim();
+const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"");
+const BLANK_RE = /\[\[(.*?)\]\]/g;
+function parseBlank(p){ const [ans,hint] = p.split("::"); return {alts:ans.split("|"), hint:hint||""}; }
+function presentText(t){ return t.replace(BLANK_RE,(m,p)=>"<u>"+parseBlank(p).hint+"</u>"); }
+function modelText(t){ return t.replace(BLANK_RE,(m,p)=>"<b>"+parseBlank(p).alts[0]+"</b>"); }
+function praise(s,t){ const r = t ? s/t : 0;
+  if(r>=0.9) return " — Excellent ! 🎉"; if(r>=0.7) return " — Très bien !";
+  if(r>=0.5) return " — Pas mal. Relisez les corrections."; return " — Relisez la règle et recommencez."; }
+
+/* ---------- rendu ---------- */
+function renderFill(ex, body){
+  ex.items.forEach((it,i)=>{
+    const div = document.createElement("div"); div.className = "item";
+    let html = ex.num ? '<span class="num">'+(i+1)+'.</span> ' : "";
+    it.t.split(/\[\[(.*?)\]\]/).forEach((p,k)=>{
+      if(k%2===0){ html += p; return; }
+      const b = parseBlank(p);
+      const w = Math.max(6, Math.max(...b.alts.map(a=>a.length))+2);
+      html += '<span class="bw"><input class="blank" type="text" style="width:'+w+'ch" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-alts="'+b.alts.join("|")+'" aria-label="'+(b.hint||"réponse")+'">'
+           + (b.hint ? '<span class="hint">('+b.hint+')</span>' : "") + '<span class="fb"></span></span>';
+    });
+    if(it.note) html += '<div class="note" hidden>💡 '+it.note+'</div>';
+    if(it.info) html += '<div class="info" hidden>ℹ️ '+it.info+'</div>';
+    div.innerHTML = html; body.appendChild(div);
+  });
+}
+function renderChoice(ex, body){
+  ex.items.forEach((it,i)=>{
+    const div = document.createElement("div"); div.className = "item" + (ex.inline ? " inline" : "");
+    div.innerHTML = '<p class="q">'+(ex.num?'<span class="num">'+(i+1)+'.</span> ':"")+it.q+'</p><div class="opts" role="group">'
+      + it.opts.map((o,k)=>'<button type="button" class="opt" aria-pressed="false" data-k="'+k+'">'+o+'</button>').join("") + '</div>'
+      + (it.note ? '<div class="note" hidden>💡 '+it.note+'</div>' : "");
+    div.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+      if(div.classList.contains("locked")) return;
+      div.querySelectorAll(".opt").forEach(x=>{x.classList.remove("sel"); x.setAttribute("aria-pressed","false");});
+      b.classList.add("sel"); b.setAttribute("aria-pressed","true");
+    }));
+    body.appendChild(div);
+  });
+}
+
+/* ---------- correction ---------- */
+function checkFill(ex){
+  let score = 0;
+  ex.root.querySelectorAll(".ex-body .item").forEach(item=>{
+    let allOk = true;
+    item.querySelectorAll("input.blank").forEach(inp=>{
+      const alts = inp.dataset.alts.split("|"), v = norm(inp.value), fb = inp.parentElement.querySelector(".fb");
+      inp.classList.remove("ok","ko","warn"); inp.readOnly = true;
+      if(alts.some(a=>norm(a)===v)){ score++; inp.classList.add("ok"); fb.innerHTML = '<span class="y">✓</span>'; }
+      else {
+        allOk = false;
+        if(v && alts.some(a=>strip(norm(a))===strip(v))){
+          inp.classList.add("warn"); fb.innerHTML = '<span class="n">✗</span> <span class="acc">accents :</span> <span class="corr">'+alts[0]+'</span>';
+        } else {
+          inp.classList.add("ko"); fb.innerHTML = '<span class="n">✗</span> <span class="corr">'+alts[0]+'</span>';
+        }
+      }
+    });
+    const note = item.querySelector(".note"); if(note) note.hidden = allOk;
+    const info = item.querySelector(".info"); if(info) info.hidden = false;
+  });
+  return score;
+}
+function checkChoice(ex){
+  let score = 0;
+  ex.root.querySelectorAll(".ex-body .item").forEach((item,i)=>{
+    const it = ex.items[i], btns = item.querySelectorAll(".opt"), sel = item.querySelector(".opt.sel");
+    item.classList.add("locked");
+    btns[it.a].classList.add("right");
+    const ok = sel && +sel.dataset.k === it.a;
+    if(ok) score++; else if(sel) sel.classList.add("wrong");
+    const note = item.querySelector(".note"); if(note) note.hidden = ok;
+  });
+  return score;
+}
+function countEmpty(ex){
+  if(ex.type==="choice") return [...ex.root.querySelectorAll(".ex-body .item")].filter(it=>!it.querySelector(".opt.sel")).length;
+  return [...ex.root.querySelectorAll("input.blank")].filter(i=>!i.value.trim()).length;
+}
+function resetEx(ex){
+  ex.root.querySelectorAll("input.blank").forEach(inp=>{ inp.value=""; inp.readOnly=false; inp.classList.remove("ok","ko","warn"); inp.parentElement.querySelector(".fb").innerHTML=""; });
+  ex.root.querySelectorAll(".ex-body .item").forEach(it=>it.classList.remove("locked"));
+  ex.root.querySelectorAll(".opt").forEach(b=>{ b.classList.remove("sel","right","wrong"); b.setAttribute("aria-pressed","false"); });
+  ex.root.querySelectorAll(".note,.info").forEach(n=>n.hidden=true);
+}
+
+/* ---------- montage ---------- */
+function unlockAfterListening(){
+  document.getElementById("tr-lock").hidden = true;
+  document.getElementById("tr-actions").hidden = false;
+  document.getElementById("apres-lock").hidden = true;
+  document.getElementById("apres").hidden = false;
+}
+function mount(id){
+  const ex = EXS[id], root = document.getElementById(id); ex.root = root;
+  const body = root.querySelector(".ex-body");
+  (ex.type==="choice" ? renderChoice : renderFill)(ex, body);
+  ex.total = ex.type==="choice" ? ex.items.length : body.querySelectorAll("input.blank").length;
+  state[id] = null;
+
+  const act = document.createElement("div"); act.className = "ex-actions";
+  act.innerHTML = '<button type="button" class="btn primary">Vérifier</button><button type="button" class="btn ghost">Recommencer</button><span class="ex-score" aria-live="polite"></span><span class="ex-msg" aria-live="polite"></span>';
+  body.after(act);
+  const [bCheck,bReset] = act.querySelectorAll("button"), scoreEl = act.querySelector(".ex-score"), msg = act.querySelector(".ex-msg");
+
+  bCheck.addEventListener("click",()=>{
+    const empty = countEmpty(ex);
+    if(empty>0 && !bCheck.dataset.warned){
+      msg.textContent = "Il reste "+empty+" réponse(s) vide(s). Cliquez de nouveau sur « Vérifier » pour corriger quand même.";
+      bCheck.dataset.warned = "1"; return;
+    }
+    msg.textContent = ""; delete bCheck.dataset.warned;
+    const sc = ex.type==="choice" ? checkChoice(ex) : checkFill(ex);
+    state[id] = sc; bCheck.disabled = true;
+    scoreEl.textContent = "Score : "+sc+" / "+ex.total + praise(sc, ex.total);
+    updateScores();
+    if(id==="p4") unlockAfterListening();
+  });
+  bReset.addEventListener("click",()=>{
+    resetEx(ex); state[id] = null; bCheck.disabled = false; delete bCheck.dataset.warned;
+    scoreEl.textContent = ""; msg.textContent = ""; updateScores();
+  });
+}
+Object.keys(EXS).forEach(mount);
+
+/* textes au présent + modèles (partie 3) */
+document.querySelectorAll(".present[data-src]").forEach(el=>{ el.innerHTML = presentText(EXS[el.dataset.src].items[0].t); });
+document.querySelectorAll(".write[data-model]").forEach(el=>{
+  const id = el.dataset.model;
+  el.innerHTML = '<h4 style="margin-top:0">✍️ À vous !</h4>'
+    + '<p>Recopiez le texte entier au passé <b>dans votre cahier</b> (ou sur une feuille). Ensuite, comparez avec le modèle et corrigez votre texte.</p>'
+    + '<div class="ex-actions"><button type="button" class="btn ghost">Afficher le texte modèle</button></div>'
+    + '<div class="model" hidden>'+modelText(EXS[id].items[0].t)+'</div>';
+  const btn = el.querySelector("button"), model = el.querySelector(".model");
+  btn.addEventListener("click",()=>{ model.hidden = !model.hidden; btn.textContent = model.hidden ? "Afficher le texte modèle" : "Masquer le texte modèle"; });
+});
+
+/* ---------- scores ---------- */
+function updateScores(){
+  let s=0, t=0; const parts = {1:[0,0,false],2:[0,0,false],3:[0,0,false],4:[0,0,false]};
+  Object.keys(EXS).forEach(id=>{
+    const p = id[1], ex = EXS[id]; t += ex.total; parts[p][1] += ex.total;
+    if(state[id]!==null){ s += state[id]; parts[p][0] += state[id]; parts[p][2] = true; }
+  });
+  document.getElementById("total").textContent = s+" / "+t+" pts";
+  const tb = document.querySelector("#bilan tbody"); let rows = "";
+  Object.keys(parts).forEach(p=>{
+    const [a,b,done] = parts[p];
+    document.getElementById("ts"+p).textContent = done ? a+"/"+b : "";
+    rows += "<tr><td>"+PART_NAMES[p]+"</td><td>"+(done ? a+" / "+b : "— / "+b)+"</td></tr>";
+  });
+  rows += "<tr><td><b>Total</b></td><td><b>"+s+" / "+t+"</b></td></tr>";
+  tb.innerHTML = rows;
+}
+updateScores();
+
+/* ---------- navigation ---------- */
+function showPart(n){
+  document.querySelectorAll("main .part").forEach(p=>p.hidden = p.dataset.part!==n);
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", t.dataset.part===n ? "true" : "false"));
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>showPart(t.dataset.part)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showPart(b.dataset.go)));
+
+/* ---------- audio et transcription ---------- */
+const audio = document.getElementById("audio");
+audio.addEventListener("error",()=>{ document.getElementById("audio-msg").hidden = false; });
+audio.src = AUDIO_SRC;
+document.getElementById("btn-tr").addEventListener("click",e=>{
+  const tr = document.getElementById("transcript"), hl = document.getElementById("btn-hl");
+  tr.hidden = !tr.hidden; hl.hidden = tr.hidden;
+  e.currentTarget.textContent = tr.hidden ? "Afficher la transcription" : "Masquer la transcription";
+});
+document.getElementById("btn-hl").addEventListener("click",e=>{
+  const tr = document.getElementById("transcript"); tr.classList.toggle("hl");
+  e.currentTarget.textContent = tr.classList.contains("hl") ? "Retirer le surlignage" : "Surligner les plus-que-parfaits";
+});
+
+/* ---------- fiches recto-verso ---------- */
+(function(){
+  const fc = document.getElementById("fc"), front = document.getElementById("fcFront"), back = document.getElementById("fcBack"), count = document.getElementById("fcCount");
+  let order = CARDS.map((_,i)=>i), ci = 0;
+  function show(){
+    fc.classList.add("noanim"); fc.classList.remove("flipped");
+    const k = order[ci], [r,cue,v] = CARDS[k];
+    front.innerHTML = '<span class="fc-n">Recto · fiche '+(k+1)+'</span><p class="fc-q">'+r+'</p><p class="fc-cue">('+cue+')</p><span class="fc-tap">Touchez pour retourner ↻</span>';
+    back.innerHTML = '<span class="fc-n">Verso · réponse</span><p class="fc-a">'+v+'</p><span class="fc-tap">Touchez pour revenir ↻</span>';
+    count.textContent = (ci+1)+" / "+CARDS.length;
+    void fc.offsetWidth; fc.classList.remove("noanim");
+  }
+  const flip = ()=>fc.classList.toggle("flipped");
+  fc.addEventListener("click",flip);
+  fc.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); flip(); } });
+  document.getElementById("fcFlip").addEventListener("click",flip);
+  document.getElementById("fcPrev").addEventListener("click",()=>{ ci=(ci-1+CARDS.length)%CARDS.length; show(); });
+  document.getElementById("fcNext").addEventListener("click",()=>{ ci=(ci+1)%CARDS.length; show(); });
+  document.getElementById("fcShuffle").addEventListener("click",()=>{
+    for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+    ci=0; show();
+  });
+  show();
+})();
+
+/* ---------- micro-dialogues ---------- */
+(function(){
+  const box = document.getElementById("dialogues");
+  DIAL.forEach((d,i)=>{
+    const div = document.createElement("div"); div.className = "dlg";
+    let html = '<h4>'+(i+1)+'. '+d.t+'</h4>';
+    d.l.forEach(line=>{
+      if(line[0]==="A") html += '<div class="bub a"><b class="who">A</b> '+line[1]+'</div>';
+      else html += '<div class="bub b"><b class="who">B</b> <span class="cue">('+line[1]+')</span><span class="mod" hidden>'+line[2]+'</span></div>';
+    });
+    html += '<div class="ex-actions" style="margin-top:8px"><button type="button" class="btn ghost">Voir le modèle</button></div>';
+    div.innerHTML = html;
+    const btn = div.querySelector("button");
+    btn.addEventListener("click",()=>{
+      const mods = div.querySelectorAll(".mod"), show = mods[0].hidden;
+      mods.forEach(m=>m.hidden=!show);
+      btn.textContent = show ? "Masquer le modèle" : "Voir le modèle";
+    });
+    box.appendChild(div);
+  });
+})();
+
+/* ---------- clavier d'accents ---------- */
+const bar = document.getElementById("accents"); let lastField = null;
+const isField = el => el && el.matches && el.matches("input.blank");
+document.addEventListener("focusin",e=>{ if(isField(e.target)){ lastField = e.target; if(!e.target.readOnly) bar.classList.add("show"); } });
+document.addEventListener("focusout",()=>{ setTimeout(()=>{ if(!isField(document.activeElement)) bar.classList.remove("show"); },150); });
+bar.addEventListener("pointerdown",e=>{ if(e.target.closest("button")) e.preventDefault(); });
+bar.addEventListener("mousedown",e=>{ if(e.target.closest("button")) e.preventDefault(); });
+bar.addEventListener("click",e=>{
+  const b = e.target.closest("button"); if(!b || !lastField || lastField.readOnly) return;
+  const s = lastField.selectionStart ?? lastField.value.length, en = lastField.selectionEnd ?? s;
+  lastField.setRangeText(b.textContent, s, en, "end"); lastField.focus();
+});
+if(window.visualViewport){
+  const pos = ()=>{ const vv = window.visualViewport; bar.style.bottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + "px"; };
+  window.visualViewport.addEventListener("resize",pos); window.visualViewport.addEventListener("scroll",pos);
+}
+/* Entrée = passer au champ suivant */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter" && e.target.matches && e.target.matches("input.blank")){
+    e.preventDefault();
+    const all = [...e.target.closest(".ex").querySelectorAll("input.blank")], i = all.indexOf(e.target);
+    if(all[i+1]) all[i+1].focus(); else e.target.blur();
+  }
+});
+</script>
+</body>
+</html>
