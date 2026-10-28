@@ -159,17 +159,26 @@ mark.pqp{background:none;color:inherit}
 .fc-count{font-weight:700;color:var(--muted)}
 
 /* partie 5 : dialogues */
+.steps{margin:4px 0 10px;padding-left:1.3em}
+.steps li{margin:4px 0}
+.grille{border:1.5px solid var(--ok);border-radius:12px;padding:10px 14px;margin:10px 0 6px;background:#fff}
+.grille ul{margin:6px 0 0}
 .dlg{border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
 .dlg h4{margin:0 0 8px;color:var(--accent)}
-.bub{max-width:88%;padding:8px 12px;border-radius:14px;margin:6px 0;font-size:.97rem;line-height:1.45}
-.bub b.who{display:inline-block;min-width:1.4em;font-weight:800}
-.bub.a{background:#fff;border:1.5px solid var(--bleu);border-top-left-radius:4px}
-.bub.a b.who{color:var(--bleu)}
-.bub.b{margin-left:auto;background:#fff;border:1.5px dashed var(--rouge);border-top-right-radius:4px}
-.bub.b b.who{color:var(--rouge)}
-.cue{color:var(--muted);font-style:italic}
-.mod{display:block;margin-top:4px;padding-top:4px;border-top:1px dotted var(--line);font-weight:600}
-.mod em{font-style:normal;color:var(--violet)}
+.roles{display:flex;flex-wrap:wrap;gap:8px}
+.rbtn{font:inherit;font-size:.92rem;font-weight:700;border-radius:10px;padding:8px 14px;min-height:42px;cursor:pointer;background:#fff;border:1.5px solid}
+.ra{color:var(--bleu);border-color:var(--bleu)} .rb{color:var(--rouge);border-color:var(--rouge)} .rx{color:var(--ok);border-color:var(--ok);margin-left:auto}
+.ra[aria-expanded="true"]{background:var(--bleu);color:#fff} .rb[aria-expanded="true"]{background:var(--rouge);color:#fff} .rx[aria-expanded="true"]{background:var(--ok);color:#fff}
+.rc{margin-top:10px;border:1.5px solid;border-radius:12px;padding:10px 14px;background:#fff;font-size:.97rem;line-height:1.5}
+.rc p{margin:6px 0 0}
+.rc-a{border-color:var(--bleu)} .rc-b{border-color:var(--rouge);border-style:dashed} .rc-x{border-color:var(--ok)}
+.who-a{color:var(--bleu)} .who-b{color:var(--rouge)}
+.goal{font-weight:700}
+.tline{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-top:8px;align-items:baseline}
+.tk{font-weight:700;color:var(--rouge);font-size:.88rem;white-space:nowrap}
+.tv{font-style:italic}
+.rc-x em{font-style:normal;font-weight:700;color:var(--violet)}
+.rc-x ul{margin:6px 0 0}
 
 #accents{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);display:none;padding:6px 8px calc(6px + env(safe-area-inset-bottom));gap:5px;overflow-x:auto;justify-content:safe center}
 #accents.show{display:flex}
@@ -183,7 +192,8 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font
   .lbl{font-size:.68rem;padding:1px 6px}
   .lbl.main{font-size:.75rem}
   .fc-q{font-size:1.08rem}
-  .bub{max-width:94%}
+  .rx{margin-left:0}
+  .tk{white-space:normal}
 }
 </style>
 </head>
@@ -587,8 +597,22 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font
   </div>
 
   <div class="card">
-    <h3>💬 10 micro-dialogues</h3>
-    <p class="consigne">En binôme. <b style="color:var(--bleu)">A</b> lit ses répliques ; <b style="color:var(--rouge)">B</b> répond à l'oral à partir des indices, avec le passé composé et le plus-que-parfait. Comparez avec le modèle, puis changez de rôle. <b>Défi :</b> ajoutez deux répliques de votre invention.</p>
+    <h3>💬 10 micro-dialogues avec cartes de rôle</h3>
+    <ol class="steps">
+      <li>En binôme, choisissez une situation. Chaque élève ouvre <b>seulement sa carte</b> (<b style="color:var(--bleu)">A</b> ou <b style="color:var(--rouge)">B</b>). Ne regardez pas la carte de l'autre !</li>
+      <li><b style="color:var(--bleu)">A</b> commence et pose des questions. <b style="color:var(--rouge)">B</b> répond à partir de sa chronologie : <b>à vous de trouver les verbes et les temps</b> (passé composé, imparfait, plus-que-parfait).</li>
+      <li>Après le dialogue, vérifiez avec la grille ci-dessous, puis regardez les exemples : ce sont des réponses possibles parmi d'autres.</li>
+      <li>Changez de rôle pour la situation suivante.</li>
+    </ol>
+    <div class="grille">
+      <b>✅ Grille de vérification</b>
+      <ul>
+        <li>Pour une action qui s'était passée <b>avant</b> une autre action passée, ai-je utilisé le <span class="c-pqp">plus-que-parfait</span> ?</li>
+        <li>Ai-je choisi le bon auxiliaire (<b>avoir</b> ou <b>être</b>) ?</li>
+        <li>Avec <b>être</b>, ai-je fait l'accord (parti<b>e</b>, arrivé<b>s</b>…) ?</li>
+        <li>Pour le décor et les descriptions, ai-je utilisé l'<span class="c-imp">imparfait</span> ?</li>
+      </ul>
+    </div>
     <div id="dialogues"></div>
   </div>
 </section>
@@ -711,58 +735,58 @@ const CARDS = [
   ["Ma grand-mère m'a raconté que…","mes grands-parents / se rencontrer à un bal","Ma grand-mère m'a raconté que mes grands-parents <b>s'étaient rencontrés</b> à un bal."]
 ];
 
-/* Micro-dialogues : A = réplique complète ; B = [indices, modèle] */
+/* Micro-dialogues : carte A (rôle), carte B (chronologie sans verbes), exemples */
 const DIAL = [
-  {t:"Le rendez-vous manqué", l:[
-    ["A","Quand je suis arrivé(e) au café, tu étais déjà parti(e) !"],
-    ["B","attendre une heure / tu / ne pas répondre au téléphone","Je t'<em>avais attendu(e)</em> pendant une heure, et tu n'<em>avais pas répondu</em> au téléphone !"],
-    ["A","Désolé(e), j'ai raté le bus…"],
-    ["B","pourtant / tu / me promettre d'être à l'heure","Pourtant, tu m'<em>avais promis</em> d'être à l'heure !"]]},
-  {t:"Le gâteau d'anniversaire", l:[
-    ["A","Tu as goûté le gâteau d'anniversaire ?"],
-    ["B","non / quand j'arrive / les enfants / déjà tout manger","Non ! Quand je suis arrivé(e), les enfants <em>avaient déjà tout mangé</em>."],
-    ["A","Dommage ! Tu avais faim ?"],
-    ["B","oui / je / ne rien manger depuis le matin","Oui, je n'<em>avais rien mangé</em> depuis le matin !"]]},
-  {t:"L'examen", l:[
-    ["A","Alors, ton examen de français ?"],
-    ["B","réussir / parce que / réviser tous les soirs","Je l'ai réussi parce que j'<em>avais révisé</em> tous les soirs."],
-    ["A","Bravo ! Et Lucas ?"],
-    ["B","il / échouer / il / ne pas ouvrir ses livres","Il a échoué : il n'<em>avait pas ouvert</em> ses livres !"]]},
-  {t:"Le voyage à Saint-Malo", l:[
-    ["A","Tu as aimé Saint-Malo ?"],
-    ["B","beaucoup / je / ne jamais voir une ville fortifiée avant","Beaucoup ! Je n'<em>avais jamais vu</em> de ville fortifiée avant."],
-    ["A","Tu savais que la ville avait été détruite en 1944 ?"],
-    ["B","oui / je / lire un article avant de partir","Oui, j'<em>avais lu</em> un article avant de partir."]]},
-  {t:"Les clés", l:[
-    ["A","Pourquoi tu as dormi chez ta sœur hier ?"],
-    ["B","parce que / je / perdre mes clés","Parce que j'<em>avais perdu</em> mes clés."],
-    ["A","Et tu les as retrouvées ?"],
-    ["B","oui / je / les laisser au bureau","Oui, je les <em>avais laissées</em> au bureau !"]]},
-  {t:"Le film", l:[
-    ["A","Pourquoi tu n'es pas venu(e) au cinéma avec nous ?"],
-    ["B","parce que / je / déjà voir ce film","Parce que j'<em>avais déjà vu</em> ce film."],
-    ["A","Ah bon ? Quand ?"],
-    ["B","mon frère / m'inviter la semaine d'avant","Mon frère m'<em>avait invité(e)</em> la semaine d'avant."]]},
-  {t:"Le retard", l:[
-    ["A","Tu es arrivé(e) en retard au travail ce matin ?"],
-    ["B","oui / je / ne pas entendre le réveil","Oui, je n'<em>avais pas entendu</em> le réveil."],
-    ["A","Tu t'étais couché(e) tard ?"],
-    ["B","oui / je / regarder une série jusqu'à 2 h","Oui, j'<em>avais regardé</em> une série jusqu'à deux heures du matin."]]},
-  {t:"La fête surprise", l:[
-    ["A","Tu as aimé ta fête surprise ?"],
-    ["B","oui, mais / je / tout deviner","Oui, mais j'<em>avais tout deviné</em> !"],
-    ["A","Comment ?"],
-    ["B","ma mère / laisser la liste des invités sur la table","Ma mère <em>avait laissé</em> la liste des invités sur la table."]]},
-  {t:"L'ancien quartier", l:[
-    ["A","Tu es retourné(e) dans ton ancien quartier ?"],
-    ["B","oui / je / ne pas le reconnaître / tout changer","Oui, et je ne l'ai pas reconnu : tout <em>avait changé</em> !"],
-    ["A","Et ta boulangerie préférée ?"],
-    ["B","elle / fermer deux ans avant","Elle <em>avait fermé</em> deux ans avant."]]},
-  {t:"Le colis", l:[
-    ["A","Tu as reçu ton colis ?"],
-    ["B","non / quand le livreur passe / je / déjà partir","Non, quand le livreur est passé, j'<em>étais déjà parti(e)</em>."],
-    ["A","Il a laissé un message ?"],
-    ["B","oui / il / le déposer chez la voisine","Oui : il l'<em>avait déposé</em> chez la voisine."]]}
+  {t:"Le rendez-vous manqué",
+   a:"Vous aviez rendez-vous à 19 h au café avec votre ami(e). Votre bus était en retard : vous êtes arrivé(e) à 19 h 20 et votre ami(e) n'était plus là. Vous êtes fâché(e). Commencez : « Quand je suis arrivé(e), tu étais déjà parti(e) ! » Demandez des explications, puis excusez-vous pour votre retard.",
+   bGoal:"Défendez-vous : expliquez ce qui s'était passé avant son arrivée.",
+   b:[["18 h 50","arrivée au café, en avance"],["19 h 05","appel de ta mère : une urgence"],["19 h 10","départ du café"],["ton téléphone","plus de batterie, impossible de prévenir"]],
+   ex:["J'<em>étais arrivé(e)</em> en avance, à 7 heures moins 10 ! Mais ma mère m'<em>avait appelé(e)</em> pour une urgence, alors je suis parti(e).","Je n'ai pas pu te prévenir : mon téléphone n'avait plus de batterie."]},
+  {t:"Le gâteau d'anniversaire",
+   a:"Hier, vous avez organisé l'anniversaire de votre fils. Votre ami(e) est arrivé(e) à la fête à 18 h. Vous voulez savoir s'il/elle a aimé la fête et votre gâteau. Commencez : « Alors, tu as goûté mon gâteau ? »",
+   bGoal:"Racontez, avec humour, pourquoi vous n'avez pas goûté le gâteau.",
+   b:[["16 h","début de la fête"],["17 h","les enfants seuls dans la cuisine"],["17 h 30","gâteau : plus une miette"],["18 h","ton arrivée"],["ce jour-là","pas de déjeuner, très faim"]],
+   ex:["Quand je suis arrivé(e), les enfants <em>avaient déjà tout mangé</em> !","Et moi, je n'<em>avais pas déjeuné</em> : j'avais très faim…"]},
+  {t:"Les résultats de l'examen",
+   a:"Votre ami(e) a passé un examen de français la semaine dernière. Demandez-lui ses résultats. Demandez aussi des nouvelles de Lucas, qui suit le même cours, et demandez pourquoi les résultats sont si différents.",
+   bGoal:"Expliquez la différence entre vos résultats et ceux de Lucas.",
+   b:[["le mois avant","révisions tous les soirs, exercices en ligne"],["la veille","8 heures de sommeil"],["ton résultat","17/20"],["Lucas, le mois avant","fêtes, séries, livres jamais ouverts"],["résultat de Lucas","6/20"]],
+   ex:["J'ai eu 17 parce que j'<em>avais révisé</em> tous les soirs pendant un mois.","Lucas a eu 6 : il n'<em>avait jamais ouvert</em> ses livres !"]},
+  {t:"Le voyage à Saint-Malo",
+   a:"Votre ami(e) revient de Saint-Malo. Vous ne connaissez pas cette ville. Posez-lui des questions : est-ce qu'il/elle a aimé ? Qu'est-ce qu'il/elle a vu ? Qu'est-ce qu'il/elle savait de la ville avant le voyage ?",
+   bGoal:"Racontez votre voyage et ce que vous aviez appris avant de partir.",
+   b:[["avant le voyage","documentaire sur la guerre, article sur la reconstruction"],["première fois","une ville avec des remparts"],["sur place","promenade sur les remparts, visite guidée"],["surprise","appartements modernes derrière les vieilles façades"]],
+   ex:["Avant de partir, j'<em>avais vu</em> un documentaire sur la guerre et j'<em>avais lu</em> un article sur la reconstruction.","Je n'<em>avais jamais visité</em> de ville avec des remparts !"]},
+  {t:"Les clés",
+   a:"Hier soir, votre colocataire n'est pas rentré(e) à la maison : il/elle a dormi chez sa sœur. Vous étiez inquiet/inquiète. Demandez-lui ce qui s'est passé.",
+   bGoal:"Racontez votre soirée et expliquez où étaient vos clés.",
+   b:[["18 h","départ du bureau"],["19 h","devant la porte : pas de clés dans le sac"],["19 h 15","trois appels à ton/ta colocataire, pas de réponse"],["la nuit","chez ta sœur"],["ce matin","clés retrouvées… sur ton bureau, au travail"]],
+   ex:["Je n'avais pas mes clés : je les <em>avais laissées</em> au bureau !","Je t'<em>avais appelé(e)</em> trois fois, mais tu n'<em>avais pas répondu</em>."]},
+  {t:"La soirée cinéma",
+   a:"Samedi, vous êtes allé(e) au cinéma avec des amis. Votre ami(e) n'est pas venu(e). Demandez-lui pourquoi et donnez votre avis sur le film.",
+   bGoal:"Expliquez pourquoi vous n'êtes pas venu(e) et donnez votre avis sur le film.",
+   b:[["le samedi d'avant","même film, invitation de ton frère"],["ton avis","film très long, fin décevante"],["samedi soir","à la maison, une série"]],
+   ex:["Je l'<em>avais déjà vu</em> : mon frère m'<em>avait invité(e)</em> la semaine d'avant.","Franchement, je l'ai trouvé trop long."]},
+  {t:"Le retard au travail",
+   a:"Vous êtes le/la responsable. Votre collègue est arrivé(e) à 10 h au lieu de 8 h, et une réunion importante était prévue à 8 h 30. Demandez des explications.",
+   bGoal:"Justifiez votre retard… honnêtement, ou pas !",
+   b:[["la veille","une série jusqu'à 2 h du matin"],["la nuit","téléphone (et réveil) : batterie à zéro"],["9 h 30","réveil, panique"],["la réunion","complètement oubliée"]],
+   ex:["Je n'ai pas entendu le réveil : mon téléphone <em>s'était déchargé</em> pendant la nuit.","Je dois être honnête : j'<em>avais regardé</em> une série jusqu'à 2 heures…"]},
+  {t:"La fête surprise",
+   a:"Vous avez organisé une fête surprise pour votre ami(e). Mais quand il/elle est entré(e), il/elle n'a pas eu l'air surpris(e). Demandez-lui pourquoi.",
+   bGoal:"Expliquez comment vous aviez découvert le secret.",
+   b:[["une semaine avant","liste des invités, oubliée par ta mère sur la table"],["trois jours avant","message de ton cousin, envoyé par erreur"],["le jour J","fausse surprise, grand sourire"]],
+   ex:["J'<em>avais tout deviné</em> ! Ma mère <em>avait oublié</em> la liste des invités sur la table.","Et mon cousin m'<em>avait envoyé</em> un message par erreur…"]},
+  {t:"L'ancien quartier",
+   a:"Votre ami(e) est retourné(e) dans le quartier de son enfance après quinze ans. Demandez-lui ses impressions : qu'est-ce qu'il/elle a retrouvé ? Qu'est-ce qui était différent ?",
+   bGoal:"Racontez ce que vous avez découvert : qu'est-ce qui avait changé ?",
+   b:[["ta vieille école","remplacée par un supermarché"],["ta boulangerie préférée","fermée il y a deux ans"],["le parc","de nouveaux arbres"],["tes anciens voisins","partis à la campagne"]],
+   ex:["Je n'ai pas reconnu mon quartier : tout <em>avait changé</em> !","On <em>avait remplacé</em> mon école par un supermarché, et ma boulangerie préférée <em>avait fermé</em>."]},
+  {t:"Le colis",
+   a:"Vous avez envoyé un cadeau d'anniversaire à votre ami(e) par la poste. Le livreur dit qu'il est passé chez lui/elle à 11 h. Demandez s'il/elle a reçu le colis.",
+   bGoal:"Racontez ce qui s'est passé avec le colis.",
+   b:[["10 h 30","départ de la maison"],["11 h","passage du livreur : personne"],["12 h","retour, pas de colis devant la porte"],["15 h","la voisine à la porte, le colis dans les mains"]],
+   ex:["Quand le livreur est passé, j'<em>étais déjà parti(e)</em>.","Finalement, la voisine est venue à 15 h : le livreur l'<em>avait déposé</em> chez elle !"]}
 ];
 
 const PART_NAMES = {1:"1 · Formation",2:"2 · Utilisation",3:"3 · Écriture",4:"4 · Compréhension orale"};
@@ -980,19 +1004,25 @@ document.getElementById("btn-hl").addEventListener("click",e=>{
   const box = document.getElementById("dialogues");
   DIAL.forEach((d,i)=>{
     const div = document.createElement("div"); div.className = "dlg";
-    let html = '<h4>'+(i+1)+'. '+d.t+'</h4>';
-    d.l.forEach(line=>{
-      if(line[0]==="A") html += '<div class="bub a"><b class="who">A</b> '+line[1]+'</div>';
-      else html += '<div class="bub b"><b class="who">B</b> <span class="cue">('+line[1]+')</span><span class="mod" hidden>'+line[2]+'</span></div>';
-    });
-    html += '<div class="ex-actions" style="margin-top:8px"><button type="button" class="btn ghost">Voir le modèle</button></div>';
-    div.innerHTML = html;
-    const btn = div.querySelector("button");
-    btn.addEventListener("click",()=>{
-      const mods = div.querySelectorAll(".mod"), show = mods[0].hidden;
-      mods.forEach(m=>m.hidden=!show);
-      btn.textContent = show ? "Masquer le modèle" : "Voir le modèle";
-    });
+    div.innerHTML = '<h4>'+(i+1)+'. '+d.t+'</h4>'
+      + '<div class="roles">'
+      +   '<button type="button" class="rbtn ra" data-r="a" aria-expanded="false">Carte A</button>'
+      +   '<button type="button" class="rbtn rb" data-r="b" aria-expanded="false">Carte B</button>'
+      +   '<button type="button" class="rbtn rx" data-r="x" aria-expanded="false">Exemples</button>'
+      + '</div>'
+      + '<div class="rc rc-a" data-p="a" hidden><b class="who-a">Carte A</b><p>'+d.a+'</p></div>'
+      + '<div class="rc rc-b" data-p="b" hidden><b class="who-b">Carte B</b><p class="goal">'+d.bGoal+'</p>'
+      +   '<div class="tline">'+d.b.map(([k,v])=>'<span class="tk">'+k+'</span><span class="tv">'+v+'</span>').join("")+'</div>'
+      +   '<p class="muted" style="margin:8px 0 0">Transformez ces notes en phrases : trouvez les verbes et choisissez les temps.</p></div>'
+      + '<div class="rc rc-x" data-p="x" hidden><b>Exemples possibles</b> <span class="muted">(après le dialogue ; d’autres réponses sont correctes)</span><ul>'
+      +   d.ex.map(e=>'<li>'+e+'</li>').join("")+'</ul></div>';
+    const btns = div.querySelectorAll(".rbtn"), panels = div.querySelectorAll(".rc");
+    btns.forEach(b=>b.addEventListener("click",()=>{
+      const r = b.dataset.r, open = b.getAttribute("aria-expanded")==="true";
+      btns.forEach(x=>x.setAttribute("aria-expanded","false"));
+      panels.forEach(p=>p.hidden = true);
+      if(!open){ b.setAttribute("aria-expanded","true"); div.querySelector('.rc[data-p="'+r+'"]').hidden = false; }
+    }));
     box.appendChild(div);
   });
 })();
