@@ -155,6 +155,15 @@ mark.pqp{background:none;color:inherit}
 .fc-a{font-size:1.15rem;margin:6px 0}
 .fc-a b{color:var(--violet)}
 .fc-tap{position:absolute;bottom:8px;right:14px;font-size:.75rem;color:var(--muted)}
+.fi .fc-face{padding:12px 12px 30px;justify-content:flex-start;gap:8px}
+.fi-img{width:100%;border-radius:10px;border:1px solid var(--line)}
+.fi .fc-back .fi-img{max-width:62%;opacity:.85}
+.fi-q{font-weight:700;margin:4px 0 0;font-size:1rem}
+.fi .fc-a{font-size:1.08rem;margin:2px 0}
+.fi .fc-a b{color:var(--violet)} .fi .fc-a i{color:var(--bleu);font-style:normal;font-weight:700}
+.fi .fc-var{font-size:.92rem;color:var(--muted);margin:0}
+.fi .fc-var b{color:var(--violet)}
+.fi .fc-n{position:static;align-self:flex-start}
 .fc-ctrl{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
 .fc-count{font-weight:700;color:var(--muted)}
 
@@ -372,6 +381,26 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font
     <div class="ex-body"></div>
   </section>
 
+  <section class="card">
+    <h3>Exercice 6 · Racontez en images 🗣️</h3>
+    <p class="consigne">Observez les deux images de la carte. <b>Expliquez à l'oral ce qui s'est passé</b> en combinant le <span class="c-pc">passé composé</span> (le repère) et le <span class="c-pqp">plus-que-parfait</span> (ce qui s'était passé avant). Commencez par <i>Quand…</i> ou <i>Lorsque…</i>, puis touchez la carte pour voir une proposition de réponse.</p>
+    <div class="fc fi" id="fi" role="button" tabindex="0" aria-label="Retourner la carte">
+      <div class="fc-inner">
+        <div class="fc-face fc-front" id="fiFront"></div>
+        <div class="fc-face fc-back" id="fiBack"></div>
+      </div>
+    </div>
+    <div class="fc-ctrl">
+      <button type="button" class="btn ghost" id="fiPrev">← Précédente</button>
+      <span class="fc-count" id="fiCount" aria-live="polite"></span>
+      <button type="button" class="btn ghost" id="fiNext">Suivante →</button>
+    </div>
+    <div class="fc-ctrl" style="justify-content:center">
+      <button type="button" class="btn primary" id="fiFlip">Retourner la carte</button>
+      <button type="button" class="btn ghost" id="fiShuffle">Mélanger</button>
+    </div>
+  </section>
+
   <div class="next"><button class="btn ghost" data-go="3">Partie 3 : À vous d'écrire →</button></div>
 </section>
 
@@ -495,7 +524,7 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font
   </div>
 
   <section class="card ex vert" id="p4">
-    <h3>Exercice 6 · Questionnaire (15 questions)</h3>
+    <h3>Exercice 7 · Questionnaire (15 questions)</h3>
     <p class="consigne">Choisissez la bonne réponse, puis cliquez sur « Vérifier ».</p>
     <div class="ex-body"></div>
   </section>
@@ -974,30 +1003,62 @@ document.getElementById("btn-hl").addEventListener("click",e=>{
   e.currentTarget.textContent = tr.classList.contains("hl") ? "Retirer le surlignage" : "Surligner les plus-que-parfaits";
 });
 
-/* ---------- fiches recto-verso ---------- */
-(function(){
-  const fc = document.getElementById("fc"), front = document.getElementById("fcFront"), back = document.getElementById("fcBack"), count = document.getElementById("fcCount");
-  let order = CARDS.map((_,i)=>i), ci = 0;
+/* ---------- paquets de cartes recto-verso ---------- */
+function makeDeck(id, items, front, back){
+  const fc = document.getElementById(id), fr = document.getElementById(id+"Front"), bk = document.getElementById(id+"Back"), count = document.getElementById(id+"Count");
+  let order = items.map((_,i)=>i), ci = 0;
   function show(){
     fc.classList.add("noanim"); fc.classList.remove("flipped");
-    const k = order[ci], [r,cue,v] = CARDS[k];
-    front.innerHTML = '<span class="fc-n">Recto · fiche '+(k+1)+'</span><p class="fc-q">'+r+'</p><p class="fc-cue">('+cue+')</p><span class="fc-tap">Touchez pour retourner ↻</span>';
-    back.innerHTML = '<span class="fc-n">Verso · réponse</span><p class="fc-a">'+v+'</p><span class="fc-tap">Touchez pour revenir ↻</span>';
-    count.textContent = (ci+1)+" / "+CARDS.length;
+    const k = order[ci];
+    fr.innerHTML = front(items[k],k); bk.innerHTML = back(items[k],k);
+    count.textContent = (ci+1)+" / "+items.length;
     void fc.offsetWidth; fc.classList.remove("noanim");
   }
   const flip = ()=>fc.classList.toggle("flipped");
   fc.addEventListener("click",flip);
   fc.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); flip(); } });
-  document.getElementById("fcFlip").addEventListener("click",flip);
-  document.getElementById("fcPrev").addEventListener("click",()=>{ ci=(ci-1+CARDS.length)%CARDS.length; show(); });
-  document.getElementById("fcNext").addEventListener("click",()=>{ ci=(ci+1)%CARDS.length; show(); });
-  document.getElementById("fcShuffle").addEventListener("click",()=>{
+  document.getElementById(id+"Flip").addEventListener("click",flip);
+  document.getElementById(id+"Prev").addEventListener("click",()=>{ ci=(ci-1+items.length)%items.length; show(); });
+  document.getElementById(id+"Next").addEventListener("click",()=>{ ci=(ci+1)%items.length; show(); });
+  document.getElementById(id+"Shuffle").addEventListener("click",()=>{
     for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
     ci=0; show();
   });
   show();
-})();
+}
+
+/* Fiches de la partie 5 */
+makeDeck("fc", CARDS,
+  ([r,cue],k)=>'<span class="fc-n">Recto · fiche '+(k+1)+'</span><p class="fc-q">'+r+'</p><p class="fc-cue">('+cue+')</p><span class="fc-tap">Touchez pour retourner ↻</span>',
+  ([,,v])=>'<span class="fc-n">Verso · réponse</span><p class="fc-a">'+v+'</p><span class="fc-tap">Touchez pour revenir ↻</span>');
+
+/* Cartes en images de la partie 2 : [fichier, description, réponse, variante] */
+const PICS = [
+  ["bd-cantine","12 h 30, les collègues déjeunent ; 13 h 00, Antoine arrive à la cantine avec son plateau : la table est vide.",
+   "Quand Antoine <i>est arrivé</i> à la cantine, ses collègues <b>avaient déjà déjeuné</b>.",
+   "Ils <b>avaient fini</b> de manger et ils <b>étaient partis</b>."],
+  ["bd-pharmacie","19 h 00, le pharmacien ferme la pharmacie ; 19 h 10, Sophie passe avec son ordonnance : c'est fermé.",
+   "Quand Sophie <i>est passée</i> devant la pharmacie, le pharmacien <b>avait déjà fermé</b> ses portes.",
+   "Elle n'a pas pu acheter ses médicaments : la pharmacie <b>avait fermé</b> dix minutes avant."],
+  ["bd-pluie","10 h 00, il pleut à verse pendant la classe ; 10 h 15, les enfants sortent dans la cour pleine de flaques.",
+   "Lorsque les enfants <i>sont sortis</i> en récréation, la pluie <b>s'était arrêtée</b>.",
+   "Il <b>avait plu</b> à verse : la cour était pleine de flaques."],
+  ["bd-contravention","14 h 00, une contractuelle met une amende (un P-V) sur une voiture rouge ; 14 h 15, Claire revient avec ses courses.",
+   "Quand Claire <i>est revenue</i> à sa voiture, une contractuelle lui <b>avait mis</b> un P-V.",
+   "Elle <b>avait mal garé</b> sa voiture pour faire ses courses. (un P-V = une amende)"],
+  ["bd-match","20 h 45, le match commence et l'équipe adverse marque un but ; 20 h 55, Lucas arrive dans les tribunes : 0-1.",
+   "Quand Lucas <i>est arrivé</i> dans les tribunes, l'équipe adverse <b>avait déjà marqué</b> un but.",
+   "Le match <b>avait commencé</b> dix minutes avant."],
+  ["bd-colocation","18 h 00, la colocataire de Julien nettoie le salon en désordre ; 18 h 40, Julien rentre : tout est propre.",
+   "Quand Julien <i>est rentré</i>, sa colocataire <b>avait déjà tout nettoyé</b>.",
+   "Elle <b>avait rangé</b> le salon et elle <b>avait passé</b> l'aspirateur."],
+  ["bd-exposition","17 h 30, les gardiens ferment l'exposition ; 17 h 45, trois visiteurs arrivent avec leurs billets.",
+   "Lorsque nous <i>sommes arrivés</i>, l'exposition <b>avait déjà fermé</b> ses portes.",
+   "Nous <b>avions acheté</b> nos billets, mais nous ne sommes pas entrés !"]
+];
+makeDeck("fi", PICS,
+  ([f,alt],k)=>'<span class="fc-n">Carte '+(k+1)+'</span><img class="fi-img" src="img/'+f+'.jpg" alt="'+alt+'" width="840" height="430"><p class="fi-q">Expliquez ce qui s\u2019est passé : passé composé + plus-que-parfait.</p><span class="fc-tap">Touchez pour retourner ↻</span>',
+  ([f,alt,a,v])=>'<span class="fc-n">Proposition de réponse</span><img class="fi-img" src="img/'+f+'.jpg" alt="" width="840" height="430"><p class="fc-a">'+a+'</p><p class="fc-var">Pour aller plus loin : '+v+'</p><span class="fc-tap">Touchez pour revenir ↻</span>');
 
 /* ---------- micro-dialogues ---------- */
 (function(){
