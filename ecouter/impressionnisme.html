@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'impressionnisme · Écouter B1</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* Onglets */
+.onglets{position:sticky;top:0;z-index:5;background:#fff;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 0 10px;margin:8px 0 4px;border-bottom:1px solid var(--bord)}
+button.onglet{font:inherit;font-size:.92rem;font-weight:600;line-height:1.25;color:var(--texte);background:#fff;border:1.5px solid var(--bord);border-radius:10px;padding:10px 6px;cursor:pointer;min-height:48px}
+button.onglet[aria-selected="true"]{border-color:var(--violet-txt);color:var(--violet-txt);box-shadow:inset 0 -3px 0 var(--violet-txt)}
+button.onglet .sous{display:block;font-weight:400;font-size:.78rem;color:var(--texte-doux)}
+.panneau[hidden]{display:none}
+/* Vidéos horizontales */
+.video-h{position:relative;width:100%;max-width:720px;margin:12px auto;aspect-ratio:4/3;background:#000;border-radius:var(--rayon);overflow:hidden;border:1px solid var(--bord)}
+.video-h.large{aspect-ratio:16/9}
+.video-h video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+/* Notes explicatives */
+.notes{display:grid;gap:12px;grid-template-columns:1fr;margin:12px 0}
+@media (min-width:640px){.notes{grid-template-columns:1fr 1fr}}
+.note{border:1px solid var(--bord);border-radius:var(--rayon);padding:14px 16px;background:#fff}
+.note h3{margin:0 0 6px;font-size:1.05rem}
+.note p{margin:6px 0}
+.note .dates{font-size:.88rem;color:var(--texte-doux);margin-top:0}
+.gram-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.legende{display:none;flex-wrap:wrap;gap:6px 12px;font-size:.88rem}
+.voir-g .legende{display:flex}
+.legende span{padding:1px 6px;border-radius:4px}
+.voir-g .g{border-bottom:2.5px solid;padding:0 1px}
+.voir-g .g[data-g="passif"],.legende .l-passif{border-color:#00709A;background:#EAF4F9}
+.voir-g .g[data-g="adj"],.legende .l-adj{border-color:#672290;background:#F4EDF8}
+.voir-g .g[data-g="yen"],.legende .l-yen{border-color:#B35A00;background:#FBF1E6}
+.voir-g .g[data-g="conc"],.legende .l-conc{border-color:#C2161F;background:#FCEDEE}
+.voir-g .g[data-g="conn"],.legende .l-conn{border-color:#464141;background:#F1F0F0}
+.legende span{border-bottom:2.5px solid}
+.photos3{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin:12px 0}
+.photos3 figure{margin:0;border:1px solid var(--bord);border-radius:var(--rayon);overflow:hidden;position:relative}
+.photos3 img{display:block;width:100%;height:auto}
+.photos3 figcaption{position:absolute;top:6px;left:6px;width:1.8rem;height:1.8rem;border-radius:50%;background:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.vue2{display:grid;gap:10px;grid-template-columns:1fr;margin:12px 0}
+@media (min-width:560px){.vue2{grid-template-columns:repeat(3,1fr)}}
+.vue2 img{display:block;width:100%;height:auto;border-radius:var(--rayon);border:1px solid var(--bord)}
+.a-noter{border:1.5px dashed var(--bord);border-radius:var(--rayon);padding:12px 16px;margin:12px 0}
+.a-noter ol{padding-left:1.2em;margin:6px 0}
+.a-noter li{margin:6px 0}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="back" href="../index.html#art">← Toutes les activités</a>
+  <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+</header>
+<main>
+  <p class="kicker">Écouter · Niveau B1 · Unité 6 · L'art et nous</p>
+  <h1>L'impressionnisme&nbsp;: peindre, jouer, photographier la lumière</h1>
+  <p class="lead">Trois vidéos pour découvrir un courant artistique né en France il y a 150 ans… et qui inspire encore les artistes d'aujourd'hui.</p>
+
+  <div class="onglets" role="tablist" aria-label="Les trois parties">
+    <button class="onglet" role="tab" id="t-monet" aria-controls="p-monet" aria-selected="true">1 · Chez Monet<span class="sous">peinture, musique</span></button>
+    <button class="onglet" role="tab" id="t-giverny" aria-controls="p-giverny" aria-selected="false">2 · Giverny<span class="sous">le jardin</span></button>
+    <button class="onglet" role="tab" id="t-photo" aria-controls="p-photo" aria-selected="false">3 · La photo<span class="sous">aujourd'hui</span></button>
+  </div>
+
+  <!-- ===================================================== 1. CHEZ MONET -->
+  <section class="panneau" id="p-monet" role="tabpanel" aria-labelledby="t-monet">
+    <h2>1. Chez Monet&nbsp;: des tableaux et une musique</h2>
+    <p>Lisez d'abord ces notes. Elles utilisent la grammaire de l'unité&nbsp;: touchez le bouton pour la voir en couleur.</p>
+    <div id="notes-zone">
+      <div class="gram-bar">
+        <button type="button" class="btn small" id="voir-g" aria-pressed="false">Montrer la grammaire</button>
+        <div class="legende" aria-hidden="true">
+          <span class="l-passif">passif</span><span class="l-adj">adjectifs</span><span class="l-yen">y / en</span><span class="l-conc">concession</span><span class="l-conn">connecteurs</span>
+        </div>
+      </div>
+      <div class="notes">
+        <article class="note">
+          <h3>L'impressionnisme</h3>
+          <p>C'est un <span class="g" data-g="adj">grand mouvement artistique</span> né en France vers 1870. Son nom <span class="g" data-g="passif">a été inventé par</span> un critique, à partir d'un tableau de Monet, <i>Impression, soleil levant</i>. <span class="g" data-g="conc">Même si</span> le mot était d'abord une moquerie, les peintres l'ont adopté.</p>
+          <p>Les impressionnistes peignent en plein air, avec des <span class="g" data-g="adj">touches rapides</span> et des <span class="g" data-g="adj">couleurs claires</span>. <span class="g" data-g="conn">En effet</span>, ce qui les intéresse, c'est la lumière qui change.</p>
+        </article>
+        <article class="note">
+          <h3>Claude Monet</h3>
+          <p class="dates">Paris, 1840 – Giverny, 1926</p>
+          <p>C'est le <span class="g" data-g="adj">plus célèbre peintre</span> impressionniste. En 1883, il s'installe à Giverny, un village de Normandie, et il <span class="g" data-g="yen">y</span> vit jusqu'à sa mort. Il crée un jardin, puis un étang avec un pont japonais.</p>
+          <p>Il peint souvent le même sujet à différentes heures&nbsp;: <span class="g" data-g="conn">ainsi</span>, on voit la lumière changer. Des nymphéas&nbsp;? Il <span class="g" data-g="yen">en</span> a peint environ 250.</p>
+        </article>
+        <article class="note">
+          <h3>Claude Debussy</h3>
+          <p class="dates">Saint-Germain-en-Laye, 1862 – Paris, 1918</p>
+          <p>C'est un compositeur français. <i>Clair de lune</i>, la musique de la vidéo, <span class="g" data-g="passif">a été écrit pour</span> le piano&nbsp;: c'est une pièce de la <i>Suite bergamasque</i>.</p>
+          <p>Sa musique est <span class="g" data-g="adj">douce, mystérieuse</span>, pleine de nuances. <span class="g" data-g="conn">Par ailleurs</span>, Debussy aimait beaucoup la peinture et la poésie.</p>
+        </article>
+        <article class="note">
+          <h3>L'impressionnisme en musique</h3>
+          <p>On parle de musique impressionniste pour Debussy et pour Ravel. <span class="g" data-g="conc">Pourtant</span>, Debussy n'aimait pas ce mot&nbsp;!</p>
+          <p>Comme les peintres, ces compositeurs cherchent <span class="g" data-g="conn">d'une part</span> à créer une atmosphère, <span class="g" data-g="conn">d'autre part</span> à donner des sensations&nbsp;: l'eau, la lumière, la lune. La musique ne raconte pas une histoire&nbsp;: elle peint avec des sons.</p>
+        </article>
+      </div>
+    </div>
+    <div id="ex-notes"></div>
+    <div id="ex-gram-notes"></div>
+
+    <h3>Regardez et écoutez</h3>
+    <p class="notice">Une vidéo sans paroles (1 min 15)&nbsp;: des tableaux de Monet et le <i>Clair de lune</i> de Debussy. Regardez-la une fois sans rien faire, juste pour le plaisir.</p>
+    <div class="video-h"><video id="v-monet" controls playsinline preload="metadata" src="chez-monet.mp4"></video></div>
+    <div class="box secours" hidden><p>La vidéo ne s'affiche pas&nbsp;? Choisissez le fichier <b>chez-monet.mp4</b> sur votre appareil&nbsp;:</p><input type="file" accept="video/*" data-for="v-monet"></div>
+    <div id="ex-monet-video"></div>
+
+    <div class="box">
+      <h3>Parlons-en</h3>
+      <ol>
+        <li>Qu'avez-vous ressenti pendant la vidéo&nbsp;? Calme, nostalgie, joie…&nbsp;?</li>
+        <li>Quel tableau préférez-vous&nbsp;? Décrivez-le avec trois adjectifs bien placés.</li>
+        <li>La musique et la peinture vont-elles bien ensemble&nbsp;? Qu'ont-elles en commun&nbsp;?</li>
+      </ol>
+      <p class="phrases">Cette musique me rend… · Ce tableau m'évoque… · C'est un magnifique jardin fleuri… · Même si je ne connais pas bien la peinture, je trouve que… · D'une part…, d'autre part…</p>
+    </div>
+  </section>
+
+  <!-- ===================================================== 2. GIVERNY -->
+  <section class="panneau" id="p-giverny" role="tabpanel" aria-labelledby="t-giverny" hidden>
+    <h2>2. Giverny&nbsp;: le jardin de Monet</h2>
+    <p class="lead">Un reportage du journal régional de France 3 Paris Île-de-France (3 min).</p>
+
+    <h3>Avant la vidéo</h3>
+    <div class="vue2">
+      <img src="images/giverny-fleurs.jpg" alt="Un massif de fleurs roses, violettes et bleues dans le jardin de Monet" loading="lazy">
+      <img src="images/giverny-etang.jpg" alt="Un nymphéa jaune au milieu de feuilles flottantes sur l'eau de l'étang" loading="lazy">
+      <img src="images/giverny-pont.jpg" alt="Un homme sur le pont japonais vert, au-dessus de l'étang" loading="lazy">
+    </div>
+    <div class="box">
+      <h3>Faites des hypothèses</h3>
+      <ol>
+        <li>Ces images ont été prises dans le jardin de Monet. À quelle saison, à votre avis&nbsp;?</li>
+        <li>Pourquoi un journal télévisé parle-t-il de ce jardin&nbsp;? Qui va parler dans le reportage&nbsp;?</li>
+        <li>Vous avez vu ces lieux dans les tableaux de la partie 1&nbsp;: lesquels&nbsp;?</li>
+      </ol>
+      <p class="notice">Gardez vos hypothèses (à l'oral ou sur votre cahier)&nbsp;: vous les vérifierez après l'écoute.</p>
+    </div>
+    <div id="ex-g-vocab"></div>
+
+    <h3>Écouter</h3>
+    <div class="video-h large"><video id="v-giverny" controls playsinline preload="metadata" src="giverny.mp4"></video></div>
+    <div class="box secours" hidden><p>La vidéo ne s'affiche pas&nbsp;? Choisissez le fichier <b>giverny.mp4</b> sur votre appareil&nbsp;:</p><input type="file" accept="video/*" data-for="v-giverny"></div>
+    <div class="etapes">
+      <div class="etape"><b>Écoute 1 · générale</b><span class="notice">Le reportage en entier, sans vous arrêter.</span></div>
+      <div class="etape"><b>Écoute 2 · détaillée</b><span class="notice">Arrêtez la vidéo autant de fois que nécessaire.</span></div>
+      <div class="etape"><b>Écoute 3 · la langue</b><span class="notice">Écoutez comment on présente un lieu.</span></div>
+    </div>
+    <div id="ex-g-global"></div>
+    <div id="ex-g-detail"></div>
+    <div class="a-noter">
+      <h3>Écoute 2 · Notez sur votre cahier</h3>
+      <ol>
+        <li>Pourquoi Monet plante-t-il d'abord des fleurs&nbsp;?</li>
+        <li>Quelles sont les couleurs de la lumière dans le jardin le matin, pendant la journée, à la fin de la journée&nbsp;?</li>
+        <li>Il y a combien de temps que le jardin a été restauré&nbsp;?</li>
+        <li>Quelle situation a mis le jardin en danger&nbsp;?</li>
+      </ol>
+      <p class="notice">Nous corrigerons ensemble en classe.</p>
+    </div>
+    <div id="ex-g-langue"></div>
+
+    <h3>Après la vidéo</h3>
+    <div class="box"><p><b>Revenez à vos hypothèses</b>&nbsp;: la saison, les personnes interrogées, les tableaux. Qu'est-ce qui vous a surpris dans ce reportage&nbsp;?</p></div>
+    <div class="cards">
+      <article class="card">
+        <h3><span class="tag med">Médiation</span>Convaincre un ami</h3>
+        <p>À deux. Votre ami francophone passe une semaine à Paris et hésite à aller à Giverny. Convainquez-le en une minute&nbsp;: ce qu'il va voir, pourquoi c'est unique, quand y aller.</p>
+        <p class="phrases">« Tu devrais y aller parce que… » · « Le jardin a été créé par… » · « Même si c'est un peu loin de Paris, … »</p>
+      </article>
+      <article class="card">
+        <h3><span class="tag duo">Débat</span>Un jardin, une œuvre d'art&nbsp;?</h3>
+        <p>En petit groupe. Le jardin de Monet est-il une œuvre d'art comme ses tableaux&nbsp;? Et des centaines de milliers de visiteurs par an, est-ce une chance ou un danger pour un lieu comme celui-ci&nbsp;?</p>
+        <p class="phrases">« D'une part…, d'autre part… » · « Il faut reconnaître que…, mais… » · « Bien que ce soit un jardin, … »</p>
+      </article>
+    </div>
+    <h3>Production écrite</h3>
+    <p class="notice">Écrivez sur votre cahier ou sur une feuille, pas sur cette page.</p>
+    <div class="cards">
+      <article class="card">
+        <h3><span class="num c-vert">1</span>Un message à un ami</h3>
+        <p class="meta">100 à 120 mots</p>
+        <p>Vous avez visité le jardin de Monet. Écrivez à un ami francophone&nbsp;: ce que vous avez vu, ce que vous avez ressenti, et pourquoi il doit y aller lui aussi.</p>
+      </article>
+      <article class="card">
+        <h3><span class="num c-bleu">2</span>Un lieu qui inspire</h3>
+        <p class="meta">120 à 150 mots · pour un blog francophone de voyage</p>
+        <p>Présentez un lieu de votre ville qui a inspiré un artiste (une maison, un jardin, un quartier). Utilisez au moins une forme passive et une concession.</p>
+      </article>
+    </div>
+    <div class="box"><ul class="check">
+      <li>J'ai utilisé le vocabulaire du reportage (un étang, une plate-bande, une toile…).</li>
+      <li>J'ai utilisé le passif et y ou en.</li>
+      <li>J'ai nuancé mon avis avec une concession.</li>
+    </ul></div>
+  </section>
+
+  <!-- ===================================================== 3. PHOTOGRAPHIE -->
+  <section class="panneau" id="p-photo" role="tabpanel" aria-labelledby="t-photo" hidden>
+    <h2>3. La photographie impressionniste</h2>
+    <p class="lead">Un court reportage de France Télévisions (1 min 25) sur un photographe d'aujourd'hui.</p>
+
+    <h3>Avant la vidéo</h3>
+    <p class="notice">Observez ces trois images, sans lire la suite.</p>
+    <div class="photos3">
+      <figure><img src="images/photo-1.jpg" alt="Image A : des taches vertes, roses et blanches, floues, comme des fleurs vues en mouvement" loading="lazy"><figcaption>A</figcaption></figure>
+      <figure><img src="images/photo-2.jpg" alt="Image B : de longues traînées verticales orange en haut et bleu-gris en bas" loading="lazy"><figcaption>B</figcaption></figure>
+      <figure><img src="images/photo-3.jpg" alt="Image C : des formes claires et floues sur un fond rouge sombre, comme de la lumière en mouvement" loading="lazy"><figcaption>C</figcaption></figure>
+    </div>
+    <div class="box">
+      <h3>Sans contexte</h3>
+      <ol>
+        <li>À votre avis, ce sont des peintures, des photos… ou autre chose&nbsp;?</li>
+        <li>Que représentent-elles&nbsp;? Qu'est-ce qu'on reconnaît&nbsp;?</li>
+        <li>Si vous trouviez ces images sur votre téléphone, vous les garderiez ou vous les effaceriez&nbsp;? Pourquoi&nbsp;?</li>
+      </ol>
+      <p class="phrases">On dirait… · Ça ressemble à… · Je pense que c'est… parce que… · Même si c'est flou, je trouve que…</p>
+    </div>
+    <div id="ex-p-avant"></div>
+
+    <h3>Écouter</h3>
+    <div class="video-wrap"><video id="v-photo" controls playsinline preload="metadata" src="photographie-impressionniste.mp4"></video><div class="cache-st" id="cache">Sous-titres masqués&nbsp;: écoutez&nbsp;!</div></div>
+    <div class="btn-row" style="justify-content:center"><button type="button" class="btn" id="bascule" aria-pressed="true">Afficher les sous-titres</button></div>
+    <div class="box secours" hidden><p>La vidéo ne s'affiche pas&nbsp;? Choisissez le fichier <b>photographie-impressionniste.mp4</b> sur votre appareil&nbsp;:</p><input type="file" accept="video/*" data-for="v-photo"></div>
+    <p class="notice" style="text-align:center">Pour les écoutes 1 et 2, gardez les sous-titres masqués et ne mettez pas la vidéo en plein écran.</p>
+    <div class="etapes">
+      <div class="etape"><b>Écoute 1 · générale</b><span class="notice">Une écoute complète, sans sous-titres.</span></div>
+      <div class="etape"><b>Écoute 2 · détaillée</b><span class="notice">Arrêtez la vidéo. Toujours sans sous-titres.</span></div>
+      <div class="etape"><b>Écoute 3 · avec sous-titres</b><span class="notice">Vérifiez, puis travaillez la langue.</span></div>
+    </div>
+    <div id="ex-p-global"></div>
+    <div id="ex-p-detail"></div>
+    <div id="ex-p-ordre"></div>
+    <div id="ex-p-langue"></div>
+
+    <h3>Après la vidéo&nbsp;: débattre</h3>
+    <div class="box"><p><b>Revenez aux images A, B et C.</b> Maintenant que vous connaissez la technique de Bernard Reignier, les regardez-vous autrement&nbsp;?</p></div>
+    <div class="cards">
+      <article class="card">
+        <h3><span class="tag duo">Débat</span>Une photo ratée&nbsp;?</h3>
+        <p>Sans contexte, apprécierait-on ces photos&nbsp;? N'y a-t-il pas un risque de penser que ce sont des photos mal réussies&nbsp;? Le contexte (le titre, l'explication de l'artiste) change-t-il notre regard&nbsp;?</p>
+        <p class="phrases">« Même si c'est flou, … » · « Bien qu'on ne reconnaisse pas la forme, … » · « Sans explication, on pourrait croire que… » · « En effet… »</p>
+      </article>
+      <article class="card">
+        <h3><span class="tag duo">Débat</span>L'impressionnisme peut-il reprendre vie&nbsp;?</h3>
+        <p>Un courant né il y a 150 ans peut-il encore inspirer des artistes&nbsp;? Avec quels outils&nbsp;: la photo, le téléphone, l'intelligence artificielle&nbsp;? Est-ce encore de l'impressionnisme&nbsp;?</p>
+        <p class="phrases">« D'une part…, d'autre part… » · « Par ailleurs… » · « Ainsi… » · « Il faut reconnaître que…, mais… »</p>
+      </article>
+      <article class="card">
+        <h3><span class="tag med">Défi photo</span>À vous de bouger&nbsp;!</h3>
+        <p>Avec votre téléphone, prenez une photo «&nbsp;impressionniste&nbsp;» en bougeant l'appareil pendant la prise de vue. Présentez-la à la classe&nbsp;: qu'avez-vous voulu montrer&nbsp;?</p>
+        <p class="phrases">« J'ai fait un mouvement de… » · « J'ai voulu accentuer la couleur… » · « La forme a disparu, mais… »</p>
+      </article>
+    </div>
+    <h3>Production écrite</h3>
+    <p class="notice">Écrivez sur votre cahier ou sur une feuille, pas sur cette page.</p>
+    <div class="cards">
+      <article class="card">
+        <h3><span class="num c-violet">1</span>Le cartel d'une photo</h3>
+        <p class="meta">Leçon 24 · 80 à 100 mots</p>
+        <p>Choisissez l'image A, B ou C (ou votre propre photo «&nbsp;impressionniste&nbsp;»). Écrivez son cartel&nbsp;: l'artiste, un titre, la technique, puis une courte analyse.</p>
+      </article>
+      <article class="card">
+        <h3><span class="num c-rouge">2</span>Votre avis sur un forum</h3>
+        <p class="meta">120 à 150 mots</p>
+        <p>Sur un forum de photographie, quelqu'un écrit&nbsp;: «&nbsp;Une photo floue est une photo ratée.&nbsp;» Répondez-lui avec un avis nuancé&nbsp;: deux concessions et trois connecteurs.</p>
+      </article>
+    </div>
+
+    <h2 id="transcription">Transcription</h2>
+    <details>
+      <summary>Afficher la transcription (après les activités)</summary>
+      <div class="transcript">
+        <span class="speaker">Narratrice</span>
+        <p>Un peintre en son jardin. En bougeant son appareil à l'instant de la prise de vue, le photographe Bernard Reignier ne fige pas une vision, mais offre, dit-il, une image en devenir.</p>
+        <span class="speaker">Bernard Reignier, photographe impressionniste</span>
+        <p>Il n'y a pas de vie sans mouvement. Donc, je me suis dit que peut-être que, pour donner de la vie à l'image, il fallait bouger l'appareil par rapport au sujet pour avoir un effet de coup de pinceau, puisque c'est comme ça que les impressionnistes donnent de la vie à leur tableau.</p>
+        <p>Je voulais absolument accentuer la couleur un peu jaune-oranger des arbres. Donc là, j'ai fait un mouvement de va-et-vient. Je suis passé plusieurs fois au même endroit. Donc j'ai saturé la couleur, non pas en travaillant sur l'ordinateur, mais saturé la couleur par le simple mouvement alterné, comme si j'avais donné plusieurs coups de pinceau.</p>
+        <span class="speaker">Narratrice</span>
+        <p>Peindre avec la lumière. Révéler l'invisible. La photographie dynamique est pour Bernard Reignier un terrain de jeu sans limite.</p>
+        <span class="speaker">Bernard Reignier</span>
+        <p>Vous pouvez imaginer ce que vous voulez. Puis l'autre chose qui est intéressante, c'est que dans le mouvement, la couleur prend le pas sur la forme. Puisque le mouvement déforme la forme, mais préserve la couleur.</p>
+        <span class="speaker">Narratrice</span>
+        <p>Depuis sa retraite et la découverte de la photo dynamique, Bernard Reignier travaille son art en poète. L'ancien chirurgien orthopédiste, aujourd'hui photographe, n'a jamais cessé de soigner le mouvement.</p>
+      </div>
+    </details>
+  </section>
+
+  <p class="note-pied notice">Vidéos&nbsp;: montage de tableaux de Claude Monet sur le <i>Clair de lune</i> de Claude Debussy&nbsp;; France 3 Paris Île-de-France (19/20)&nbsp;; France Télévisions. Transcription de la partie 3 établie à partir des sous-titres de la vidéo. Utilisation pédagogique en classe. Conception pédagogique&nbsp;: Nadia Aguilar Neri.</p>
+</main>
+
+<script src="assets/exercices.js"></script>
+<script>
+/* ---------- Onglets (#monet, #giverny, #photo) ---------- */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".onglet"));
+  var noms = { monet: "t-monet", giverny: "t-giverny", photo: "t-photo" };
+  function show(id, scroll) {
+    tabs.forEach(function (t) {
+      var on = t.id === id;
+      t.setAttribute("aria-selected", String(on));
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    document.querySelectorAll("video").forEach(function (v) { if (!v.closest(".panneau").hidden) return; v.pause(); });
+    if (scroll) document.querySelector(".onglets").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { show(t.id, true); history.replaceState(null, "", "#" + t.id.slice(2)); });
+    t.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      var n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); n.click();
+    });
+  });
+  var h = location.hash.slice(1); if (noms[h]) show(noms[h], false);
+  window.addEventListener("hashchange", function () { var k = location.hash.slice(1); if (noms[k]) show(noms[k], true); });
+})();
+
+/* ---------- Grammaire en couleur dans les notes ---------- */
+document.getElementById("voir-g").addEventListener("click", function () {
+  var z = document.getElementById("notes-zone"), on = z.classList.toggle("voir-g");
+  this.setAttribute("aria-pressed", String(on));
+  this.textContent = on ? "Cacher la grammaire" : "Montrer la grammaire";
+});
+
+/* ---------- Vidéos : fichier de secours ; sous-titres masqués (partie 3) ---------- */
+document.querySelectorAll("video").forEach(function (v) {
+  var box = document.querySelector('input[data-for="' + v.id + '"]').closest(".secours");
+  v.addEventListener("error", function () { box.hidden = false; }, true);
+});
+document.querySelectorAll(".secours input").forEach(function (inp) {
+  inp.addEventListener("change", function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    var v = document.getElementById(inp.dataset.for); v.src = URL.createObjectURL(f); v.load();
+    inp.closest(".secours").hidden = true;
+  });
+});
+(function () {
+  var cache = document.getElementById("cache"), b = document.getElementById("bascule");
+  b.addEventListener("click", function () {
+    var masque = !cache.hidden; cache.hidden = masque;
+    b.setAttribute("aria-pressed", String(!masque));
+    b.textContent = masque ? "Masquer les sous-titres" : "Afficher les sous-titres";
+  });
+})();
+
+/* =============================== PARTIE 1 =============================== */
+Exos.qcm(document.getElementById("ex-notes"), {
+  num: 1, color: "c-violet", titre: "Avez-vous bien lu ?",
+  consigne: "Répondez d'après les notes.", melanger: true,
+  items: [
+    { q: "D'où vient le mot « impressionnisme » ?", options: ["d'un tableau de Monet", "d'un livre sur la peinture", "d'un poème de Debussy"], answer: 0, ok: "Du tableau <i>Impression, soleil levant</i>. Un critique s'en est moqué, et le nom est resté.", fb: { 1: "Relisez la première note : le nom vient d'une œuvre de Monet.", 2: "Debussy est un musicien, et il est né après la naissance du mouvement." } },
+    { q: "Au début, le mot « impressionniste » était…", options: ["une moquerie", "un compliment", "le nom d'une école d'art"], answer: 0, ok: "« Même si le mot était d'abord une moquerie, les peintres l'ont adopté. »", fb: { 1: "Au contraire : le critique voulait se moquer.", 2: "Ce n'était pas une école : c'était le mot d'un critique." } },
+    { q: "Qu'est-ce qui intéresse surtout les impressionnistes ?", options: ["la lumière qui change", "les grands événements historiques", "les portraits de personnes célèbres"], answer: 0, ok: "C'est pour ça qu'ils peignent en plein air, vite, avec des couleurs claires.", fb: { 1: "Les impressionnistes peignent plutôt la nature et la vie de tous les jours.", 2: "Relisez la fin de la première note : « ce qui les intéresse, c'est… »." } },
+    { q: "Pourquoi Monet peint-il souvent le même sujet ?", options: ["pour montrer les changements de lumière", "parce qu'il n'a pas d'autres idées", "pour vendre plusieurs fois le même tableau"], answer: 0, ok: "Il peint à différentes heures : « ainsi, on voit la lumière changer ».", fb: { 1: "Au contraire, c'est une idée très originale : la lumière est son vrai sujet.", 2: "La note parle de lumière, pas d'argent." } },
+    { q: "Que pensait Debussy du mot « impressionniste » pour sa musique ?", options: ["Il ne l'aimait pas.", "Il l'avait inventé.", "Il le trouvait parfait."], answer: 0, ok: "« Pourtant, Debussy n'aimait pas ce mot ! » On l'utilise quand même.", fb: { 1: "Le mot a été inventé par un critique, pour la peinture.", 2: "Relisez la dernière note : le mot « pourtant » annonce une surprise." } }
+  ]
+});
+Exos.qcm(document.getElementById("ex-gram-notes"), {
+  num: 2, color: "c-bleu", titre: "La grammaire de l'unité dans les notes",
+  consigne: "Touchez « Montrer la grammaire » pour vous aider.", melanger: true,
+  items: [
+    { q: "« Son nom <b>a été inventé par</b> un critique. » C'est…", options: ["une forme passive", "un passé composé actif", "un plus-que-parfait"], answer: 0, ok: "être (a été) + participe passé + <i>par</i> + l'agent : c'est le passif.", fb: { 1: "Qui fait l'action ? Le critique, introduit par « par » : c'est un passif.", 2: "Le plus-que-parfait se forme avec avais / étais. Ici : « a été » + participe." } },
+    { q: "« Il s'installe à Giverny, et il <b>y</b> vit jusqu'à sa mort. » <i>y</i> remplace…", options: ["à Giverny", "en 1883", "sa mort"], answer: 0, ok: "<i>y</i> remplace un lieu : il vit à Giverny.", fb: { 1: "<i>y</i> remplace un lieu, pas une date.", 2: "Relisez : où vit-il ?" } },
+    { q: "« Des nymphéas ? Il <b>en</b> a peint environ 250. » <i>en</i> remplace…", options: ["des nymphéas", "à Giverny", "le jardin"], answer: 0, ok: "<i>en</i> remplace une quantité : il a peint 250 nymphéas.", fb: { 1: "Pour un lieu avec « à », on utilise <i>y</i>.", 2: "Avec un nombre (250), <i>en</i> remplace la chose comptée." } },
+    { q: "« <b>Même si</b> le mot était d'abord une moquerie, les peintres l'ont adopté. » Cette phrase exprime…", options: ["une concession", "une cause", "une conséquence"], answer: 0, ok: "On reconnaît un fait (une moquerie), mais le résultat est inattendu (ils l'adoptent).", fb: { 1: "Une cause répond à « pourquoi ? ». Ici, on oppose deux idées.", 2: "Pour une conséquence, on dirait « donc » ou « ainsi »." } },
+    { q: "« Il peint le même sujet à différentes heures : <b>ainsi</b>, on voit la lumière changer. » <i>ainsi</i> introduit…", options: ["une conséquence", "une opposition", "une nouvelle idée"], answer: 0, ok: "<i>ainsi</i> = c'est pourquoi : voici le résultat.", fb: { 1: "Pour opposer, on utilise <i>pourtant</i> ou <i>néanmoins</i>.", 2: "Pour ajouter une idée, on utilise <i>par ailleurs</i> ou <i>de plus</i>." } },
+    { q: "Quelle expression a un adjectif placé <b>avant</b> le nom ?", options: ["un grand mouvement artistique", "des touches rapides", "des couleurs claires"], answer: 0, ok: "<i>grand</i> est un adjectif court et fréquent : avant le nom. <i>artistique</i>, après.", fb: { 1: "<i>rapides</i> est placé après le nom.", 2: "<i>claires</i> (une couleur) se place après le nom." } }
+  ]
+});
+Exos.qcm(document.getElementById("ex-monet-video"), {
+  num: 3, color: "c-vert", titre: "Qu'avez-vous vu ? Qu'avez-vous entendu ?",
+  consigne: "Après avoir regardé la vidéo.", melanger: true,
+  items: [
+    { q: "Dans la vidéo, on voit surtout…", options: ["des tableaux de jardins et d'étangs", "des photos de Paris au XIX<sup>e</sup> siècle", "des portraits de la famille de Monet"], answer: 0, ok: "Des allées fleuries, l'étang, les nymphéas : le jardin de Giverny peint par Monet.", fb: { 1: "Ce ne sont pas des photos, et on ne voit pas de ville.", 2: "On ne voit pas de portraits : regardez les sujets des tableaux." } },
+    { q: "Quel sujet revient le plus souvent ?", options: ["les nymphéas sur l'eau", "la mer et les bateaux", "la neige et l'hiver"], answer: 0, ok: "Les nymphéas : Monet en a peint environ 250.", fb: { 1: "Il n'y a pas de mer dans cette vidéo.", 2: "Les tableaux sont pleins de fleurs et de verdure : ce n'est pas l'hiver." } },
+    { q: "Le pont qu'on voit dans un tableau est…", options: ["un pont japonais au-dessus de l'étang", "un pont de pierre sur la Seine", "un pont de chemin de fer"], answer: 0, ok: "Monet l'a fait construire dans son jardin d'eau. Vous le verrez « en vrai » dans la partie 2.", fb: { 1: "Ce pont est en bois, peint, et passe au-dessus de l'étang du jardin.", 2: "Pas de train ici : c'est un petit pont de jardin." } },
+    { q: "Comment est la musique ?", options: ["lente et douce", "rapide et puissante", "une chanson avec des paroles"], answer: 0, ok: "Le <i>Clair de lune</i> de Debussy : une musique calme, comme la lumière de la lune sur l'eau.", fb: { 1: "Réécoutez : le rythme est plutôt lent.", 2: "Il n'y a pas de paroles : c'est une pièce instrumentale." } }
+  ]
+});
+
+/* =============================== PARTIE 2 =============================== */
+Exos.qcm(document.getElementById("ex-g-vocab"), {
+  num: 1, color: "c-violet", titre: "Les mots du reportage",
+  consigne: "Choisissez le sens du mot en gras.", melanger: true,
+  items: [
+    { q: "Chaque année, des milliers de visiteurs <b>foulent</b> les allées du jardin.", options: ["marchent sur", "nettoient", "photographient"], answer: 0, ok: "<i>Fouler</i> = marcher sur (le sol, l'herbe, les allées).", fb: { 1: "Les visiteurs ne travaillent pas : ils se promènent.", 2: "Ils prennent sans doute des photos, mais <i>fouler</i> parle des pieds." } },
+    { q: "Les jardiniers plantent des tulipes dans les <b>plates-bandes</b>.", options: ["les parterres de fleurs", "les pots sur les fenêtres", "les serres"], answer: 0, ok: "Une <i>plate-bande</i> = un parterre : une bande de terre où on plante des fleurs.", fb: { 1: "Une plate-bande est dans le sol du jardin.", 2: "Une serre est une maison de verre ; une plate-bande est en plein air." } },
+    { q: "Depuis la fenêtre, Monet avait une belle <b>vue</b> sur le jardin.", options: ["un paysage, une perspective", "une lumière", "une photo"], answer: 0, ok: "Une <i>vue</i> = ce qu'on voit d'un endroit : un paysage, une perspective.", fb: { 1: "La lumière éclaire la vue, mais ce n'est pas le même mot.", 2: "Une vue n'est pas un objet : c'est ce qu'on voit." } },
+    { q: "Monet a peint plus de 250 <b>toiles</b> de nymphéas.", options: ["des tableaux", "des dessins au crayon", "des tissus pour le jardin"], answer: 0, ok: "Une <i>toile</i> = le tissu sur lequel on peint, et donc le tableau lui-même.", fb: { 1: "Monet peint à l'huile, sur toile, pas au crayon.", 2: "Le mot vient bien du tissu, mais ici il désigne la peinture." } },
+    { q: "Avec une <b>touche</b> de rose, le jardinier imite les couleurs de Monet.", options: ["une nuance de couleur", "une fleur rare", "un outil de jardin"], answer: 0, ok: "Une <i>touche</i> = une petite quantité de couleur, comme un coup de pinceau.", fb: { 1: "On parle de couleur, pas d'une plante.", 2: "Le jardinier « peint » avec les fleurs : la touche est une couleur." } },
+    { q: "Monet a fait creuser un <b>étang</b> au fond du jardin.", options: ["un bassin, un petit lac", "un puits", "un canal"], answer: 0, ok: "Un <i>étang</i> = une étendue d'eau calme, plus petite qu'un lac.", fb: { 1: "Un puits est profond et étroit ; on ne peut pas y faire pousser des fleurs.", 2: "Un canal est long et étroit ; l'eau de l'étang est calme et large." } },
+    { q: "Sur l'étang flottent des <b>nénuphars</b>, qu'on appelle aussi des <b>nymphéas</b>.", options: ["des plantes aquatiques aux feuilles flottantes", "des poissons colorés", "des petits bateaux"], answer: 0, ok: "Des plantes d'eau : leurs grandes feuilles rondes flottent, leurs fleurs sont blanches, roses ou jaunes.", fb: { 1: "Regardez la deuxième photo : ce sont des feuilles et une fleur.", 2: "Ce sont des plantes, pas des objets." } },
+    { q: "Après la mort de Monet, le jardin a été <b>en péril</b>.", options: ["en danger", "très célèbre", "fermé le dimanche"], answer: 0, ok: "<i>En péril</i> = en danger.", fb: { 1: "Le mot <i>péril</i> annonce un problème, pas un succès.", 2: "Le mot est beaucoup plus fort : le jardin risquait de disparaître." } }
+  ]
+});
+Exos.qcm(document.getElementById("ex-g-global"), {
+  num: 2, color: "c-bleu", titre: "Écoute 1 · De quoi parle le reportage ?",
+  consigne: "Après une écoute complète.", melanger: true,
+  items: [
+    { q: "Le reportage présente surtout…", options: ["le jardin et la maison de Monet à Giverny", "une exposition de tableaux de Monet à Paris", "la vie quotidienne du village de Giverny"], answer: 0, ok: "On visite la maison, le jardin de fleurs et le jardin d'eau.", fb: { 1: "On voit quelques tableaux, mais le reportage a été tourné à Giverny.", 2: "Le village n'est pas le sujet : écoutez qui parle et où." } },
+    { q: "Le reportage montre deux espaces différents :", options: ["un jardin de fleurs et un jardin d'eau", "un potager et un verger", "un parc public et une forêt"], answer: 0, ok: "Les allées fleuries d'abord, puis l'étang aux nymphéas et le pont japonais.", fb: { 1: "Ce jardin n'est pas fait pour les légumes ou les fruits : regardez les images.", 2: "C'est le jardin privé du peintre, pas un parc." } },
+    { q: "Qui parle dans le reportage ?", options: ["une journaliste, des visiteuses et un homme qui connaît bien le jardin", "seulement le présentateur du journal", "des peintres qui copient Monet"], answer: 0, ok: "Plusieurs voix : c'est typique d'un reportage télévisé.", fb: { 1: "Il y a d'autres voix après la présentation : écoutez bien.", 2: "On ne voit personne peindre dans ce reportage." } }
+  ]
+});
+/* Réponses provisoires : à confirmer avec le corrigé du dossier (questions 1 et 2). */
+Exos.qcm(document.getElementById("ex-g-detail"), {
+  num: 3, color: "c-rouge", titre: "Écoute 2 · Les détails",
+  consigne: "Arrêtez la vidéo autant de fois que nécessaire.",
+  items: [
+    { fixe: true, q: "Combien de visiteurs arrivent à Giverny chaque année ?", options: ["cinq mille", "cinq cent mille", "cent mille", "cinquante mille"], answer: 1, ok: "Un demi-million de visiteurs par an : c'est un des lieux les plus visités de la région.", fb: { 0: "Beaucoup plus ! Réécoutez le début.", 2: "Plus encore : écoutez bien le chiffre.", 3: "Attention aux chiffres : cinquante, cinq cents…" } },
+    { fixe: true, q: "Claude Monet y a vécu pendant combien de temps ?", options: ["34 ans", "44 ans", "43 ans", "40 ans"], answer: 2, ok: "De 1883 à sa mort, en 1926 : 43 ans.", fb: { 0: "Attention à l'ordre des chiffres : trente-quatre ou quarante-trois ?", 1: "Presque ! Réécoutez : quarante-…", 3: "Un peu plus que 40 : réécoutez." } },
+    { q: "Quelle œuvre a été inspirée par la vue de l'étang ?", options: ["les Nymphéas", "<i>Impression, soleil levant</i>", "les Meules"], answer: 0, ok: "Les Nymphéas : environ 250 tableaux de l'étang et de ses fleurs.", fb: { 1: "<i>Impression, soleil levant</i> montre un port, pas un étang.", 2: "Les Meules sont des tas de foin dans un champ." } },
+    { q: "Quelle culture intéressait les Européens à cette époque ?", options: ["la culture japonaise", "la culture chinoise", "la culture grecque"], answer: 0, ok: "C'est le « japonisme » : pensez au pont japonais et aux estampes de la maison de Monet.", fb: { 1: "Pensez au nom du pont vert de l'étang.", 2: "Le pont de l'étang porte le nom d'un pays d'Asie." } }
+  ]
+});
+Exos.qcm(document.getElementById("ex-g-langue"), {
+  num: 4, color: "c-vert", titre: "Écoute 3 · Présenter un lieu avec la grammaire de l'unité",
+  consigne: "Choisissez la phrase correcte.", melanger: true,
+  items: [
+    { q: "Pour dire que le jardin a retrouvé son aspect d'origine :", options: ["Le jardin a été restauré.", "Le jardin a restauré.", "Le jardin est restaurant."], answer: 0, ok: "Passif : quelqu'un a restauré le jardin → le jardin <b>a été restauré</b>.", fb: { 1: "Le jardin ne fait pas l'action : il la subit. Il faut <i>être</i>.", 2: "Un restaurant n'a rien à voir ici !" } },
+    { q: "« Monet a vécu 43 ans <b>à Giverny</b>. » → « Monet ___ a vécu 43 ans. »", options: ["y", "en", "le"], answer: 0, ok: "<i>y</i> remplace un lieu introduit par <i>à</i>.", fb: { 1: "<i>en</i> remplace un lieu introduit par <i>de</i> (Il en revient).", 2: "<i>le</i> remplace un COD, pas un lieu." } },
+    { q: "« Des visiteurs ? Il ___ vient un demi-million chaque année. »", options: ["en", "y", "les"], answer: 0, ok: "Avec une quantité, on utilise <i>en</i>.", fb: { 1: "Ici, on ne parle pas d'un lieu mais d'une quantité de visiteurs.", 2: "Avec une quantité (un demi-million), on utilise <i>en</i>." } },
+    { q: "Quelle phrase exprime une concession ?", options: ["Bien que le jardin soit très visité, il reste paisible.", "Le jardin est très visité, donc il est célèbre.", "Le jardin est très visité car il est célèbre."], answer: 0, ok: "<i>bien que</i> + subjonctif : on reconnaît un fait, mais on maintient une idée contraire.", fb: { 1: "<i>donc</i> exprime une conséquence.", 2: "<i>car</i> exprime une cause." } }
+  ]
+});
+
+/* =============================== PARTIE 3 =============================== */
+Exos.qcm(document.getElementById("ex-p-avant"), {
+  num: 1, color: "c-gris", titre: "Observez bien",
+  consigne: "Regardez encore les images A, B et C.", melanger: true,
+  items: [
+    { q: "Qu'ont en commun les trois images ?", options: ["Les formes sont floues, mais les couleurs sont fortes.", "Elles montrent toutes des personnes.", "Elles sont en noir et blanc."], answer: 0, ok: "Exactement : c'est tout le principe de ces photos, comme vous allez le découvrir.", fb: { 1: "On ne reconnaît pas de personnes : regardez les formes.", 2: "Au contraire : les couleurs sont très présentes." } },
+    { q: "Dans l'image B, les traînées orange en haut pourraient être…", options: ["le feuillage d'arbres en automne", "un incendie", "un coucher de soleil sur la mer"], answer: 0, ok: "Ce sont des arbres jaune-orangé : le photographe en parle dans la vidéo.", fb: { 1: "Regardez les lignes verticales en bas : on dirait des troncs.", 2: "Il n'y a pas d'horizon : les lignes sont verticales, comme des troncs d'arbres." } }
+  ]
+});
+Exos.qcm(document.getElementById("ex-p-global"), {
+  num: 2, color: "c-bleu", titre: "Écoute 1 · Compréhension générale",
+  consigne: "Après une écoute complète, sans sous-titres.", melanger: true,
+  items: [
+    { q: "Bernard Reignier est…", options: ["un photographe, ancien chirurgien", "un peintre, ancien professeur", "un jardinier, ancien photographe"], answer: 0, ok: "« L'ancien chirurgien orthopédiste, aujourd'hui photographe ».", fb: { 1: "Il a un appareil photo dans les mains : ce n'est pas un peintre.", 2: "C'est l'inverse : il est photographe aujourd'hui." } },
+    { q: "Quelle est sa technique ?", options: ["Il bouge l'appareil pendant la prise de vue.", "Il retouche ses photos sur l'ordinateur.", "Il peint sur ses photos."], answer: 0, ok: "« En bougeant son appareil à l'instant de la prise de vue… »", fb: { 1: "Il dit justement le contraire : « non pas en travaillant sur l'ordinateur ».", 2: "Il ne touche pas au papier : tout se passe au moment de la photo." } },
+    { q: "Pourquoi l'appelle-t-on « photographe impressionniste » ?", options: ["Ses photos ressemblent à des coups de pinceau.", "Il photographie les tableaux des impressionnistes.", "Il expose au musée de Monet."], answer: 0, ok: "Il veut « un effet de coup de pinceau », comme les peintres impressionnistes.", fb: { 1: "Il photographie la nature, pas des tableaux.", 2: "La vidéo ne parle pas d'exposition chez Monet." } }
+  ]
+});
+Exos.qcm(document.getElementById("ex-p-detail"), {
+  num: 3, color: "c-rouge", titre: "Écoute 2 · Vrai ou faux ?",
+  consigne: "Toujours sans sous-titres. Arrêtez la vidéo si nécessaire.",
+  items: [
+    { q: "Pour Bernard Reignier, il n'y a pas de vie sans mouvement.", options: ["Vrai", "Faux"], answer: 0, ok: "C'est sa première phrase et l'idée de toute sa démarche.", fb: { 1: "Réécoutez sa première phrase." } },
+    { q: "Pour photographier les arbres, il a bougé l'appareil une seule fois, très vite.", options: ["Vrai", "Faux"], answer: 1, ok: "Il a fait « un mouvement de va-et-vient » et il est passé « plusieurs fois au même endroit ».", fb: { 0: "Écoutez bien : combien de fois est-il passé au même endroit ?" } },
+    { q: "Il a saturé la couleur des arbres avec un logiciel.", options: ["Vrai", "Faux"], answer: 1, ok: "« Non pas en travaillant sur l'ordinateur, mais […] par le simple mouvement alterné. »", fb: { 0: "Il dit « non pas en travaillant sur l'ordinateur » : alors comment ?" } },
+    { q: "Selon lui, dans le mouvement, la forme disparaît mais la couleur reste.", options: ["Vrai", "Faux"], answer: 0, ok: "« Le mouvement déforme la forme, mais préserve la couleur. »", fb: { 1: "Réécoutez la fin : que devient la couleur ?" } },
+    { q: "Il a commencé la photographie dynamique quand il était étudiant.", options: ["Vrai", "Faux"], answer: 1, ok: "« Depuis sa retraite et la découverte de la photo dynamique… »", fb: { 0: "Écoutez la fin : depuis quand fait-il ces photos ?" } }
+  ]
+});
+Exos.ordre(document.getElementById("ex-p-ordre"), {
+  num: 4, color: "c-vert", titre: "Comment a-t-il photographié les arbres ?",
+  items: [
+    { texte: "Remettez les étapes dans l'ordre.",
+      consigne: "Touchez les étapes de la <b>première</b> à la <b>dernière</b>.",
+      etapes: ["Il veut accentuer la couleur jaune-orangé des arbres.", "Il fait un mouvement de va-et-vient avec l'appareil.", "Il passe plusieurs fois au même endroit.", "La couleur est saturée, comme avec plusieurs coups de pinceau."],
+      ok: "D'abord l'intention, puis le geste répété, enfin le résultat.",
+      indice: "Commencez par ce qu'il voulait faire, finissez par le résultat." }
+  ]
+});
+Exos.qcm(document.getElementById("ex-p-langue"), {
+  num: 5, color: "c-violet", titre: "Écoute 3 · La langue du reportage",
+  consigne: "Maintenant, affichez les sous-titres.", melanger: true,
+  items: [
+    { q: "« Comme si j'<b>avais donné</b> plusieurs coups de pinceau. » <i>avais donné</i> est…", options: ["un plus-que-parfait", "un passé composé", "un imparfait"], answer: 0, ok: "<i>comme si</i> + plus-que-parfait : on imagine une action qui n'a pas eu lieu. Il n'a pas utilisé de pinceau !", fb: { 1: "Le passé composé serait « j'ai donné ». Ici : « avais » + participe.", 2: "L'imparfait serait « je donnais ». Ici, il y a un auxiliaire + un participe." } },
+    { q: "« <b>En bougeant</b> son appareil, il ne fige pas une vision. » Le gérondif indique…", options: ["la manière, le moyen", "le lieu", "une opposition"], answer: 0, ok: "Comment fait-il ? En bougeant son appareil : c'est le moyen.", fb: { 1: "Le gérondif ne répond pas à « où ? », mais à « comment ? ».", 2: "Pour s'opposer, on utiliserait « pourtant » ou « même si »." } },
+    { q: "« Il fallait bouger l'appareil […], <b>puisque</b> c'est comme ça que les impressionnistes donnent de la vie à leur tableau. » <i>puisque</i> introduit…", options: ["une cause", "une conséquence", "une concession"], answer: 0, ok: "<i>puisque</i> = car, une cause que tout le monde connaît.", fb: { 1: "La conséquence serait introduite par « donc ».", 2: "Il n'y a pas d'opposition : il explique pourquoi." } },
+    { q: "« Dans le mouvement, la couleur <b>prend le pas sur</b> la forme. » Cela veut dire que la couleur…", options: ["devient plus importante que la forme", "disparaît derrière la forme", "suit la forme"], answer: 0, ok: "<i>Prendre le pas sur</i> = devenir plus important que, dominer.", fb: { 1: "C'est le contraire : la couleur reste, la forme se déforme.", 2: "La couleur ne suit pas : elle domine." } },
+    { q: "« L'ancien chirurgien n'a jamais cessé de <b>soigner</b> le mouvement. » Pourquoi ce verbe est-il amusant ?", options: ["Un chirurgien soigne les malades ; ici, il « soigne » ses photos.", "Il est encore malade.", "Il travaille toujours à l'hôpital."], answer: 0, ok: "Jeu de mots : <i>soigner</i> un patient / <i>soigner</i> son travail (le faire avec attention). Et le mouvement, c'était déjà sa spécialité d'orthopédiste !", fb: { 1: "Il n'est pas malade : pensez à son ancien métier.", 2: "Il est à la retraite : il est photographe maintenant." } }
+  ]
+});
+</script>
+</body>
+</html>

@@ -286,7 +286,7 @@
       cfg.items.forEach(function (it, idx) {
         var box = el("div", "item");
         box.appendChild(el("p", "q", '<span class="n">' + (idx + 1) + ".</span> " + it.texte));
-        box.appendChild(el("p", "consigne", "Touchez les actions de la <b>plus ancienne</b> à la <b>plus récente</b>."));
+        box.appendChild(el("p", "consigne", it.consigne || "Touchez les actions de la <b>plus ancienne</b> à la <b>plus récente</b>."));
         var picked = el("div", "order-picked");
         var pool = el("div", "order-pool");
         var fb = el("p", "fb"); fb.setAttribute("aria-live", "polite");
