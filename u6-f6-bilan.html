@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiche 6 · Bilan de l&#x27;unité · Inspire 3 · Unité 6</title>
+<style>
+:root{
+  --ink:#1f2430; --muted:#5b6475; --line:#e3e6ee; --soft:#f6f7fa;
+  --accent:#2f4b8f; --accent-soft:#eef2fb; --warm:#b4532a; --warm-soft:#fbf1ec;
+  --ok:#1f7a4d; --ok-soft:#eaf6ef; --ko:#b3261e; --ko-soft:#fcecea;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);
+  font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--accent)}
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+header.site .inner{max-width:780px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
+.badge{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--accent);border:1.5px solid var(--accent);border-radius:6px;padding:3px 7px;white-space:nowrap}
+.brand-txt{font-size:14px;line-height:1.25;color:var(--muted);overflow:hidden;text-overflow:ellipsis}
+.brand-txt b{color:var(--ink)}
+.score-pill{font-size:14px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:5px 12px;white-space:nowrap}
+.oif{display:flex;height:3px}.oif span{flex:1}
+.oif span:nth-child(1){background:#0072bb}.oif span:nth-child(2){background:#fcd116}
+.oif span:nth-child(3){background:#3aa935}.oif span:nth-child(4){background:#e2001a}.oif span:nth-child(5){background:#7b2d8e}
+main{max-width:780px;margin:0 auto;padding:18px 16px 60px}
+.crumb{font-size:14px;color:var(--muted);margin-bottom:6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:30px;line-height:1.2;margin:4px 0 6px}
+.lead{color:var(--muted);margin:0 0 18px}
+h2{font-size:20px;margin:34px 0 4px;display:flex;gap:10px;align-items:baseline}
+h2 .num{font-family:Georgia,serif;color:var(--warm);font-size:22px}
+.consigne{color:var(--muted);margin:0 0 12px}
+.essentiel{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:14px 16px;background:#fff}
+.essentiel h3{margin:14px 0 6px;font-size:16px;color:var(--accent)}
+.essentiel h3:first-child{margin-top:0}
+.essentiel p{margin:6px 0}
+.ex{color:var(--warm);font-style:italic}
+table.regle{width:100%;border-collapse:collapse;font-size:15.5px;margin:8px 0}
+table.regle th,table.regle td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+table.regle th{background:var(--soft);font-weight:600}
+.tw{overflow-x:auto}
+.attention{background:var(--warm-soft);border-radius:8px;padding:9px 12px;margin-top:10px;font-size:15.5px}
+.item{border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0;background:#fff}
+.item .q{margin:0 0 10px}
+.item .q .n{font-weight:700;color:var(--accent);margin-right:6px}
+.gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--accent);text-align:center;color:var(--accent);font-weight:600;padding:0 4px}
+.opts{display:grid;gap:8px}
+.opts.row{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+button.opt{all:unset;box-sizing:border-box;display:flex;gap:8px;align-items:flex-start;min-height:46px;padding:10px 12px;
+  border:1.5px solid var(--line);border-radius:10px;cursor:pointer;background:#fff;font-size:16.5px;line-height:1.35}
+button.opt:hover{border-color:var(--accent)}
+button.opt:focus-visible{outline:3px solid var(--accent-soft);border-color:var(--accent)}
+button.opt .l{font-weight:700;color:var(--accent);min-width:22px}
+button.opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+button.opt.ko{border-color:var(--ko);background:var(--ko-soft)}
+button.opt[disabled]{cursor:default}
+.fb{display:none;margin-top:10px;padding:9px 12px;border-radius:8px;font-size:15.5px}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);color:#14532d}
+.fb.ko{background:var(--ko-soft);color:#7a1b16}
+.fb .t{display:block;font-weight:700;margin-bottom:2px}
+.words{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{all:unset;cursor:pointer;padding:8px 12px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:16px;min-height:22px}
+.chip:hover{border-color:var(--accent)}
+.chip.used{opacity:.3;pointer-events:none}
+.answer{min-height:52px;border:1.5px dashed #c9cfdc;border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--soft)}
+.answer:empty::before{content:"Touchez les mots dans l'ordre…";color:#9aa2b1;font-size:15px;padding-left:4px}
+.answer .chip{background:#fff;border-color:var(--accent)}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button.btn{all:unset;cursor:pointer;padding:9px 16px;border-radius:8px;font-weight:600;font-size:15.5px;background:var(--accent);color:#fff}
+button.btn.ghost{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+button.btn[disabled]{opacity:.4;cursor:default}
+.sent{line-height:2.3}
+.tok{all:unset;cursor:pointer;padding:3px 4px;border-radius:6px;border-bottom:2px solid transparent}
+.tok:hover{background:var(--accent-soft)}
+.tok.ok{background:var(--ok-soft);border-bottom-color:var(--ok)}
+.tok.ko{background:var(--ko-soft);border-bottom-color:var(--ko)}
+.tok[disabled]{cursor:default}
+.passage{background:var(--soft);border-radius:10px;padding:14px 16px;line-height:1.9;margin:0 0 6px}
+.passage .g{font-weight:700;color:var(--accent)}
+.auto .opts{grid-template-columns:repeat(3,1fr)}
+.auto button.opt{font-size:15px;padding:10px 8px;justify-content:center;text-align:center}
+button.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.revoir{border:1.5px solid var(--accent);border-radius:12px;padding:14px 16px;margin-top:14px}
+.revoir ul{margin:6px 0 0;padding-left:22px}
+.avous{border:1.5px solid var(--warm);border-radius:12px;padding:14px 16px;background:var(--warm-soft)}
+.avous h2{margin-top:0}
+.avous ol{margin:6px 0 0;padding-left:22px}
+.bilan{margin-top:30px;border-radius:12px;padding:16px;background:var(--accent-soft);text-align:center}
+.bilan .big{font-family:Georgia,serif;font-size:30px;font-weight:700;color:var(--accent)}
+footer.site{border-top:1px solid var(--line);margin-top:30px}
+footer.site .inner{max-width:780px;margin:0 auto;padding:14px 16px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:16px}
+.card{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.card:hover{border-color:var(--accent)}
+.card .k{font-family:Georgia,serif;color:var(--warm);font-size:15px}
+.card h3{margin:4px 0 6px;font-size:19px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+@media (max-width:520px){h1{font-size:25px}.brand-txt{display:none}body{font-size:16.5px}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="inner">
+    <a class="brand" href="index.html#grammaire-u6"><span class="badge">INSPIRE 3</span>
+      <span class="brand-txt"><b>Unité 6 · L'art et nous</b><br>Systématisation · Bilan de l&#x27;unité</span></a>
+    <span class="score-pill" id="score" aria-live="polite">0 / 0</span>
+  </div>
+  <div class="oif"><span></span><span></span><span></span><span></span><span></span></div>
+</header>
+<main>
+  <div class="crumb"><a href="index.html#grammaire-u6">Inspire 3 · Unités 5 et 6</a> › Fiche 6 · Bilan</div>
+  <h1>Fiche 6 · Bilan de l&#x27;unité</h1>
+  <p class="lead">Leçons 21 à 24 · Cette fiche mélange tout ce que nous avons vu dans l'unité. Faites-la sans regarder les autres fiches, puis utilisez l'auto-évaluation pour savoir quoi revoir. Comptez 25 minutes.</p>
+  <h2><span class="num">★</span>L'essentiel</h2>
+  <div class="essentiel">
+<h3>La carte de l'unité</h3>
+<div class="tw"><table class="regle"><tr><th>Pour…</th><th>J'utilise…</th><th>Exemple</th><th>Revoir</th></tr>
+<tr><td>présenter une œuvre</td><td>le passif</td><td class="ex">Ce portrait a été peint en 1824.</td><td><a href="u6-f1-passif.html">Fiche 1</a></td></tr>
+<tr><td>décrire une œuvre</td><td>des adjectifs bien placés</td><td class="ex">une magnifique statue africaine</td><td><a href="u6-f2-adjectifs.html">Fiche 2</a></td></tr>
+<tr><td>ne pas répéter</td><td>y et en</td><td class="ex">J'y vais. J'en ai vu trois.</td><td><a href="u6-f3-y-en.html">Fiche 3</a></td></tr>
+<tr><td>nuancer un avis</td><td>la concession</td><td class="ex">Même si c'est illégal, c'est beau.</td><td><a href="u6-f4-concession.html">Fiche 4</a></td></tr>
+<tr><td>organiser mes idées</td><td>les connecteurs</td><td class="ex">En effet… Par ailleurs… Ainsi…</td><td><a href="u6-f5-connecteurs.html">Fiche 5</a></td></tr>
+<tr><td>bien prononcer</td><td>l'enchaînement vocalique</td><td class="ex">Il‿a‿eu‿une‿idée.</td><td>Cahier p. 85</td></tr></table></div>
+</div>
+  <section data-ex="ex1"><h2><span class="num">A</span>Les mots de l'unité</h2><p class="consigne">Choisissez le mot qui correspond à la définition.</p></section><section data-ex="ex2"><h2><span class="num">B</span>Décrire et caractériser</h2><p class="consigne">Choisissez la bonne réponse.</p></section><section data-ex="ex3"><h2><span class="num">C</span>Le passif dans un cartel</h2><p class="consigne">Lisez le texte, puis choisissez la forme qui complète chaque trou.</p><div class="passage">Cette fresque <span class="g">(1) ______</span> en 1985 par un collectif d'artistes du quartier. Abîmée par la pluie, elle <span class="g">(2) ______</span> en 2020. Aujourd'hui, elle <span class="g">(3) ______</span> par des touristes du monde entier et, l'année prochaine, elle <span class="g">(4) ______</span> dans un guide d'art urbain.</div></section><section data-ex="ex4"><h2><span class="num">D</span>y et en dans une conversation</h2><p class="consigne">Lisez le dialogue, puis complétez chaque trou.</p><div class="passage">— Tu es déjà allée au festival de street art&nbsp;?<br>— Oui, j'<span class="g">(1) ______</span> suis allée l'année dernière.<br>— Tu as pris des photos&nbsp;?<br>— Oui, j'<span class="g">(2) ______</span> ai pris une centaine&nbsp;!<br>— Tu t'intéresses vraiment au graffiti…<br>— Oui, je m'<span class="g">(3) ______</span> intéresse depuis le lycée.<br>— Tu me parles souvent de ce festival.<br>— C'est vrai, je t'<span class="g">(4) ______</span> parle tout le temps&nbsp;!</div></section><section data-ex="ex5"><h2><span class="num">E</span>Nuancer ou expliquer ?</h2><p class="consigne">Attention : certains outils se ressemblent. Réfléchissez au sens avant de choisir.</p></section><section data-ex="ex6"><h2><span class="num">F</span>Remettez dans l'ordre</h2><p class="consigne">Chaque phrase mélange plusieurs points de l'unité.</p></section><section data-ex="ex7"><h2><span class="num">G</span>Repérez l'erreur</h2><p class="consigne">Chaque phrase contient une erreur. Touchez le mot incorrect.</p></section><section data-ex="ex8"><h2><span class="num">H</span>L'enchaînement vocalique</h2><p class="consigne">Combien de syllabes entendez-vous ? Lisez la phrase à voix haute, sans pause entre les voyelles.</p></section><section data-ex="ex9"><h2><span class="num">I</span>Auto-évaluation : je sais…</h2><p class="consigne">Soyez honnête : vos réponses ne sont pas notées. Si vous répondez « Presque » ou « Pas encore », la liste de ce qu'il faut revoir apparaît en bas.</p><div class="sec-after"><div class="revoir" id="revoir" hidden><b>À revoir avant l'évaluation</b><ul></ul></div></div></section>
+  <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>Répondez sur votre cahier. Pour chaque réponse, utilisez au moins <b>un connecteur</b> et <b>une concession</b>.</p>
+<ol><li>Relisez votre réponse de la séance 1 : « Qu'est-ce que l'art pour vous ? » Votre avis a-t-il changé ? Comment ?</li>
+<li>Quel document de l'unité vous a le plus marqué(e) ? Pourquoi ?</li>
+<li>L'art peut-il changer notre quotidien ? Donnez un exemple de votre vie : une musique, un mur de votre quartier, un musée.</li>
+<li>Quelle erreur faites-vous encore souvent ? Écrivez une phrase avec cette erreur, puis sa correction.</li></ol></section>
+  <div class="bilan" id="bilan" hidden><div>Votre résultat</div><div class="big" id="bilan-n"></div><p id="bilan-msg" style="margin:6px 0 0"></p></div>
+  <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
+</main>
+<footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
+<div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
+<script>const DATA = {"ex1": {"title": "Les mots de l'unité", "consigne": "Choisissez le mot qui correspond à la définition.", "items": [{"q": "Une sculpture qui représente la tête et les épaules d'une personne.", "opts": ["une statuette", "un buste", "un portrait"], "a": 1, "why": "Le <b>buste</b> ; la statuette est une petite statue."}, {"q": "La façon de présenter les œuvres dans un musée.", "opts": ["la scénographie", "la chorégraphie", "la photographie"], "a": 0, "why": "La <b>scénographie</b> : l'espace, la lumière, le mobilier."}, {"q": "Une technique de street art : on peint à travers une forme découpée.", "opts": ["un collage", "un pochoir", "une mosaïque"], "a": 1, "why": "Le <b>pochoir</b>, la technique préférée de Banksy."}, {"q": "Les soins par la musique.", "opts": ["l'art-thérapie", "la muséologie", "la musicothérapie"], "a": 2, "why": "La <b>musicothérapie</b> est une forme d'art-thérapie."}, {"q": "Nécessaire pour jouer du violon.", "opts": ["un archet", "un accord", "un tambour"], "a": 0, "why": "L'<b>archet</b>."}, {"q": "Le bruit d'une salle pleine de voix, avant un concert.", "opts": ["le recueillement", "le brouhaha", "l'apaisement"], "a": 1, "why": "Le <b>brouhaha</b> (Châtelet-Lilas, leçon 23)."}, {"q": "Quel mot n'appartient pas à la série : paisible · serein · apaisant · effrayant ?", "opts": ["paisible", "apaisant", "effrayant"], "a": 2, "why": "<b>Effrayant</b> = qui fait peur ; les autres expriment le calme."}]}, "ex2": {"title": "Décrire et caractériser", "consigne": "Choisissez la bonne réponse.", "items": [{"q": "Quelle expression est correcte ?", "opts": ["un ancien bel escalier", "un bel escalier ancien", "un escalier bel ancien"], "a": 1, "why": "<b>bel</b> devant une voyelle, avant le nom ; <b>ancien</b> (= très vieux) après."}, {"q": "« C'est mon ancienne professeure de dessin. »", "opts": ["Elle n'est plus ma professeure.", "Elle est très âgée.", "Elle enseigne depuis longtemps."], "a": 0, "why": "<b>Ancien</b> avant le nom = qui n'est plus."}, {"q": "Cette statue fait très peur : elle est…", "opts": ["envoûtante", "effrayante", "harmonieuse"], "a": 1, "why": "<b>effrayante</b>, du verbe effrayer (faire peur)."}, {"q": "« Je n'ai rien ressenti devant ces tableaux. » Je les ai trouvés…", "opts": ["sans intérêt", "fascinants", "novateurs"], "a": 0, "why": "<b>sans intérêt</b> : ils ne m'ont rien apporté."}]}, "ex3": {"title": "Le passif dans un cartel", "consigne": "Lisez le texte, puis choisissez la forme qui complète chaque trou.", "passage": "Cette fresque <span class=\"g\">(1) ______</span> en 1985 par un collectif d'artistes du quartier. Abîmée par la pluie, elle <span class=\"g\">(2) ______</span> en 2020. Aujourd'hui, elle <span class=\"g\">(3) ______</span> par des touristes du monde entier et, l'année prochaine, elle <span class=\"g\">(4) ______</span> dans un guide d'art urbain.", "items": [{"q": "Trou (1)", "opts": ["a peint", "a été peinte", "était peint"], "a": 1, "row": true, "why": "Passé composé passif, accordé avec <em>fresque</em> : <b>a été peinte</b>."}, {"q": "Trou (2)", "opts": ["a été restaurée", "a restauré", "est restauré"], "a": 0, "row": true, "why": "On l'a restaurée → elle <b>a été restaurée</b>."}, {"q": "Trou (3)", "opts": ["admire", "est admirée", "a admiré"], "a": 1, "row": true, "why": "Présent passif : <b>est admirée</b> par des touristes."}, {"q": "Trou (4)", "opts": ["présentera", "sera présenté", "sera présentée"], "a": 2, "row": true, "why": "Futur passif + accord au féminin : <b>sera présentée</b>."}, {"q": "Quelle phrase est au passif ?", "opts": ["Les artistes sont venus de loin.", "La fresque est protégée par la ville.", "Elle est restée dix ans."], "a": 1, "why": "Seule <b>est protégée par la ville</b> a un complément d'agent possible ; <em>venir</em> et <em>rester</em> forment leur passé composé avec être."}]}, "ex4": {"title": "y et en dans une conversation", "consigne": "Lisez le dialogue, puis complétez chaque trou.", "passage": "— Tu es déjà allée au festival de street art&nbsp;?<br>— Oui, j'<span class=\"g\">(1) ______</span> suis allée l'année dernière.<br>— Tu as pris des photos&nbsp;?<br>— Oui, j'<span class=\"g\">(2) ______</span> ai pris une centaine&nbsp;!<br>— Tu t'intéresses vraiment au graffiti…<br>— Oui, je m'<span class=\"g\">(3) ______</span> intéresse depuis le lycée.<br>— Tu me parles souvent de ce festival.<br>— C'est vrai, je t'<span class=\"g\">(4) ______</span> parle tout le temps&nbsp;!", "items": [{"q": "Trou (1)", "opts": ["y", "en"], "a": 0, "row": true, "why": "aller <b>au</b> festival : un lieu avec à → <b>y</b>."}, {"q": "Trou (2)", "opts": ["y", "en"], "a": 1, "row": true, "why": "<b>des</b> photos, une centaine : une quantité → <b>en</b>."}, {"q": "Trou (3)", "opts": ["y", "en"], "a": 0, "row": true, "why": "s'intéresser <b>au</b> graffiti → <b>y</b>."}, {"q": "Trou (4)", "opts": ["y", "en"], "a": 1, "row": true, "why": "parler <b>de</b> ce festival → <b>en</b>."}]}, "ex5": {"title": "Nuancer ou expliquer ?", "consigne": "Attention : certains outils se ressemblent. Réfléchissez au sens avant de choisir.", "items": [{"q": "___ son prix élevé, le musée attire beaucoup de visiteurs.", "opts": ["Grâce à", "Malgré", "Car"], "a": 1, "why": "Le prix élevé est un obstacle : <b>malgré</b> (concession)."}, {"q": "___ sa gratuité, le musée attire beaucoup de visiteurs.", "opts": ["Grâce à", "Malgré", "Bien que"], "a": 0, "why": "La gratuité est une cause positive : <b>grâce à</b>. Comparez avec la phrase précédente."}, {"q": "Je pensais que l'art abstrait était facile. ___, c'est très difficile !", "opts": ["En effet", "En fait", "Ainsi"], "a": 1, "why": "<b>En fait</b> = en réalité : on corrige une idée fausse."}, {"q": "La musique réduit l'anxiété. ___, plusieurs études l'ont montré.", "opts": ["En effet", "En fait", "Néanmoins"], "a": 0, "why": "<b>En effet</b> confirme et explique ce qui précède."}, {"q": "___ il pleuve, le festival continue.", "opts": ["Même s'", "Bien qu'", "Malgré"], "a": 1, "why": "<em>pleuve</em> est un subjonctif → <b>bien qu'</b>."}, {"q": "___ il pleut, le festival continue.", "opts": ["Même s'", "Bien qu'", "Malgré"], "a": 0, "why": "<em>pleut</em> est un indicatif → <b>même s'</b>."}, {"q": "Le street art est souvent illégal. ___, beaucoup de villes l'encouragent.", "opts": ["Donc", "Toutefois", "Car"], "a": 1, "why": "Deux idées opposées : <b>toutefois</b>."}, {"q": "Le street art est dans la rue ; ___, il rend l'art accessible à tous.", "opts": ["ainsi", "toutefois", "bien que"], "a": 0, "why": "Une conséquence : <b>ainsi</b>."}]}, "ex6": {"title": "Remettez dans l'ordre", "consigne": "Chaque phrase mélange plusieurs points de l'unité.", "type": "order", "items": [{"words": ["je la trouve", "Même si", "fascinante", "est étrange,", "cette œuvre"], "answer": "Même si cette œuvre est étrange, je la trouve fascinante", "alt": ["Je la trouve fascinante même si cette œuvre est étrange"]}, {"words": ["africaine", "C'est", "statue", "magnifique", "une"], "answer": "C'est une magnifique statue africaine", "alt": ["C'est une statue africaine magnifique"]}, {"words": ["allé", "jamais", "y", "Je", "suis", "n'"], "answer": "Je n'y suis jamais allé"}]}, "ex7": {"title": "Repérez l'erreur", "consigne": "Chaque phrase contient une erreur. Touchez le mot incorrect.", "type": "tap", "items": [{"s": "Bien que le musée est fermé, on peut voir la façade.", "target": ["est"], "why": "<b>bien que</b> + subjonctif : bien que le musée <b>soit</b> fermé."}, {"s": "Ces tableaux ont été peint par Van Gogh.", "target": ["peint"], "why": "Accord avec <em>ces tableaux</em> : ont été <b>peints</b>."}, {"s": "Malgré il pleut, nous allons au musée.", "target": ["Malgré"], "why": "<b>malgré</b> + nom : malgré <b>la pluie</b>. Ou : <b>même s'</b>il pleut."}, {"s": "Nous avons visité un vieux hôtel transformé en musée.", "target": ["vieux"], "why": "Devant un h muet : un <b>vieil</b> hôtel."}, {"s": "Tu penses à ton cartel ? Oui, j'en pense tout le temps.", "target": ["j'en"], "why": "penser <b>à</b> quelque chose → <b>j'y</b> pense."}]}, "ex8": {"title": "L'enchaînement vocalique", "consigne": "Combien de syllabes entendez-vous ? Lisez la phrase à voix haute, sans pause entre les voyelles.", "items": [{"q": "« Il a eu une idée. »", "opts": ["5", "6", "7"], "a": 1, "row": true, "why": "i-la-u-u-ni-dée : <b>6</b> syllabes."}, {"q": "« Elle a aimé. »", "opts": ["4", "5", "6"], "a": 0, "row": true, "why": "è-la-ai-mé : <b>4</b> syllabes."}, {"q": "« Tu as eu une émotion. »", "opts": ["6", "7", "8"], "a": 1, "row": true, "why": "tu-a-u-u-né-mo-tion : <b>7</b> syllabes."}]}, "ex9": {"title": "Auto-évaluation : je sais…", "consigne": "Soyez honnête : vos réponses ne sont pas notées. Si vous répondez « Presque » ou « Pas encore », la liste de ce qu'il faut revoir apparaît en bas.", "type": "auto", "after": "<div class=\"revoir\" id=\"revoir\" hidden><b>À revoir avant l'évaluation</b><ul></ul></div>", "items": [{"q": "présenter une œuvre : artiste, titre, date, technique, lieu", "go": "la leçon 24 (le cartel) et votre plan de la séance 11"}, {"q": "utiliser le passif pour présenter une œuvre", "go": "<a href=\"u6-f1-passif.html\">Fiche 1</a>"}, {"q": "placer les adjectifs pour décrire une œuvre", "go": "<a href=\"u6-f2-adjectifs.html\">Fiche 2</a>"}, {"q": "remplacer un lieu, une chose ou une quantité par y ou en", "go": "<a href=\"u6-f3-y-en.html\">Fiche 3</a>"}, {"q": "nuancer un avis avec même si, bien que, malgré, toutefois", "go": "<a href=\"u6-f4-concession.html\">Fiche 4</a>"}, {"q": "organiser mes idées avec des connecteurs", "go": "<a href=\"u6-f5-connecteurs.html\">Fiche 5</a>"}, {"q": "dire ce qu'une œuvre ou une musique me fait ressentir", "go": "le vocabulaire des émotions, cahier p. 83"}, {"q": "faire l'enchaînement vocalique", "go": "la phonétique, cahier p. 85 ex. 11"}]}};</script>
+<script>
+const L = "abcdefghij";
+let total = 0, score = 0, done = 0;
+const pill = document.getElementById('score');
+function upd(){ pill.textContent = score + ' / ' + total;
+  if (done === total){ const b=document.getElementById('bilan'); b.hidden=false;
+    document.getElementById('bilan-n').textContent = score + ' / ' + total;
+    const pct = score/total;
+    document.getElementById('bilan-msg').textContent = pct>=0.85 ? "Très bien : la règle est acquise. Passez à la production sur votre cahier."
+      : pct>=0.6 ? "Bien. Relisez « L'essentiel » et refaites les questions en rouge (rechargez la page)."
+      : "Relisez « L'essentiel » avec attention, puis rechargez la page et recommencez."; } }
+function fb(el, ok, why, right){ el.className='fb show '+(ok?'ok':'ko');
+  el.innerHTML = '<span class="t">'+(ok?'Correct !':'Pas tout à fait.')+'</span>' + (right && !ok ? 'Réponse : <em>'+right+'</em>. ' : '') + (why||''); }
+function norm(s){ return s.toLowerCase().replace(/[’']/g,"'").replace(/[.,;:!?«»]/g,'').replace(/'\s+/g,"'").replace(/\s+/g,' ').trim(); }
+
+function renderQcm(box, it, n){
+  total++;
+  const q = it.q.replace('___','<span class="gap">&nbsp;</span>');
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+q+'</p><div class="opts'+(it.row?' row':'')+'"></div><div class="fb"></div>';
+  const opts = box.querySelector('.opts'), f = box.querySelector('.fb');
+  it.opts.forEach((o,i)=>{ const b=document.createElement('button'); b.className='opt'; b.type='button';
+    b.innerHTML='<span class="l">'+L[i]+')</span><span>'+o+'</span>';
+    b.onclick=()=>{ const ok = i===it.a; opts.querySelectorAll('button').forEach((x,j)=>{x.disabled=true; if(j===it.a) x.classList.add('ok');});
+      if(!ok) b.classList.add('ko'); else score++;
+      const g = box.querySelector('.gap'); if(g){ g.textContent = it.fill || it.opts[it.a]; }
+      done++; fb(f, ok, it.why, null); upd(); };
+    opts.appendChild(b); });
+}
+function renderOrder(box, it, n){
+  total++;
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+(it.q||'Remettez les mots dans l\'ordre.')+'</p><div class="answer"></div><div class="words"></div>'+
+    '<div class="actions"><button class="btn" type="button">Vérifier</button><button class="btn ghost" type="button">Effacer</button></div><div class="fb"></div>';
+  const ans = box.querySelector('.answer'), pool = box.querySelector('.words'), [chk, clr] = box.querySelectorAll('.actions button'), f = box.querySelector('.fb');
+  it.words.forEach((w,i)=>{ const c=document.createElement('button'); c.className='chip'; c.type='button'; c.textContent=w;
+    c.onclick=()=>{ c.classList.add('used'); const a=document.createElement('button'); a.className='chip'; a.type='button'; a.textContent=w;
+      a.onclick=()=>{ if(chk.disabled) return; a.remove(); c.classList.remove('used'); }; ans.appendChild(a); };
+    pool.appendChild(c); });
+  clr.onclick=()=>{ if(chk.disabled) return; ans.innerHTML=''; pool.querySelectorAll('.chip').forEach(c=>c.classList.remove('used')); };
+  chk.onclick=()=>{ const got = [...ans.children].map(x=>x.textContent).join(' ');
+    if(!got) return; const ok = norm(got)===norm(it.answer) || (it.alt||[]).some(a=>norm(a)===norm(got));
+    chk.disabled = true; clr.disabled = true; if(ok) score++; done++; fb(f, ok, it.why, it.answer); upd(); };
+}
+function renderTap(box, it, n){
+  total++;
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+(it.q||'Touchez le mot demandé.')+'</p><p class="sent"></p><div class="fb"></div>';
+  const s = box.querySelector('.sent'), f = box.querySelector('.fb');
+  const toks = it.s.split(' ');
+  const btns = [];
+  toks.forEach((t,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='tok'; b.textContent=t; btns.push(b);
+    b.onclick=()=>{ const clean = norm(t); const ok = it.target.map(norm).includes(clean);
+      btns.forEach(x=>{ x.disabled=true; if(it.target.map(norm).includes(norm(x.textContent))) x.classList.add('ok'); });
+      if(!ok) b.classList.add('ko'); else score++; done++; fb(f, ok, it.why, null); upd(); };
+    s.appendChild(b); s.appendChild(document.createTextNode(' ')); });
+}
+const AUTO = {};
+function renderAuto(box, it, n){
+  box.classList.add('auto');
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+it.q+'</p><div class="opts row"></div>';
+  const opts = box.querySelector('.opts');
+  ['Je sais faire','Presque','Pas encore'].forEach((o,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='opt'; b.textContent=o;
+    b.onclick=()=>{ opts.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); AUTO[n]= i>0 ? it : null; showRevoir(); };
+    opts.appendChild(b); });
+}
+function showRevoir(){ const r=document.getElementById('revoir'); if(!r) return;
+  const list = Object.values(AUTO).filter(Boolean);
+  if(!list.length){ r.hidden=true; return; }
+  r.hidden=false; r.querySelector('ul').innerHTML = list.map(it=>'<li>'+it.q+' → '+it.go+'</li>').join(''); }
+document.querySelectorAll('[data-ex]').forEach(sec=>{
+  const ex = DATA[sec.dataset.ex]; let n=0;
+  ex.items.forEach(it=>{ n++; const box=document.createElement('div'); box.className='item'; sec.insertBefore(box, sec.querySelector('.sec-after'));
+    const t = it.type || ex.type;
+    if(t==='order') renderOrder(box,it,n); else if(t==='tap') renderTap(box,it,n); else if(t==='auto') renderAuto(box,it,n); else renderQcm(box,it,n); });
+});
+upd();
+</script>
+</body>
+</html>
