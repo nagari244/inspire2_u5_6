@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiche 4 · La concession · Inspire 3 · Unité 6</title>
+<style>
+:root{
+  --ink:#1f2430; --muted:#5b6475; --line:#e3e6ee; --soft:#f6f7fa;
+  --accent:#2f4b8f; --accent-soft:#eef2fb; --warm:#b4532a; --warm-soft:#fbf1ec;
+  --ok:#1f7a4d; --ok-soft:#eaf6ef; --ko:#b3261e; --ko-soft:#fcecea;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);
+  font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--accent)}
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+header.site .inner{max-width:780px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
+.badge{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--accent);border:1.5px solid var(--accent);border-radius:6px;padding:3px 7px;white-space:nowrap}
+.brand-txt{font-size:14px;line-height:1.25;color:var(--muted);overflow:hidden;text-overflow:ellipsis}
+.brand-txt b{color:var(--ink)}
+.score-pill{font-size:14px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:5px 12px;white-space:nowrap}
+.oif{display:flex;height:3px}.oif span{flex:1}
+.oif span:nth-child(1){background:#0072bb}.oif span:nth-child(2){background:#fcd116}
+.oif span:nth-child(3){background:#3aa935}.oif span:nth-child(4){background:#e2001a}.oif span:nth-child(5){background:#7b2d8e}
+main{max-width:780px;margin:0 auto;padding:18px 16px 60px}
+.crumb{font-size:14px;color:var(--muted);margin-bottom:6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:30px;line-height:1.2;margin:4px 0 6px}
+.lead{color:var(--muted);margin:0 0 18px}
+h2{font-size:20px;margin:34px 0 4px;display:flex;gap:10px;align-items:baseline}
+h2 .num{font-family:Georgia,serif;color:var(--warm);font-size:22px}
+.consigne{color:var(--muted);margin:0 0 12px}
+.essentiel{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:14px 16px;background:#fff}
+.essentiel h3{margin:14px 0 6px;font-size:16px;color:var(--accent)}
+.essentiel h3:first-child{margin-top:0}
+.essentiel p{margin:6px 0}
+.ex{color:var(--warm);font-style:italic}
+table.regle{width:100%;border-collapse:collapse;font-size:15.5px;margin:8px 0}
+table.regle th,table.regle td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+table.regle th{background:var(--soft);font-weight:600}
+.tw{overflow-x:auto}
+.attention{background:var(--warm-soft);border-radius:8px;padding:9px 12px;margin-top:10px;font-size:15.5px}
+.item{border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0;background:#fff}
+.item .q{margin:0 0 10px}
+.item .q .n{font-weight:700;color:var(--accent);margin-right:6px}
+.gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--accent);text-align:center;color:var(--accent);font-weight:600;padding:0 4px}
+.opts{display:grid;gap:8px}
+.opts.row{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+button.opt{all:unset;box-sizing:border-box;display:flex;gap:8px;align-items:flex-start;min-height:46px;padding:10px 12px;
+  border:1.5px solid var(--line);border-radius:10px;cursor:pointer;background:#fff;font-size:16.5px;line-height:1.35}
+button.opt:hover{border-color:var(--accent)}
+button.opt:focus-visible{outline:3px solid var(--accent-soft);border-color:var(--accent)}
+button.opt .l{font-weight:700;color:var(--accent);min-width:22px}
+button.opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+button.opt.ko{border-color:var(--ko);background:var(--ko-soft)}
+button.opt[disabled]{cursor:default}
+.fb{display:none;margin-top:10px;padding:9px 12px;border-radius:8px;font-size:15.5px}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);color:#14532d}
+.fb.ko{background:var(--ko-soft);color:#7a1b16}
+.fb .t{display:block;font-weight:700;margin-bottom:2px}
+.words{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{all:unset;cursor:pointer;padding:8px 12px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:16px;min-height:22px}
+.chip:hover{border-color:var(--accent)}
+.chip.used{opacity:.3;pointer-events:none}
+.answer{min-height:52px;border:1.5px dashed #c9cfdc;border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--soft)}
+.answer:empty::before{content:"Touchez les mots dans l'ordre…";color:#9aa2b1;font-size:15px;padding-left:4px}
+.answer .chip{background:#fff;border-color:var(--accent)}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button.btn{all:unset;cursor:pointer;padding:9px 16px;border-radius:8px;font-weight:600;font-size:15.5px;background:var(--accent);color:#fff}
+button.btn.ghost{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+button.btn[disabled]{opacity:.4;cursor:default}
+.sent{line-height:2.3}
+.tok{all:unset;cursor:pointer;padding:3px 4px;border-radius:6px;border-bottom:2px solid transparent}
+.tok:hover{background:var(--accent-soft)}
+.tok.ok{background:var(--ok-soft);border-bottom-color:var(--ok)}
+.tok.ko{background:var(--ko-soft);border-bottom-color:var(--ko)}
+.tok[disabled]{cursor:default}
+.passage{background:var(--soft);border-radius:10px;padding:14px 16px;line-height:1.9;margin:0 0 6px}
+.passage .g{font-weight:700;color:var(--accent)}
+.auto .opts{grid-template-columns:repeat(3,1fr)}
+.auto button.opt{font-size:15px;padding:10px 8px;justify-content:center;text-align:center}
+button.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.revoir{border:1.5px solid var(--accent);border-radius:12px;padding:14px 16px;margin-top:14px}
+.revoir ul{margin:6px 0 0;padding-left:22px}
+.avous{border:1.5px solid var(--warm);border-radius:12px;padding:14px 16px;background:var(--warm-soft)}
+.avous h2{margin-top:0}
+.avous ol{margin:6px 0 0;padding-left:22px}
+.bilan{margin-top:30px;border-radius:12px;padding:16px;background:var(--accent-soft);text-align:center}
+.bilan .big{font-family:Georgia,serif;font-size:30px;font-weight:700;color:var(--accent)}
+footer.site{border-top:1px solid var(--line);margin-top:30px}
+footer.site .inner{max-width:780px;margin:0 auto;padding:14px 16px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:16px}
+.card{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.card:hover{border-color:var(--accent)}
+.card .k{font-family:Georgia,serif;color:var(--warm);font-size:15px}
+.card h3{margin:4px 0 6px;font-size:19px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+@media (max-width:520px){h1{font-size:25px}.brand-txt{display:none}body{font-size:16.5px}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="inner">
+    <a class="brand" href="index.html#grammaire-u6"><span class="badge">INSPIRE 3</span>
+      <span class="brand-txt"><b>Unité 6 · L'art et nous</b><br>Systématisation · La concession</span></a>
+    <span class="score-pill" id="score" aria-live="polite">0 / 0</span>
+  </div>
+  <div class="oif"><span></span><span></span><span></span><span></span><span></span></div>
+</header>
+<main>
+  <div class="crumb"><a href="index.html#grammaire-u6">Inspire 3 · Unités 5 et 6</a> › Fiche 4 · La concession</div>
+  <h1>Fiche 4 · La concession</h1>
+  <p class="lead">Leçon 22 · Pour nuancer un avis : on reconnaît un fait, mais on maintient son idée. <em>Même si le street art dérange, il embellit la ville.</em></p>
+  <h2><span class="num">★</span>L'essentiel</h2>
+  <div class="essentiel">
+<div class="tw"><table class="regle"><tr><th>Outil</th><th>Construction</th><th>Exemple</th></tr>
+<tr><td><b>même si</b></td><td>+ indicatif</td><td class="ex">Même si les spectacles sont gratuits, peu de gens restent.</td></tr>
+<tr><td><b>bien que</b></td><td>+ subjonctif</td><td class="ex">Bien que l'œuvre soit éphémère, elle a marqué le quartier.</td></tr>
+<tr><td><b>malgré</b></td><td>+ nom</td><td class="ex">Malgré son succès, Banksy reste anonyme.</td></tr>
+<tr><td><b>cependant, toutefois, néanmoins, pourtant</b></td><td>+ phrase (après un point, un point-virgule ou en début de phrase)</td><td class="ex">Le street art est populaire. Toutefois, il n'est pas toujours accepté.</td></tr>
+<tr><td><b>il faut reconnaître que… / c'est vrai que…, mais…</b></td><td>+ indicatif</td><td class="ex">Il faut reconnaître que certains graffitis sont laids, mais…</td></tr></table></div>
+<div class="attention"><b>Attention :</b> <em>même si</em> + indicatif (<em>même si c'<b>est</b>…</em>), mais <em>bien que</em> + subjonctif (<em>bien que ce <b>soit</b>…</em>). Après <em>malgré</em>, jamais de verbe conjugué.</div>
+</div>
+  <section data-ex="ex1"><h2><span class="num">A</span>Choisissez l'outil de concession</h2><p class="consigne">Un seul outil est correct dans chaque phrase.</p></section><section data-ex="ex2"><h2><span class="num">B</span>Indicatif ou subjonctif ?</h2><p class="consigne">Choisissez la forme du verbe.</p></section><section data-ex="ex3"><h2><span class="num">C</span>La phrase qui a le même sens</h2><p class="consigne">Choisissez la reformulation correcte.</p></section><section data-ex="ex4"><h2><span class="num">D</span>Repérez le mot de concession</h2><p class="consigne">Touchez le mot qui introduit la concession.</p></section>
+  <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>« Le street art a-t-il sa place dans un musée ? » Écrivez <b>3 phrases nuancées</b> avec trois outils différents :</p>
+<ol><li>une phrase avec <b>même si</b> ;</li><li>une phrase avec <b>malgré</b> ;</li><li>deux phrases reliées par <b>cependant</b> ou <b>toutefois</b>.</li></ol></section>
+  <div class="bilan" id="bilan" hidden><div>Votre résultat</div><div class="big" id="bilan-n"></div><p id="bilan-msg" style="margin:6px 0 0"></p></div>
+  <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
+</main>
+<footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
+<div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
+<script>const DATA = {"ex1": {"title": "Choisissez l'outil de concession", "consigne": "Un seul outil est correct dans chaque phrase.", "items": [{"q": "___ son succès, Banksy reste anonyme.", "opts": ["Même si", "Malgré", "Bien que"], "a": 1, "why": "Devant un nom (<em>son succès</em>) → <b>malgré</b>."}, {"q": "___ les graffitis soient parfois laids, ils animent les quartiers.", "opts": ["Même si", "Malgré", "Bien que"], "a": 2, "why": "<em>soient</em> est un subjonctif → <b>bien que</b>."}, {"q": "___ les spectacles sont gratuits, peu de gens restent.", "opts": ["Même si", "Malgré", "Bien que"], "a": 0, "why": "<em>sont</em> est un indicatif → <b>même si</b>."}, {"q": "L'art de rue est accessible à tous. ___, il dérange certains habitants.", "opts": ["Malgré", "Toutefois", "Bien que"], "a": 1, "why": "En début de phrase, suivi d'une virgule → <b>toutefois</b> (ou cependant, néanmoins)."}, {"q": "___ la pluie, le festival a eu lieu.", "opts": ["Malgré", "Même si", "Pourtant"], "a": 0, "why": "Devant un nom (<em>la pluie</em>) → <b>malgré</b>."}]}, "ex2": {"title": "Indicatif ou subjonctif ?", "consigne": "Choisissez la forme du verbe.", "items": [{"q": "Bien que l'œuvre ___ éphémère, elle a marqué le quartier.", "opts": ["est", "soit", "était"], "a": 1, "row": true, "why": "<b>bien que</b> + subjonctif."}, {"q": "Même si Invader ___ illégalement, beaucoup de villes l'apprécient.", "opts": ["agit", "agisse", "agir"], "a": 0, "row": true, "why": "<b>même si</b> + indicatif."}, {"q": "Bien que les musées ___ des collections superbes, ils sont peu visités.", "opts": ["ont", "aient", "avoir"], "a": 1, "row": true, "why": "<b>bien que</b> + subjonctif : qu'ils <b>aient</b>."}]}, "ex3": {"title": "La phrase qui a le même sens", "consigne": "Choisissez la reformulation correcte.", "items": [{"q": "« Bien que le musée soit cher, il attire beaucoup de visiteurs. »", "opts": ["Malgré son prix, le musée attire beaucoup de visiteurs.", "Grâce à son prix, le musée attire beaucoup de visiteurs.", "Le musée est cher, donc il attire beaucoup de visiteurs."], "a": 0, "why": "<b>malgré</b> + nom garde l'idée de concession ; <em>grâce à</em> et <em>donc</em> expriment la cause et la conséquence."}, {"q": "« Même si les lieux culturels sont indispensables, ils sont difficiles d'accès. »", "opts": ["Les lieux culturels sont difficiles d'accès, car ils sont indispensables.", "Les lieux culturels sont indispensables ; pourtant, ils sont difficiles d'accès.", "Les lieux culturels sont indispensables, donc ils sont difficiles d'accès."], "a": 1, "why": "<b>pourtant</b> exprime la même opposition que <em>même si</em>."}]}, "ex4": {"title": "Repérez le mot de concession", "consigne": "Touchez le mot qui introduit la concession.", "type": "tap", "items": [{"s": "Je trouve ce mural magnifique ; pourtant, je comprends les habitants qui le critiquent.", "target": ["pourtant"], "why": "<b>pourtant</b> introduit une idée qui s'oppose à la première."}, {"s": "Les festivals restent populaires malgré le prix des billets.", "target": ["malgré"], "why": "<b>malgré</b> + nom (<em>le prix des billets</em>)."}, {"s": "Néanmoins, l'art doit rester accessible à tous.", "target": ["Néanmoins,"], "why": "<b>néanmoins</b>, en début de phrase."}]}};</script>
+<script>
+const L = "abcdefghij";
+let total = 0, score = 0, done = 0;
+const pill = document.getElementById('score');
+function upd(){ pill.textContent = score + ' / ' + total;
+  if (done === total){ const b=document.getElementById('bilan'); b.hidden=false;
+    document.getElementById('bilan-n').textContent = score + ' / ' + total;
+    const pct = score/total;
+    document.getElementById('bilan-msg').textContent = pct>=0.85 ? "Très bien : la règle est acquise. Passez à la production sur votre cahier."
+      : pct>=0.6 ? "Bien. Relisez « L'essentiel » et refaites les questions en rouge (rechargez la page)."
+      : "Relisez « L'essentiel » avec attention, puis rechargez la page et recommencez."; } }
+function fb(el, ok, why, right){ el.className='fb show '+(ok?'ok':'ko');
+  el.innerHTML = '<span class="t">'+(ok?'Correct !':'Pas tout à fait.')+'</span>' + (right && !ok ? 'Réponse : <em>'+right+'</em>. ' : '') + (why||''); }
+function norm(s){ return s.toLowerCase().replace(/[’']/g,"'").replace(/[.,;:!?«»]/g,'').replace(/'\s+/g,"'").replace(/\s+/g,' ').trim(); }
+
+function renderQcm(box, it, n){
+  total++;
+  const q = it.q.replace('___','<span class="gap">&nbsp;</span>');
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+q+'</p><div class="opts'+(it.row?' row':'')+'"></div><div class="fb"></div>';
+  const opts = box.querySelector('.opts'), f = box.querySelector('.fb');
+  it.opts.forEach((o,i)=>{ const b=document.createElement('button'); b.className='opt'; b.type='button';
+    b.innerHTML='<span class="l">'+L[i]+')</span><span>'+o+'</span>';
+    b.onclick=()=>{ const ok = i===it.a; opts.querySelectorAll('button').forEach((x,j)=>{x.disabled=true; if(j===it.a) x.classList.add('ok');});
+      if(!ok) b.classList.add('ko'); else score++;
+      const g = box.querySelector('.gap'); if(g){ g.textContent = it.fill || it.opts[it.a]; }
+      done++; fb(f, ok, it.why, null); upd(); };
+    opts.appendChild(b); });
+}
+function renderOrder(box, it, n){
+  total++;
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+(it.q||'Remettez les mots dans l\'ordre.')+'</p><div class="answer"></div><div class="words"></div>'+
+    '<div class="actions"><button class="btn" type="button">Vérifier</button><button class="btn ghost" type="button">Effacer</button></div><div class="fb"></div>';
+  const ans = box.querySelector('.answer'), pool = box.querySelector('.words'), [chk, clr] = box.querySelectorAll('.actions button'), f = box.querySelector('.fb');
+  it.words.forEach((w,i)=>{ const c=document.createElement('button'); c.className='chip'; c.type='button'; c.textContent=w;
+    c.onclick=()=>{ c.classList.add('used'); const a=document.createElement('button'); a.className='chip'; a.type='button'; a.textContent=w;
+      a.onclick=()=>{ if(chk.disabled) return; a.remove(); c.classList.remove('used'); }; ans.appendChild(a); };
+    pool.appendChild(c); });
+  clr.onclick=()=>{ if(chk.disabled) return; ans.innerHTML=''; pool.querySelectorAll('.chip').forEach(c=>c.classList.remove('used')); };
+  chk.onclick=()=>{ const got = [...ans.children].map(x=>x.textContent).join(' ');
+    if(!got) return; const ok = norm(got)===norm(it.answer) || (it.alt||[]).some(a=>norm(a)===norm(got));
+    chk.disabled = true; clr.disabled = true; if(ok) score++; done++; fb(f, ok, it.why, it.answer); upd(); };
+}
+function renderTap(box, it, n){
+  total++;
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+(it.q||'Touchez le mot demandé.')+'</p><p class="sent"></p><div class="fb"></div>';
+  const s = box.querySelector('.sent'), f = box.querySelector('.fb');
+  const toks = it.s.split(' ');
+  const btns = [];
+  toks.forEach((t,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='tok'; b.textContent=t; btns.push(b);
+    b.onclick=()=>{ const clean = norm(t); const ok = it.target.map(norm).includes(clean);
+      btns.forEach(x=>{ x.disabled=true; if(it.target.map(norm).includes(norm(x.textContent))) x.classList.add('ok'); });
+      if(!ok) b.classList.add('ko'); else score++; done++; fb(f, ok, it.why, null); upd(); };
+    s.appendChild(b); s.appendChild(document.createTextNode(' ')); });
+}
+const AUTO = {};
+function renderAuto(box, it, n){
+  box.classList.add('auto');
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+it.q+'</p><div class="opts row"></div>';
+  const opts = box.querySelector('.opts');
+  ['Je sais faire','Presque','Pas encore'].forEach((o,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='opt'; b.textContent=o;
+    b.onclick=()=>{ opts.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); AUTO[n]= i>0 ? it : null; showRevoir(); };
+    opts.appendChild(b); });
+}
+function showRevoir(){ const r=document.getElementById('revoir'); if(!r) return;
+  const list = Object.values(AUTO).filter(Boolean);
+  if(!list.length){ r.hidden=true; return; }
+  r.hidden=false; r.querySelector('ul').innerHTML = list.map(it=>'<li>'+it.q+' → '+it.go+'</li>').join(''); }
+document.querySelectorAll('[data-ex]').forEach(sec=>{
+  const ex = DATA[sec.dataset.ex]; let n=0;
+  ex.items.forEach(it=>{ n++; const box=document.createElement('div'); box.className='item'; sec.insertBefore(box, sec.querySelector('.sec-after'));
+    const t = it.type || ex.type;
+    if(t==='order') renderOrder(box,it,n); else if(t==='tap') renderTap(box,it,n); else if(t==='auto') renderAuto(box,it,n); else renderQcm(box,it,n); });
+});
+upd();
+</script>
+</body>
+</html>

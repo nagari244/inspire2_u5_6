@@ -988,6 +988,9 @@ function showPart(n){
 }
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>showPart(t.dataset.part)));
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showPart(b.dataset.go)));
+/* ouvrir directement une partie depuis l'accueil : plus-que-parfait.html#ecoute */
+const PARTS = {"#formation":"1","#utilisation":"2","#ecriture":"3","#ecoute":"4","#oral":"5"};
+if (PARTS[location.hash]) showPart(PARTS[location.hash]);
 
 /* ---------- audio et transcription ---------- */
 const audio = document.getElementById("audio");

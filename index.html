@@ -3,31 +3,111 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inspire 2 · Unités 5-6</title>
+<title>Inspire 3 · Unités 5 et 6</title>
 <style>
-:root{--violet:#6b2c91;--bleu:#0b6fb8;--vert:#2f9b48;--jaune:#f2a900;--rouge:#d22630;--ink:#1e2330;--muted:#5b6274;--line:#e2e5eb}
+:root{--violet:#6b2c91;--bleu:#0b6fb8;--vert:#2f9b48;--jaune:#f2a900;--rouge:#d22630;--ink:#1e2330;--muted:#5b6274;--line:#e2e5eb;--soft:#f7f8fa}
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:#fff;color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--bleu)}
 .stripe{display:flex;height:6px}.stripe i{flex:1}
 main{max-width:760px;margin:0 auto;padding:24px 16px 40px}
-h1{margin:0;font-size:1.6rem;color:var(--violet)}
-.sub{margin:4px 0 22px;color:var(--muted)}
-.act{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-left:6px solid var(--violet);border-radius:14px;padding:16px;margin:12px 0}
-.act:hover,.act:focus-visible{border-color:var(--violet);outline:none}
-.act h2{margin:0 0 4px;font-size:1.15rem}
+h1{margin:0;font-size:1.7rem;line-height:1.25;color:var(--violet)}
+.sub{margin:4px 0 14px;color:var(--muted)}
+nav.sommaire{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+nav.sommaire a{text-decoration:none;font-size:.9rem;font-weight:600;border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink)}
+nav.sommaire a:hover,nav.sommaire a:focus-visible{border-color:var(--violet);outline:none}
+section.bloc{margin-top:30px;scroll-margin-top:12px}
+.bloc-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--c);padding-bottom:6px;margin-bottom:6px}
+.bloc-head .n{font-weight:800;color:var(--c);font-size:1.25rem}
+.bloc-head h2{margin:0;font-size:1.2rem}
+.bloc-intro{margin:6px 0 4px;color:var(--muted);font-size:.95rem}
+.act{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:14px 16px;margin:12px 0;background:#fff}
+a.act:hover,a.act:focus-visible{border-color:var(--c);outline:none}
+.act h3{margin:0 0 4px;font-size:1.08rem}
 .act p{margin:0;color:var(--muted);font-size:.95rem}
-.tag{display:inline-block;font-size:.78rem;font-weight:700;color:var(--bleu);border:1.5px solid var(--bleu);border-radius:6px;padding:0 6px;margin-right:6px}
+.act .meta{margin-top:6px;font-size:.85rem}
+.act.vedette{background:var(--soft)}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--c);border:1.5px solid var(--c);border-radius:6px;padding:0 6px;margin-right:6px;vertical-align:1px}
+.act.bientot{border-style:dashed;border-left-style:solid}
+.grid{display:grid;gap:0 12px;grid-template-columns:1fr}
+@media (min-width:640px){.grid{grid-template-columns:1fr 1fr}.grid .act{margin:6px 0}}
+footer{max-width:760px;margin:0 auto;padding:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </style>
 </head>
 <body>
 <div class="stripe" aria-hidden="true"><i style="background:var(--violet)"></i><i style="background:var(--bleu)"></i><i style="background:var(--vert)"></i><i style="background:var(--jaune)"></i><i style="background:var(--rouge)"></i></div>
 <main>
-  <h1>Inspire 2 · Unités 5-6</h1>
-  <p class="sub">Activités interactives de français langue étrangère</p>
-  <a class="act" href="plus-que-parfait.html">
-    <h2>Le plus-que-parfait</h2>
-    <p><span class="tag">B1</span>Formation, emplois, récit au passé, compréhension orale (Saint-Malo et Brest) et pratique orale.</p>
-  </a>
+  <h1>Inspire 3 · Unités 5 et 6</h1>
+  <p class="sub">Activités interactives de français · niveau B1</p>
+  <nav class="sommaire" aria-label="Sommaire">
+    <a href="#pqp">1 · Plus-que-parfait</a>
+    <a href="#ecouter">2 · Écouter : la ville</a>
+    <a href="#grammaire-u6">3 · Grammaire unité 6</a>
+    <a href="#art">4 · Écouter : l'art</a>
+  </nav>
+
+  <!-- 1. PLUS-QUE-PARFAIT -->
+  <section class="bloc" id="pqp" style="--c:var(--violet)">
+    <div class="bloc-head"><span class="n">1</span><h2>Unité 5 · Le plus-que-parfait</h2></div>
+    <a class="act vedette" href="plus-que-parfait.html">
+      <h3>Le plus-que-parfait</h3>
+      <p><span class="tag">B1</span>Formation, emplois, récit au passé, compréhension orale et pratique orale.</p>
+      <p class="meta">5 parties · autocorrigé</p>
+    </a>
+  </section>
+
+  <!-- 2. ÉCOUTER : LA VILLE ET SON HISTOIRE -->
+  <section class="bloc" id="ecouter" style="--c:var(--bleu)">
+    <div class="bloc-head"><span class="n">2</span><h2>Unité 5 · Écouter : la ville et son histoire</h2></div>
+    <p class="bloc-intro">Avant l'écoute, pendant l'écoute, après l'écoute : chaque activité suit ces trois étapes.</p>
+    <a class="act" href="ecouter/haussmann.html">
+      <h3>Haussmann transforme le visage de Paris</h3>
+      <p>Pourquoi Paris a-t-il changé au XIX<sup>e</sup> siècle&nbsp;? Le choléra, l'hygiène et les grands boulevards.</p>
+      <p class="meta">Vidéo · Public Sénat · 2 min 24</p>
+    </a>
+    <a class="act" href="ecouter/logements.html">
+      <h3>Qui habitait à quel étage&nbsp;?</h3>
+      <p>L'immeuble parisien, du rez-de-chaussée aux chambres de bonne. La vidéo confirme-t-elle la gravure de 1845&nbsp;?</p>
+      <p class="meta">Vidéo · 1 min 10</p>
+    </a>
+    <a class="act" href="plus-que-parfait.html#ecoute">
+      <h3>Saint-Malo et Brest : reconstruire après 1944</h3>
+      <p>Émission « Les pierres racontent » : deux villes détruites, deux manières de les reconstruire.</p>
+      <p class="meta">Audio · 3 min 19 · partie 4 de l'activité sur le plus-que-parfait</p>
+    </a>
+  </section>
+
+  <!-- 3. GRAMMAIRE UNITÉ 6 -->
+  <section class="bloc" id="grammaire-u6" style="--c:var(--vert)">
+    <div class="bloc-head"><span class="n">3</span><h2>Unité 6 · L'art et nous : grammaire</h2></div>
+    <p class="bloc-intro">Une fiche par point de grammaire, à faire à la maison après la séance de découverte (15 à 20 min). Chaque fiche finit par une production à écrire sur votre cahier.</p>
+    <div class="grid">
+      <a class="act" href="u6-f1-passif.html"><h3>Fiche 1 · La forme passive</h3><p><span class="tag">L21</span>être + participe passé, par ou de</p></a>
+      <a class="act" href="u6-f2-adjectifs.html"><h3>Fiche 2 · La place des adjectifs</h3><p><span class="tag">L21</span>avant ou après le nom, sens</p></a>
+      <a class="act" href="u6-f3-y-en.html"><h3>Fiche 3 · Les pronoms y et en</h3><p><span class="tag">L22</span>lieu, chose, quantité</p></a>
+      <a class="act" href="u6-f4-concession.html"><h3>Fiche 4 · La concession</h3><p><span class="tag">L22</span>même si, bien que, malgré…</p></a>
+      <a class="act" href="u6-f5-connecteurs.html"><h3>Fiche 5 · Les connecteurs</h3><p><span class="tag">L23</span>ajouter, expliquer, conclure, opposer</p></a>
+    </div>
+    <a class="act vedette" href="u6-f6-bilan.html">
+      <h3>Fiche 6 · Bilan de l'unité</h3>
+      <p><span class="tag">L21-24</span>Tout mélangé, repérer ses erreurs, s'auto-évaluer, réfléchir. À faire avant l'évaluation orale.</p>
+      <p class="meta">25 min · autocorrigé</p>
+    </a>
+  </section>
+
+  <!-- 4. ÉCOUTER : L'ART -->
+  <section class="bloc" id="art" style="--c:var(--rouge)">
+    <div class="bloc-head"><span class="n">4</span><h2>Unité 6 · Écouter : l'art</h2></div>
+    <div class="act bientot">
+      <h3><span class="tag">Bientôt</span>Vidéos sur l'art</h3>
+      <p>De nouvelles activités de compréhension orale seront ajoutées ici.</p>
+    </div>
+  </section>
 </main>
+<footer>
+  <span><b>Inspire 3 · Unités 5 et 6</b> · FLE B1 · D'après Inspire 3, Hachette FLE</span>
+  <span>Conception pédagogique : Nadia Aguilar Neri</span>
+</footer>
 </body>
 </html>
