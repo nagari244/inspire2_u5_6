@@ -144,17 +144,17 @@ footer.site .inner{max-width:780px;margin:0 auto;padding:14px 16px;font-size:13.
   <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>« L'art est bon pour la santé. » Écrivez <b>5 phrases</b>, chacune avec un connecteur d'une famille différente :</p>
 <ol><li>ajouter une idée ;</li><li>deux idées dans une même phrase ;</li><li>une cause (<em>en effet</em>, <em>car</em>) ;</li><li>une conséquence ;</li><li>une opposition.</li></ol></section>
   <section class="res" aria-labelledby="res-h"><h2 id="res-h"><span class="num">✓</span>Mes résultats</h2>
-    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner.</p>
+    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner. Quand tout est vérifié, remettez votre résultat dans Classroom.</p>
     <div class="tw"><table id="resultats"><tbody></tbody></table></div>
     <p class="consigne" id="res-etat"></p>
     <label for="nom">Votre nom et prénom</label><input id="nom" type="text" autocomplete="name" maxlength="60">
-    <div class="actions" style="margin-top:12px"><button type="button" class="btn" id="partager">Partager mon résultat</button></div>
-    <div class="fb" id="res-fb" aria-live="polite"></div>
+    <div id="partage"></div>
   </section>
   <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
 </main>
 <footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
 <div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
+<script src="partage.js"></script>
 <script>const DATA = {"ex1": {"fixe": true, "title": "À quoi sert ce connecteur ?", "consigne": "Choisissez la fonction du connecteur.", "items": [{"q": "« par ailleurs »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 0, "why": "<b>par ailleurs</b> ajoute une nouvelle idée."}, {"q": "« en effet »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 1, "why": "<b>en effet</b> explique ou justifie ce qui précède."}, {"q": "« ainsi »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 2, "why": "<b>ainsi</b> introduit une conséquence."}, {"q": "« néanmoins »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 3, "why": "<b>néanmoins</b> oppose (ou nuance) deux idées."}, {"q": "« car »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 1, "why": "<b>car</b> introduit une cause."}, {"q": "« de plus »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 0, "why": "<b>de plus</b> ajoute une idée."}]}, "ex2": {"title": "Le connecteur logique", "consigne": "Choisissez le connecteur qui donne du sens à la phrase.", "items": [{"q": "La musicothérapie réduit l'anxiété ; ___, elle aide à mieux dormir.", "opts": ["car", "de plus", "néanmoins"], "a": 1, "why": "On ajoute un deuxième effet positif → <b>de plus</b>."}, {"q": "Les patients se sentent mieux. ___, la musique libère des émotions positives.", "opts": ["En effet", "Néanmoins", "Ainsi"], "a": 0, "why": "La 2e phrase explique la 1re → <b>en effet</b>."}, {"q": "L'art-thérapie n'est pas encore très connue ; ___, de plus en plus d'hôpitaux la proposent.", "opts": ["ainsi", "car", "néanmoins"], "a": 2, "why": "Les deux idées s'opposent → <b>néanmoins</b>."}, {"q": "La musique apaise le stress ; ___, les patients ont moins besoin de médicaments.", "opts": ["ainsi", "en effet", "par ailleurs"], "a": 0, "why": "La 2e idée est une conséquence de la 1re → <b>ainsi</b>."}, {"q": "La musicothérapie est utile ___ pour les enfants ___ pour les adultes.", "opts": ["à la fois… et", "d'une part… car", "ainsi… donc"], "a": 0, "fill": "à la fois… et", "why": "Deux idées dans une même phrase → <b>à la fois… et</b>."}, {"q": "Les séances sont adaptées à chaque patient, ___ chacun a des besoins différents.", "opts": ["car", "ainsi", "par ailleurs"], "a": 0, "why": "On donne la cause → <b>car</b>."}]}, "ex3": {"title": "Repérez le connecteur", "consigne": "Touchez le connecteur dans la phrase.", "type": "tap", "items": [{"s": "Observer des œuvres d'art fait du bien ; c'est pourquoi certains médecins prescrivent des visites au musée.", "target": ["c'est", "pourquoi"], "why": "<b>c'est pourquoi</b> introduit une conséquence."}, {"s": "La danse permet d'exprimer la colère ou la joie. Par ailleurs, elle réduit le stress.", "target": ["Par", "ailleurs,"], "why": "<b>par ailleurs</b> ajoute une idée."}, {"s": "Ce n'est pas un traitement miracle ; cependant, ses effets sont reconnus.", "target": ["cependant,"], "why": "<b>cependant</b> oppose deux idées."}]}};</script>
 <script>
 const L = "abcdefghij";
@@ -267,22 +267,18 @@ function upd(){
   const tb=document.querySelector('#resultats tbody');
   tb.innerHTML = P.map(x=>'<tr><td>'+x.t+'</td><td>'+(x.p===undefined?'— / '+x.n:x.p+' / '+x.n)+'</td></tr>').join('') + '<tr class="tot"><td>Total</td><td>'+pts+' / '+max+'</td></tr>';
   document.getElementById('res-etat').textContent = done===P.length ? 'Tous les exercices sont vérifiés.' : 'Exercices vérifiés : '+done+' / '+P.length+'. Vérifiez-les tous pour partager votre résultat.';
-  document.getElementById('partager').disabled = done!==P.length;
+  if(window.PB) PB.setEnabled(done===P.length);
 }
 document.querySelectorAll('[data-ex]').forEach((sec,i)=>mount(sec,i));
 (function(){
-  const inp=document.getElementById('nom'), btn=document.getElementById('partager'), fb=document.getElementById('res-fb');
+  const inp=document.getElementById('nom');
   try{ inp.value = localStorage.getItem('exos:nom') || ''; }catch(e){}
   inp.addEventListener('input',()=>{ try{ localStorage.setItem('exos:nom', inp.value.trim()); }catch(e){} });
-  btn.onclick=()=>{
-    const nom=inp.value.trim(); if(!nom){ fb.className='fb show ko'; fb.innerHTML='<span class="t">Votre nom ?</span>Écrivez votre nom pour que votre professeure reconnaisse votre résultat.'; inp.focus(); return; }
-    const P=parts(), pts=P.reduce((a,x)=>a+x.p,0), max=P.reduce((a,x)=>a+x.n,0), d=new Date();
-    const txt = 'Inspire 3 · Unité 6 · '+TITRE+'\nNom : '+nom+'\nRésultat : '+pts+' / '+max+' points (premier essai)\n'+P.map(x=>'· '+x.t+' : '+x.p+' / '+x.n).join('\n')+'\nLe '+d.toLocaleDateString('fr-FR')+' à '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-    const done=(ok)=>{ fb.className='fb show '+(ok?'ok':'ko'); fb.innerHTML = ok ? '<span class="t">Copié !</span>Collez votre résultat dans le message ou le devoir demandé par votre professeure.' : '<span class="t">Copie impossible.</span>Faites une capture d\'écran du tableau.'; };
-    if(navigator.share){ navigator.share({title:TITRE, text:txt}).then(()=>{ fb.className='fb show ok'; fb.innerHTML='<span class="t">Envoyé.</span>Votre résultat a été partagé.'; }).catch(()=>{}); }
-    else if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false)); }
-    else done(false);
-  };
+  window.PB = Partage.render(document.getElementById('partage'), ()=>{
+    const nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:'Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat.'}; }
+    const P=parts();
+    return { activite:'Inspire 3 · Unité 6 · '+TITRE, nom, points:P.reduce((a,x)=>a+x.p,0), total:P.reduce((a,x)=>a+x.n,0), parts:P.map(x=>({t:x.t,p:x.p,n:x.n})) };
+  });
 })();
 upd();
 </script>

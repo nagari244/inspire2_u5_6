@@ -147,17 +147,17 @@ Avec un infinitif, avant l'infinitif : <span class="ex">Je veux y aller.</span> 
   <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>Répondez à ces questions sur votre cahier en utilisant <b>y</b> ou <b>en</b> :</p>
 <ol><li>Vous êtes déjà allé(e) à un festival de rue ?</li><li>Vous prenez des photos des graffitis de votre quartier ?</li><li>Vous pensez souvent à l'art dans votre vie quotidienne ?</li><li>Combien de musées avez-vous visités cette année ?</li></ol></section>
   <section class="res" aria-labelledby="res-h"><h2 id="res-h"><span class="num">✓</span>Mes résultats</h2>
-    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner.</p>
+    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner. Quand tout est vérifié, remettez votre résultat dans Classroom.</p>
     <div class="tw"><table id="resultats"><tbody></tbody></table></div>
     <p class="consigne" id="res-etat"></p>
     <label for="nom">Votre nom et prénom</label><input id="nom" type="text" autocomplete="name" maxlength="60">
-    <div class="actions" style="margin-top:12px"><button type="button" class="btn" id="partager">Partager mon résultat</button></div>
-    <div class="fb" id="res-fb" aria-live="polite"></div>
+    <div id="partage"></div>
   </section>
   <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
 </main>
 <footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
 <div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
+<script src="partage.js"></script>
 <script>const DATA = {"ex1": {"fixe": true, "title": "y ou en ?", "consigne": "Choisissez le pronom qui complète la réponse.", "items": [{"q": "Tu vas souvent au musée ? — Oui, j'___ vais souvent.", "opts": ["y", "en"], "a": 0, "row": true, "why": "<em>au musée</em> : lieu introduit par à → <b>y</b>."}, {"q": "Tu as vu des Space Invaders à Paris ? — Oui, j'___ ai vu beaucoup.", "opts": ["y", "en"], "a": 1, "row": true, "why": "Quantité (<em>des</em> Space Invaders) → <b>en</b>."}, {"q": "Elle s'intéresse au street art ? — Oui, elle s'___ intéresse.", "opts": ["y", "en"], "a": 0, "row": true, "why": "s'intéresser <b>à</b> quelque chose → <b>y</b>."}, {"q": "Vous revenez du festival ? — Oui, nous ___ revenons.", "opts": ["y", "en"], "a": 1, "row": true, "why": "Lieu introduit par <b>de</b> (du = de + le) → <b>en</b>."}, {"q": "Il se sert de cette application ? — Oui, il s'___ sert tous les jours.", "opts": ["y", "en"], "a": 1, "row": true, "why": "se servir <b>de</b> quelque chose → <b>en</b>."}, {"q": "Tu penses à ton exposition ? — Oui, j'___ pense tout le temps.", "opts": ["y", "en"], "a": 0, "row": true, "why": "penser <b>à</b> quelque chose → <b>y</b>."}, {"q": "Combien de mosaïques y a-t-il ? — Il y ___ a 4 000.", "opts": ["y", "en"], "a": 1, "row": true, "why": "Quantité → <b>en</b>, et on garde le nombre."}, {"q": "Tu es fan de cette application ? — Oui, j'___ suis fan.", "opts": ["y", "en"], "a": 1, "row": true, "why": "être fan <b>de</b> + chose → <b>en</b>. Pour une personne, on dit : je suis fan <b>d'elle</b>."}]}, "ex2": {"title": "Que remplace le pronom ?", "consigne": "Choisissez ce que remplace le pronom souligné.", "items": [{"q": "« Invader se rend dans les grandes villes pour <u>y</u> coller ses mosaïques. »", "opts": ["ses mosaïques", "dans les grandes villes", "dans son atelier"], "a": 1, "why": "<b>y</b> remplace un lieu introduit par <em>dans</em>."}, {"q": "« Avec l'appli, on chasse les Space Invaders et on gagne des points. L'objectif est d'<u>en</u> prendre en photo. »", "opts": ["des photos", "des Space Invaders", "des points"], "a": 1, "why": "<b>en</b> remplace une quantité : <em>des</em> Space Invaders."}, {"q": "« Ces endroits insolites sont fermés : peu de personnes peuvent <u>y</u> avoir accès. »", "opts": ["de ces endroits", "à ces personnes", "à ces endroits"], "a": 2, "why": "avoir accès <b>à</b> + lieu → <b>y</b>."}]}, "ex3": {"title": "Remettez dans l'ordre", "consigne": "Attention à la place du pronom.", "type": "order", "items": [{"words": ["allé", "n'", "Je", "pas", "y", "suis"], "answer": "Je n'y suis pas allé"}, {"words": ["en", "Je", "parler", "veux"], "answer": "Je veux en parler"}, {"words": ["trois", "a", "Il", "en", "pris"], "answer": "Il en a pris trois"}]}};</script>
 <script>
 const L = "abcdefghij";
@@ -270,22 +270,18 @@ function upd(){
   const tb=document.querySelector('#resultats tbody');
   tb.innerHTML = P.map(x=>'<tr><td>'+x.t+'</td><td>'+(x.p===undefined?'— / '+x.n:x.p+' / '+x.n)+'</td></tr>').join('') + '<tr class="tot"><td>Total</td><td>'+pts+' / '+max+'</td></tr>';
   document.getElementById('res-etat').textContent = done===P.length ? 'Tous les exercices sont vérifiés.' : 'Exercices vérifiés : '+done+' / '+P.length+'. Vérifiez-les tous pour partager votre résultat.';
-  document.getElementById('partager').disabled = done!==P.length;
+  if(window.PB) PB.setEnabled(done===P.length);
 }
 document.querySelectorAll('[data-ex]').forEach((sec,i)=>mount(sec,i));
 (function(){
-  const inp=document.getElementById('nom'), btn=document.getElementById('partager'), fb=document.getElementById('res-fb');
+  const inp=document.getElementById('nom');
   try{ inp.value = localStorage.getItem('exos:nom') || ''; }catch(e){}
   inp.addEventListener('input',()=>{ try{ localStorage.setItem('exos:nom', inp.value.trim()); }catch(e){} });
-  btn.onclick=()=>{
-    const nom=inp.value.trim(); if(!nom){ fb.className='fb show ko'; fb.innerHTML='<span class="t">Votre nom ?</span>Écrivez votre nom pour que votre professeure reconnaisse votre résultat.'; inp.focus(); return; }
-    const P=parts(), pts=P.reduce((a,x)=>a+x.p,0), max=P.reduce((a,x)=>a+x.n,0), d=new Date();
-    const txt = 'Inspire 3 · Unité 6 · '+TITRE+'\nNom : '+nom+'\nRésultat : '+pts+' / '+max+' points (premier essai)\n'+P.map(x=>'· '+x.t+' : '+x.p+' / '+x.n).join('\n')+'\nLe '+d.toLocaleDateString('fr-FR')+' à '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-    const done=(ok)=>{ fb.className='fb show '+(ok?'ok':'ko'); fb.innerHTML = ok ? '<span class="t">Copié !</span>Collez votre résultat dans le message ou le devoir demandé par votre professeure.' : '<span class="t">Copie impossible.</span>Faites une capture d\'écran du tableau.'; };
-    if(navigator.share){ navigator.share({title:TITRE, text:txt}).then(()=>{ fb.className='fb show ok'; fb.innerHTML='<span class="t">Envoyé.</span>Votre résultat a été partagé.'; }).catch(()=>{}); }
-    else if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false)); }
-    else done(false);
-  };
+  window.PB = Partage.render(document.getElementById('partage'), ()=>{
+    const nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:'Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat.'}; }
+    const P=parts();
+    return { activite:'Inspire 3 · Unité 6 · '+TITRE, nom, points:P.reduce((a,x)=>a+x.p,0), total:P.reduce((a,x)=>a+x.n,0), parts:P.map(x=>({t:x.t,p:x.p,n:x.n})) };
+  });
 })();
 upd();
 </script>

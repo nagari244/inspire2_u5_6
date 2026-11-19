@@ -153,17 +153,17 @@ Avec <b>on</b>, pas de complément d'agent : <span class="ex">On a créé une ga
   <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>Présentez votre <b>œuvre fil rouge</b> en 4 phrases au passif :</p>
 <ol><li>Quand et par qui a-t-elle été créée ?</li><li>Où est-elle exposée (ou installée) ?</li><li>Par qui est-elle visitée ou regardée ?</li><li>A-t-elle été restaurée, déplacée, prêtée… ?</li></ol></section>
   <section class="res" aria-labelledby="res-h"><h2 id="res-h"><span class="num">✓</span>Mes résultats</h2>
-    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner.</p>
+    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner. Quand tout est vérifié, remettez votre résultat dans Classroom.</p>
     <div class="tw"><table id="resultats"><tbody></tbody></table></div>
     <p class="consigne" id="res-etat"></p>
     <label for="nom">Votre nom et prénom</label><input id="nom" type="text" autocomplete="name" maxlength="60">
-    <div class="actions" style="margin-top:12px"><button type="button" class="btn" id="partager">Partager mon résultat</button></div>
-    <div class="fb" id="res-fb" aria-live="polite"></div>
+    <div id="partage"></div>
   </section>
   <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
 </main>
 <footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
 <div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
+<script src="partage.js"></script>
 <script>const DATA = {"ex1": {"title": "Choisissez la bonne phrase passive", "consigne": "Lisez la phrase active et choisissez sa transformation correcte.", "items": [{"q": "« On a restauré la fresque en 2020. »", "opts": ["La fresque est restaurée en 2020.", "La fresque a été restaurée en 2020.", "La fresque était restauré en 2020."], "a": 1, "why": "Passé composé actif → <b>a été</b> + participe passé ; <em>fresque</em> est féminin : restauré<b>e</b>."}, {"q": "« Les architectes construiront un nouveau musée. »", "opts": ["Un nouveau musée sera construit par les architectes.", "Un nouveau musée est construit par les architectes.", "Un nouveau musée sera construite par les architectes."], "a": 0, "why": "Futur actif → <b>sera</b> + participe ; <em>musée</em> est masculin : construit."}, {"q": "« La directrice choisissait les tableaux. »", "opts": ["Les tableaux ont été choisis par la directrice.", "Les tableaux étaient choisis par la directrice.", "Les tableaux étaient choisi par la directrice."], "a": 1, "why": "Imparfait actif → <b>étaient</b> ; accord au masculin pluriel : choisi<b>s</b>."}, {"q": "« On va inaugurer l'exposition demain. »", "opts": ["L'exposition va être inaugurée demain.", "L'exposition va inaugurer demain.", "L'exposition sera inauguré demain."], "a": 0, "why": "Futur proche → <b>va être</b> + participe accordé : inaugur<b>ée</b>. Avec <em>on</em>, pas de complément d'agent."}, {"q": "« Le public adore cette sculpture. »", "opts": ["Cette sculpture est adorée du public.", "Cette sculpture a adoré le public.", "Cette sculpture est adoré par le public."], "a": 0, "why": "Verbe de sentiment : le complément d'agent est souvent introduit par <b>de</b> (du = de + le). La réponse c) oublie l'accord."}, {"q": "« La neige recouvre la statue. »", "opts": ["La statue est recouvert de neige.", "La statue est recouverte de neige.", "La statue a été recouvrir de neige."], "a": 1, "why": "État : <b>de</b>. Le participe s'accorde avec <em>statue</em> : recouvert<b>e</b>."}]}, "ex2": {"fixe": true, "title": "Actif ou passif ?", "consigne": "Attention aux pièges : être + participe n'est pas toujours un passif.", "items": [{"q": "Elle est allée au Louvre-Lens dimanche.", "opts": ["Actif", "Passif"], "a": 0, "row": true, "why": "Passé composé d'<em>aller</em> : pas de COD, donc pas de passif."}, {"q": "Le tableau est exposé au premier étage.", "opts": ["Actif", "Passif"], "a": 1, "row": true, "why": "On expose le tableau → le tableau <b>est exposé</b>."}, {"q": "Les visiteurs sont arrivés très tôt.", "opts": ["Actif", "Passif"], "a": 0, "row": true, "why": "Passé composé d'<em>arriver</em>, verbe sans COD."}, {"q": "Ce portrait a été peint par Jacques-Louis David.", "opts": ["Actif", "Passif"], "a": 1, "row": true, "why": "<b>a été</b> + participe + <b>par</b> : passif au passé composé."}, {"q": "La guide a présenté l'œuvre aux enfants.", "opts": ["Actif", "Passif"], "a": 0, "row": true, "why": "Le sujet (la guide) fait l'action ; <em>l'œuvre</em> est le COD."}, {"q": "Les œuvres seront prêtées à un autre musée.", "opts": ["Actif", "Passif"], "a": 1, "row": true, "why": "Futur passif : <b>seront</b> + prêt<b>ées</b>."}]}, "ex3": {"title": "Le bon participe passé", "consigne": "Choisissez la forme qui complète la phrase.", "items": [{"q": "Ces sculptures ont été ___ en 1900.", "opts": ["réalisé", "réalisées", "réalisés"], "a": 1, "row": true, "why": "Accord avec <em>ces sculptures</em> (féminin pluriel)."}, {"q": "La galerie est ___ de béton gris.", "opts": ["revêtu", "revêtus", "revêtue"], "a": 2, "row": true, "why": "Accord avec <em>la galerie</em> (féminin singulier)."}, {"q": "Les tableaux seront ___ dans la grande salle.", "opts": ["exposées", "exposés", "exposé"], "a": 1, "row": true, "why": "Accord avec <em>les tableaux</em> (masculin pluriel)."}, {"q": "Le mur a été ___ par un artiste de rue.", "opts": ["peint", "peints", "peinte"], "a": 0, "row": true, "why": "Accord avec <em>le mur</em> (masculin singulier)."}]}, "ex4": {"title": "Remettez dans l'ordre", "consigne": "Touchez les mots dans le bon ordre, puis vérifiez.", "type": "order", "items": [{"words": ["construit", "un architecte japonais", "Ce musée", "par", "a été"], "answer": "Ce musée a été construit par un architecte japonais"}, {"words": ["exposées", "Les œuvres", "dans", "seront", "la nouvelle galerie"], "answer": "Les œuvres seront exposées dans la nouvelle galerie"}, {"words": ["de tous", "Cette statue", "aimée", "est"], "answer": "Cette statue est aimée de tous"}]}};</script>
 <script>
 const L = "abcdefghij";
@@ -276,22 +276,18 @@ function upd(){
   const tb=document.querySelector('#resultats tbody');
   tb.innerHTML = P.map(x=>'<tr><td>'+x.t+'</td><td>'+(x.p===undefined?'— / '+x.n:x.p+' / '+x.n)+'</td></tr>').join('') + '<tr class="tot"><td>Total</td><td>'+pts+' / '+max+'</td></tr>';
   document.getElementById('res-etat').textContent = done===P.length ? 'Tous les exercices sont vérifiés.' : 'Exercices vérifiés : '+done+' / '+P.length+'. Vérifiez-les tous pour partager votre résultat.';
-  document.getElementById('partager').disabled = done!==P.length;
+  if(window.PB) PB.setEnabled(done===P.length);
 }
 document.querySelectorAll('[data-ex]').forEach((sec,i)=>mount(sec,i));
 (function(){
-  const inp=document.getElementById('nom'), btn=document.getElementById('partager'), fb=document.getElementById('res-fb');
+  const inp=document.getElementById('nom');
   try{ inp.value = localStorage.getItem('exos:nom') || ''; }catch(e){}
   inp.addEventListener('input',()=>{ try{ localStorage.setItem('exos:nom', inp.value.trim()); }catch(e){} });
-  btn.onclick=()=>{
-    const nom=inp.value.trim(); if(!nom){ fb.className='fb show ko'; fb.innerHTML='<span class="t">Votre nom ?</span>Écrivez votre nom pour que votre professeure reconnaisse votre résultat.'; inp.focus(); return; }
-    const P=parts(), pts=P.reduce((a,x)=>a+x.p,0), max=P.reduce((a,x)=>a+x.n,0), d=new Date();
-    const txt = 'Inspire 3 · Unité 6 · '+TITRE+'\nNom : '+nom+'\nRésultat : '+pts+' / '+max+' points (premier essai)\n'+P.map(x=>'· '+x.t+' : '+x.p+' / '+x.n).join('\n')+'\nLe '+d.toLocaleDateString('fr-FR')+' à '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-    const done=(ok)=>{ fb.className='fb show '+(ok?'ok':'ko'); fb.innerHTML = ok ? '<span class="t">Copié !</span>Collez votre résultat dans le message ou le devoir demandé par votre professeure.' : '<span class="t">Copie impossible.</span>Faites une capture d\'écran du tableau.'; };
-    if(navigator.share){ navigator.share({title:TITRE, text:txt}).then(()=>{ fb.className='fb show ok'; fb.innerHTML='<span class="t">Envoyé.</span>Votre résultat a été partagé.'; }).catch(()=>{}); }
-    else if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false)); }
-    else done(false);
-  };
+  window.PB = Partage.render(document.getElementById('partage'), ()=>{
+    const nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:'Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat.'}; }
+    const P=parts();
+    return { activite:'Inspire 3 · Unité 6 · '+TITRE, nom, points:P.reduce((a,x)=>a+x.p,0), total:P.reduce((a,x)=>a+x.n,0), parts:P.map(x=>({t:x.t,p:x.p,n:x.n})) };
+  });
 })();
 upd();
 </script>

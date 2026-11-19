@@ -489,10 +489,9 @@
       '<p class="total"><span class="pts">0</span> / <span class="max">0</span> points</p>' +
       '<p class="etat notice"></p><ul class="detail"></ul>' +
       '<label class="nom">Votre nom et prénom <input type="text" autocomplete="name" maxlength="60"></label>' +
-      '<div class="btn-row"><button type="button" class="btn partager">Partager mon résultat</button></div>' +
-      '<p class="fb" aria-live="polite"></p>' +
+      '<div class="partage-zone"></div>' +
       '<p class="notice">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s\'entraîner.</p>';
-    var input = root.querySelector("input"), btn = root.querySelector(".partager"), fb = root.querySelector(".fb");
+    var input = root.querySelector("input"), PB = null;
     try { input.value = localStorage.getItem("exos:nom") || ""; } catch (e) {}
     input.addEventListener("input", function () { try { localStorage.setItem("exos:nom", input.value.trim()); } catch (e) {} });
     function regs() { return cfg.exos.map(function (id) { return REG.filter(function (r) { return r.root.id === id; })[0]; }).filter(Boolean); }
@@ -514,30 +513,16 @@
       root.querySelector(".detail").innerHTML = c.lignes.map(function (l) {
         return "<li>" + esc(l.titre.replace(/<[^>]+>/g, "")) + " : <b>" + (l.p === null ? "à terminer" : l.p + " / " + l.tot) + "</b></li>";
       }).join("");
-      btn.disabled = c.finis !== c.n;
+      if (PB) PB.setEnabled(c.finis === c.n);
     }
-    btn.addEventListener("click", function () {
-      var c = compute(), nom = input.value.trim();
-      if (!nom) { fb.className = "fb ko"; fb.innerHTML = '<b class="t">Votre nom ?</b> Écrivez votre nom pour que votre professeure reconnaisse votre résultat.'; input.focus(); return; }
-      var d = new Date();
-      var txt = cfg.activite + (cfg.partie ? " · " + cfg.partie : "") + "\n" +
-        "Nom : " + nom + "\n" +
-        "Résultat : " + c.pts + " / " + c.max + " points (premier essai)\n" +
-        c.lignes.map(function (l) { return "· " + l.titre.replace(/<[^>]+>/g, "") + " : " + l.p + " / " + l.tot; }).join("\n") + "\n" +
-        "Le " + d.toLocaleDateString("fr-FR") + " à " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-      function copied(ok) {
-        fb.className = ok ? "fb ok" : "fb ko";
-        fb.innerHTML = ok ? '<b class="t">Copié !</b> Collez votre résultat dans le message ou le devoir demandé par votre professeure.'
-                          : '<b class="t">Copie impossible.</b> Faites une capture d\'écran de ce cadre.';
-      }
-      if (navigator.share) {
-        navigator.share({ title: cfg.activite, text: txt }).then(function () {
-          fb.className = "fb ok"; fb.innerHTML = '<b class="t">Envoyé.</b> Votre résultat a été partagé.';
-        }).catch(function () {});
-      } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(txt).then(function () { copied(true); }, function () { copied(false); });
-      } else { copied(false); }
-    });
+    if (window.Partage) {
+      PB = Partage.render(root.querySelector(".partage-zone"), function () {
+        var c = compute(), nom = input.value.trim();
+        if (!nom) { input.focus(); return { erreur: "Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat." }; }
+        return { activite: cfg.activite + (cfg.partie ? " · " + cfg.partie : ""), nom: nom, points: c.pts, total: c.max,
+                 parts: c.lignes.map(function (l) { return { t: l.titre.replace(/<[^>]+>/g, ""), p: l.p, n: l.tot }; }) };
+      });
+    }
     document.addEventListener("exos:update", render);
     render();
   }

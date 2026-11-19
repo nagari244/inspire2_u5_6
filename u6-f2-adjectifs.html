@@ -151,17 +151,17 @@ footer.site .inner{max-width:780px;margin:0 auto;padding:14px 16px;font-size:13.
   <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>Décrivez votre <b>œuvre fil rouge</b> en 5 groupes nominaux :</p>
 <ol><li>deux adjectifs placés <b>avant</b> le nom ;</li><li>deux adjectifs placés <b>après</b> le nom ;</li><li>un adjectif d'appréciation placé avant pour insister (<em>une magnifique…</em>).</li></ol></section>
   <section class="res" aria-labelledby="res-h"><h2 id="res-h"><span class="num">✓</span>Mes résultats</h2>
-    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner.</p>
+    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner. Quand tout est vérifié, remettez votre résultat dans Classroom.</p>
     <div class="tw"><table id="resultats"><tbody></tbody></table></div>
     <p class="consigne" id="res-etat"></p>
     <label for="nom">Votre nom et prénom</label><input id="nom" type="text" autocomplete="name" maxlength="60">
-    <div class="actions" style="margin-top:12px"><button type="button" class="btn" id="partager">Partager mon résultat</button></div>
-    <div class="fb" id="res-fb" aria-live="polite"></div>
+    <div id="partage"></div>
   </section>
   <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
 </main>
 <footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
 <div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
+<script src="partage.js"></script>
 <script>const DATA = {"ex1": {"fixe": true, "title": "Avant ou après le nom ?", "consigne": "Où placez-vous l'adjectif entre parenthèses ?", "items": [{"q": "un tableau (abstrait)", "opts": ["Avant le nom", "Après le nom"], "a": 1, "row": true, "why": "Le style se place après : un tableau <b>abstrait</b>."}, {"q": "un portrait (vieux)", "opts": ["Avant le nom", "Après le nom"], "a": 0, "row": true, "why": "<em>Vieux</em> est un adjectif court et fréquent : un <b>vieux</b> portrait."}, {"q": "une sculpture (italienne)", "opts": ["Avant le nom", "Après le nom"], "a": 1, "row": true, "why": "La nationalité se place après."}, {"q": "une exposition (nouvelle)", "opts": ["Avant le nom", "Après le nom"], "a": 0, "row": true, "why": "une <b>nouvelle</b> exposition."}, {"q": "un cadre (ovale)", "opts": ["Avant le nom", "Après le nom"], "a": 1, "row": true, "why": "La forme se place après."}, {"q": "une artiste (jeune)", "opts": ["Avant le nom", "Après le nom"], "a": 0, "row": true, "why": "une <b>jeune</b> artiste."}, {"q": "un mur (coloré)", "opts": ["Avant le nom", "Après le nom"], "a": 1, "row": true, "why": "Couleur et participe passé : après le nom."}]}, "ex2": {"title": "Que veut dire la phrase ?", "consigne": "Choisissez le sens correct.", "items": [{"q": "« C'est un ancien musée. »", "opts": ["C'est un musée très vieux.", "Ce n'est plus un musée.", "C'est un musée rénové."], "a": 1, "why": "<em>Ancien</em> avant le nom = qui n'est plus ce qu'il était."}, {"q": "« J'ai rencontré une grande artiste. »", "opts": ["Une artiste de grande taille.", "Une artiste importante.", "Une artiste âgée."], "a": 1, "why": "<em>Grand(e)</em> avant le nom = important(e)."}, {"q": "« Le peintre utilise ses propres pinceaux. »", "opts": ["Des pinceaux qui ne sont pas sales.", "Des pinceaux neufs.", "Des pinceaux qui lui appartiennent."], "a": 2, "why": "<em>Propre</em> avant le nom = qui appartient à quelqu'un."}, {"q": "« C'est un curieux personnage. »", "opts": ["Un personnage étrange.", "Un personnage qui pose beaucoup de questions.", "Un personnage célèbre."], "a": 0, "why": "<em>Curieux</em> avant le nom = étrange, bizarre."}, {"q": "« Voici le dernier tableau que j'ai acheté. »", "opts": ["Je n'en achèterai plus jamais.", "Je l'ai acheté la semaine passée.", "Je n'en ai pas acheté d'autre après."], "a": 2, "why": "<em>Dernier</em> avant le nom = le plus récent, ou final."}]}, "ex3": {"title": "Beau, bel ou belle ? Vieux ou vieil ?", "consigne": "Choisissez la forme correcte.", "items": [{"q": "un ___ escalier", "opts": ["beau", "bel", "belle"], "a": 1, "row": true, "why": "Devant une voyelle (masculin) : <b>bel</b>."}, {"q": "une ___ statue", "opts": ["beau", "bel", "belle"], "a": 2, "row": true, "why": "Féminin : <b>belle</b>."}, {"q": "un ___ homme assis", "opts": ["vieux", "vieil", "vieille"], "a": 1, "row": true, "why": "Devant un h muet (masculin) : <b>vieil</b>."}, {"q": "un ___ espace d'exposition", "opts": ["nouveau", "nouvel", "nouvelle"], "a": 1, "row": true, "why": "Devant une voyelle (masculin) : <b>nouvel</b>."}]}, "ex4": {"title": "Remettez dans l'ordre", "consigne": "Construisez le groupe nominal.", "type": "order", "items": [{"words": ["moderne", "une", "sculpture", "grande"], "answer": "une grande sculpture moderne"}, {"words": ["impressionniste", "tableau", "un", "beau"], "answer": "un beau tableau impressionniste"}, {"words": ["colorés", "les", "murs", "vieux"], "answer": "les vieux murs colorés"}]}};</script>
 <script>
 const L = "abcdefghij";
@@ -274,22 +274,18 @@ function upd(){
   const tb=document.querySelector('#resultats tbody');
   tb.innerHTML = P.map(x=>'<tr><td>'+x.t+'</td><td>'+(x.p===undefined?'— / '+x.n:x.p+' / '+x.n)+'</td></tr>').join('') + '<tr class="tot"><td>Total</td><td>'+pts+' / '+max+'</td></tr>';
   document.getElementById('res-etat').textContent = done===P.length ? 'Tous les exercices sont vérifiés.' : 'Exercices vérifiés : '+done+' / '+P.length+'. Vérifiez-les tous pour partager votre résultat.';
-  document.getElementById('partager').disabled = done!==P.length;
+  if(window.PB) PB.setEnabled(done===P.length);
 }
 document.querySelectorAll('[data-ex]').forEach((sec,i)=>mount(sec,i));
 (function(){
-  const inp=document.getElementById('nom'), btn=document.getElementById('partager'), fb=document.getElementById('res-fb');
+  const inp=document.getElementById('nom');
   try{ inp.value = localStorage.getItem('exos:nom') || ''; }catch(e){}
   inp.addEventListener('input',()=>{ try{ localStorage.setItem('exos:nom', inp.value.trim()); }catch(e){} });
-  btn.onclick=()=>{
-    const nom=inp.value.trim(); if(!nom){ fb.className='fb show ko'; fb.innerHTML='<span class="t">Votre nom ?</span>Écrivez votre nom pour que votre professeure reconnaisse votre résultat.'; inp.focus(); return; }
-    const P=parts(), pts=P.reduce((a,x)=>a+x.p,0), max=P.reduce((a,x)=>a+x.n,0), d=new Date();
-    const txt = 'Inspire 3 · Unité 6 · '+TITRE+'\nNom : '+nom+'\nRésultat : '+pts+' / '+max+' points (premier essai)\n'+P.map(x=>'· '+x.t+' : '+x.p+' / '+x.n).join('\n')+'\nLe '+d.toLocaleDateString('fr-FR')+' à '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-    const done=(ok)=>{ fb.className='fb show '+(ok?'ok':'ko'); fb.innerHTML = ok ? '<span class="t">Copié !</span>Collez votre résultat dans le message ou le devoir demandé par votre professeure.' : '<span class="t">Copie impossible.</span>Faites une capture d\'écran du tableau.'; };
-    if(navigator.share){ navigator.share({title:TITRE, text:txt}).then(()=>{ fb.className='fb show ok'; fb.innerHTML='<span class="t">Envoyé.</span>Votre résultat a été partagé.'; }).catch(()=>{}); }
-    else if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false)); }
-    else done(false);
-  };
+  window.PB = Partage.render(document.getElementById('partage'), ()=>{
+    const nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:'Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat.'}; }
+    const P=parts();
+    return { activite:'Inspire 3 · Unité 6 · '+TITRE, nom, points:P.reduce((a,x)=>a+x.p,0), total:P.reduce((a,x)=>a+x.n,0), parts:P.map(x=>({t:x.t,p:x.p,n:x.n})) };
+  });
 })();
 upd();
 </script>

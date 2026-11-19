@@ -597,8 +597,7 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font
     <p style="font-size:.95rem;color:var(--muted)">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner.</p>
     <label for="pqp-nom" style="display:block;font-weight:600;margin:10px 0 4px">Votre nom et prénom</label>
     <input id="pqp-nom" type="text" autocomplete="name" maxlength="60" style="display:block;width:100%;max-width:420px;font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px">
-    <div class="ex-actions"><button type="button" class="btn primary" id="pqp-partager">Partager mon résultat</button></div>
-    <p id="pqp-fb" aria-live="polite" style="font-size:.95rem"></p>
+    <div id="pqp-partage"></div>
   </div>
 
   <div class="next"><button class="btn ghost" data-go="5">Partie 5 : À l'oral →</button></div>
@@ -660,6 +659,7 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font
   <button type="button">é</button><button type="button">è</button><button type="button">ê</button><button type="button">ë</button><button type="button">à</button><button type="button">â</button><button type="button">ç</button><button type="button">î</button><button type="button">ï</button><button type="button">ô</button><button type="button">û</button><button type="button">ù</button><button type="button">œ</button><button type="button">É</button><button type="button">À</button>
 </div>
 
+<script src="partage.js"></script>
 <script>
 "use strict";
 const AUDIO_SRC = "audio/les-pierres-racontent-saint-malo-brest.mp3";
@@ -1002,20 +1002,16 @@ function updateScores(){
   tb.innerHTML = rows;
   const etat = document.getElementById("pqp-etat");
   if(etat){ etat.textContent = fdone ? "Toutes les parties sont vérifiées." : "Vérifiez tous les exercices des parties 1 à 4 pour partager votre résultat.";
-    document.getElementById("pqp-partager").disabled = !fdone; }
+    if(window.PQPB) PQPB.setEnabled(fdone); }
 }
 (function(){
-  const inp=document.getElementById("pqp-nom"), btn=document.getElementById("pqp-partager"), fb=document.getElementById("pqp-fb");
+  const inp=document.getElementById("pqp-nom");
   try{ inp.value = localStorage.getItem("exos:nom") || ""; }catch(e){}
   inp.addEventListener("input",()=>{ try{ localStorage.setItem("exos:nom", inp.value.trim()); }catch(e){} });
-  btn.addEventListener("click",()=>{
-    const nom=inp.value.trim(); if(!nom){ fb.textContent="Écrivez votre nom pour que votre professeure reconnaisse votre résultat."; inp.focus(); return; }
-    const P=pqpParts(), pts=P.reduce((a,x)=>a+x.p,0), max=P.reduce((a,x)=>a+x.n,0), d=new Date();
-    const txt="Inspire 3 · Unité 5 · Le plus-que-parfait\nNom : "+nom+"\nRésultat : "+pts+" / "+max+" points (premier essai)\n"+P.map(x=>"· "+x.t+" : "+x.p+" / "+x.n).join("\n")+"\nLe "+d.toLocaleDateString("fr-FR")+" à "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
-    const done=ok=>{ fb.textContent = ok ? "✓ Copié ! Collez votre résultat dans le message ou le devoir demandé par votre professeure." : "Copie impossible : faites une capture d'écran du bilan."; };
-    if(navigator.share){ navigator.share({title:"Le plus-que-parfait", text:txt}).then(()=>{ fb.textContent="✓ Votre résultat a été partagé."; }).catch(()=>{}); }
-    else if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false)); }
-    else done(false);
+  window.PQPB = Partage.render(document.getElementById("pqp-partage"), ()=>{
+    const nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:"Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat."}; }
+    const P=pqpParts();
+    return { activite:"Inspire 3 · Unité 5 · Le plus-que-parfait", nom, points:P.reduce((a,x)=>a+x.p,0), total:P.reduce((a,x)=>a+x.n,0), parts:P };
   });
 })();
 updateScores();
