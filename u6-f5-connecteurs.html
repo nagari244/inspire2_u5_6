@@ -85,6 +85,22 @@ button.btn[disabled]{opacity:.4;cursor:default}
 button.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
 .revoir{border:1.5px solid var(--accent);border-radius:12px;padding:14px 16px;margin-top:14px}
 .revoir ul{margin:6px 0 0;padding-left:22px}
+button.opt.sel,.tok.sel{border-color:var(--accent);background:var(--accent-soft)}
+.tok.sel{border-bottom-color:var(--accent)}
+.answer.is-ok{border-color:var(--ok);border-style:solid}.answer.is-ko{border-color:var(--ko);border-style:solid}
+.ex-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 6px}
+.ex-score{font-weight:700;color:var(--accent)}
+.ex-msg{flex-basis:100%;margin:0;color:var(--warm);font-size:15px}
+.ex-msg:empty{display:none}
+.res{margin-top:34px;border:2px solid var(--accent);border-radius:12px;padding:16px}
+.res h2{margin-top:0}
+.res table{width:100%;border-collapse:collapse;font-size:16px;margin:8px 0}
+.res td{border-bottom:1px solid var(--line);padding:8px 6px}
+.res td:last-child{text-align:right;white-space:nowrap;font-weight:600}
+.res tr.tot td{border-bottom:none;border-top:2px solid var(--accent);font-weight:700;color:var(--accent);font-size:18px}
+.res label{display:block;font-weight:600;margin:10px 0 4px}
+.res input{display:block;width:100%;max-width:420px;font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px}
+.res .btn[disabled]{opacity:.45}
 .avous{border:1.5px solid var(--warm);border-radius:12px;padding:14px 16px;background:var(--warm-soft)}
 .avous h2{margin-top:0}
 .avous ol{margin:6px 0 0;padding-left:22px}
@@ -101,7 +117,7 @@ footer.site .inner{max-width:780px;margin:0 auto;padding:14px 16px;font-size:13.
 @media (max-width:520px){h1{font-size:25px}.brand-txt{display:none}body{font-size:16.5px}}
 </style>
 </head>
-<body>
+<body data-key="u6-f5-connecteurs" data-titre="Fiche 5 · Les connecteurs">
 <header class="site">
   <div class="inner">
     <a class="brand" href="index.html#grammaire-u6"><span class="badge">INSPIRE 3</span>
@@ -127,65 +143,69 @@ footer.site .inner{max-width:780px;margin:0 auto;padding:14px 16px;font-size:13.
   <section data-ex="ex1"><h2><span class="num">A</span>À quoi sert ce connecteur ?</h2><p class="consigne">Choisissez la fonction du connecteur.</p></section><section data-ex="ex2"><h2><span class="num">B</span>Le connecteur logique</h2><p class="consigne">Choisissez le connecteur qui donne du sens à la phrase.</p></section><section data-ex="ex3"><h2><span class="num">C</span>Repérez le connecteur</h2><p class="consigne">Touchez le connecteur dans la phrase.</p></section>
   <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>« L'art est bon pour la santé. » Écrivez <b>5 phrases</b>, chacune avec un connecteur d'une famille différente :</p>
 <ol><li>ajouter une idée ;</li><li>deux idées dans une même phrase ;</li><li>une cause (<em>en effet</em>, <em>car</em>) ;</li><li>une conséquence ;</li><li>une opposition.</li></ol></section>
-  <div class="bilan" id="bilan" hidden><div>Votre résultat</div><div class="big" id="bilan-n"></div><p id="bilan-msg" style="margin:6px 0 0"></p></div>
+  <section class="res" aria-labelledby="res-h"><h2 id="res-h"><span class="num">✓</span>Mes résultats</h2>
+    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner. Quand tout est vérifié, remettez votre résultat dans Classroom.</p>
+    <div class="tw"><table id="resultats"><tbody></tbody></table></div>
+    <p class="consigne" id="res-etat"></p>
+    <label for="nom">Votre nom et prénom</label><input id="nom" type="text" autocomplete="name" maxlength="60">
+    <div id="partage"></div>
+  </section>
   <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
 </main>
 <footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
 <div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
-<script>const DATA = {"ex1": {"title": "À quoi sert ce connecteur ?", "consigne": "Choisissez la fonction du connecteur.", "items": [{"q": "« par ailleurs »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 0, "why": "<b>par ailleurs</b> ajoute une nouvelle idée."}, {"q": "« en effet »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 1, "why": "<b>en effet</b> explique ou justifie ce qui précède."}, {"q": "« ainsi »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 2, "why": "<b>ainsi</b> introduit une conséquence."}, {"q": "« néanmoins »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 3, "why": "<b>néanmoins</b> oppose (ou nuance) deux idées."}, {"q": "« car »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 1, "why": "<b>car</b> introduit une cause."}, {"q": "« de plus »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 0, "why": "<b>de plus</b> ajoute une idée."}]}, "ex2": {"title": "Le connecteur logique", "consigne": "Choisissez le connecteur qui donne du sens à la phrase.", "items": [{"q": "La musicothérapie réduit l'anxiété ; ___, elle aide à mieux dormir.", "opts": ["car", "de plus", "néanmoins"], "a": 1, "why": "On ajoute un deuxième effet positif → <b>de plus</b>."}, {"q": "Les patients se sentent mieux. ___, la musique libère des émotions positives.", "opts": ["En effet", "Néanmoins", "Ainsi"], "a": 0, "why": "La 2e phrase explique la 1re → <b>en effet</b>."}, {"q": "L'art-thérapie n'est pas encore très connue ; ___, de plus en plus d'hôpitaux la proposent.", "opts": ["ainsi", "car", "néanmoins"], "a": 2, "why": "Les deux idées s'opposent → <b>néanmoins</b>."}, {"q": "La musique apaise le stress ; ___, les patients ont moins besoin de médicaments.", "opts": ["ainsi", "en effet", "par ailleurs"], "a": 0, "why": "La 2e idée est une conséquence de la 1re → <b>ainsi</b>."}, {"q": "La musicothérapie est utile ___ pour les enfants ___ pour les adultes.", "opts": ["à la fois… et", "d'une part… car", "ainsi… donc"], "a": 0, "fill": "à la fois… et", "why": "Deux idées dans une même phrase → <b>à la fois… et</b>."}, {"q": "Les séances sont adaptées à chaque patient, ___ chacun a des besoins différents.", "opts": ["car", "ainsi", "par ailleurs"], "a": 0, "why": "On donne la cause → <b>car</b>."}]}, "ex3": {"title": "Repérez le connecteur", "consigne": "Touchez le connecteur dans la phrase.", "type": "tap", "items": [{"s": "Observer des œuvres d'art fait du bien ; c'est pourquoi certains médecins prescrivent des visites au musée.", "target": ["c'est", "pourquoi"], "why": "<b>c'est pourquoi</b> introduit une conséquence."}, {"s": "La danse permet d'exprimer la colère ou la joie. Par ailleurs, elle réduit le stress.", "target": ["Par", "ailleurs,"], "why": "<b>par ailleurs</b> ajoute une idée."}, {"s": "Ce n'est pas un traitement miracle ; cependant, ses effets sont reconnus.", "target": ["cependant,"], "why": "<b>cependant</b> oppose deux idées."}]}};</script>
+<script src="partage.js"></script>
+<script>const DATA = {"ex1": {"fixe": true, "title": "À quoi sert ce connecteur ?", "consigne": "Choisissez la fonction du connecteur.", "items": [{"q": "« par ailleurs »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 0, "why": "<b>par ailleurs</b> ajoute une nouvelle idée."}, {"q": "« en effet »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 1, "why": "<b>en effet</b> explique ou justifie ce qui précède."}, {"q": "« ainsi »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 2, "why": "<b>ainsi</b> introduit une conséquence."}, {"q": "« néanmoins »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 3, "why": "<b>néanmoins</b> oppose (ou nuance) deux idées."}, {"q": "« car »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 1, "why": "<b>car</b> introduit une cause."}, {"q": "« de plus »", "opts": ["Ajouter une idée", "Exprimer une cause", "Exprimer une conséquence", "Opposer deux idées"], "a": 0, "why": "<b>de plus</b> ajoute une idée."}]}, "ex2": {"title": "Le connecteur logique", "consigne": "Choisissez le connecteur qui donne du sens à la phrase.", "items": [{"q": "La musicothérapie réduit l'anxiété ; ___, elle aide à mieux dormir.", "opts": ["car", "de plus", "néanmoins"], "a": 1, "why": "On ajoute un deuxième effet positif → <b>de plus</b>."}, {"q": "Les patients se sentent mieux. ___, la musique libère des émotions positives.", "opts": ["En effet", "Néanmoins", "Ainsi"], "a": 0, "why": "La 2e phrase explique la 1re → <b>en effet</b>."}, {"q": "L'art-thérapie n'est pas encore très connue ; ___, de plus en plus d'hôpitaux la proposent.", "opts": ["ainsi", "car", "néanmoins"], "a": 2, "why": "Les deux idées s'opposent → <b>néanmoins</b>."}, {"q": "La musique apaise le stress ; ___, les patients ont moins besoin de médicaments.", "opts": ["ainsi", "en effet", "par ailleurs"], "a": 0, "why": "La 2e idée est une conséquence de la 1re → <b>ainsi</b>."}, {"q": "La musicothérapie est utile ___ pour les enfants ___ pour les adultes.", "opts": ["à la fois… et", "d'une part… car", "ainsi… donc"], "a": 0, "fill": "à la fois… et", "why": "Deux idées dans une même phrase → <b>à la fois… et</b>."}, {"q": "Les séances sont adaptées à chaque patient, ___ chacun a des besoins différents.", "opts": ["car", "ainsi", "par ailleurs"], "a": 0, "why": "On donne la cause → <b>car</b>."}]}, "ex3": {"title": "Repérez le connecteur", "consigne": "Touchez le connecteur dans la phrase.", "type": "tap", "items": [{"s": "Observer des œuvres d'art fait du bien ; c'est pourquoi certains médecins prescrivent des visites au musée.", "target": ["c'est", "pourquoi"], "why": "<b>c'est pourquoi</b> introduit une conséquence."}, {"s": "La danse permet d'exprimer la colère ou la joie. Par ailleurs, elle réduit le stress.", "target": ["Par", "ailleurs,"], "why": "<b>par ailleurs</b> ajoute une idée."}, {"s": "Ce n'est pas un traitement miracle ; cependant, ses effets sont reconnus.", "target": ["cependant,"], "why": "<b>cependant</b> oppose deux idées."}]}};</script>
 <script>
 const L = "abcdefghij";
-let total = 0, score = 0, done = 0;
-const pill = document.getElementById('score');
-function upd(){ pill.textContent = score + ' / ' + total;
-  if (done === total){ const b=document.getElementById('bilan'); b.hidden=false;
-    document.getElementById('bilan-n').textContent = score + ' / ' + total;
-    const pct = score/total;
-    document.getElementById('bilan-msg').textContent = pct>=0.85 ? "Très bien : la règle est acquise. Passez à la production sur votre cahier."
-      : pct>=0.6 ? "Bien. Relisez « L'essentiel » et refaites les questions en rouge (rechargez la page)."
-      : "Relisez « L'essentiel » avec attention, puis rechargez la page et recommencez."; } }
-function fb(el, ok, why, right){ el.className='fb show '+(ok?'ok':'ko');
-  el.innerHTML = '<span class="t">'+(ok?'Correct !':'Pas tout à fait.')+'</span>' + (right && !ok ? 'Réponse : <em>'+right+'</em>. ' : '') + (why||''); }
-function norm(s){ return s.toLowerCase().replace(/[’']/g,"'").replace(/[.,;:!?«»]/g,'').replace(/'\s+/g,"'").replace(/\s+/g,' ').trim(); }
+const PAGE = document.body.dataset.key, TITRE = document.body.dataset.titre;
+const EXOS = [];               // un objet par exercice noté
+let FIRST = {};                // premier essai vérifié : { exIndex: points }
+try { FIRST = (JSON.parse(localStorage.getItem("fiche:" + PAGE) || "{}").first) || {}; } catch (e) {}
+function shuffleIdx(n){ const a=[...Array(n).keys()]; for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function norm(s){ return s.toLowerCase().replace(/[’']/g,"'").replace(/'\s+/g,"'").replace(/[.,;:!?«»]/g,'').replace(/\s+/g,' ').trim(); }
+function fbHTML(ok, why, right){ return '<span class="t">'+(ok?'Correct !':'Pas tout à fait.')+'</span>'+(right && !ok ? 'Réponse : <em>'+right+'</em>. ' : '')+(why||''); }
 
-function renderQcm(box, it, n){
-  total++;
+/* ---------- rendu des items (réponse choisie, corrigée au clic sur « Vérifier ») ---------- */
+function renderQcm(box, it, n, fixe){
   const q = it.q.replace('___','<span class="gap">&nbsp;</span>');
   box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+q+'</p><div class="opts'+(it.row?' row':'')+'"></div><div class="fb"></div>';
-  const opts = box.querySelector('.opts'), f = box.querySelector('.fb');
-  it.opts.forEach((o,i)=>{ const b=document.createElement('button'); b.className='opt'; b.type='button';
-    b.innerHTML='<span class="l">'+L[i]+')</span><span>'+o+'</span>';
-    b.onclick=()=>{ const ok = i===it.a; opts.querySelectorAll('button').forEach((x,j)=>{x.disabled=true; if(j===it.a) x.classList.add('ok');});
-      if(!ok) b.classList.add('ko'); else score++;
-      const g = box.querySelector('.gap'); if(g){ g.textContent = it.fill || it.opts[it.a]; }
-      done++; fb(f, ok, it.why, null); upd(); };
+  const opts = box.querySelector('.opts'); const order = fixe ? [...it.opts.keys()] : shuffleIdx(it.opts.length);
+  const item = { box, sel:null, answered(){ return this.sel!==null; },
+    check(){ const ok = this.sel===it.a; opts.querySelectorAll('button').forEach(b=>{ b.disabled=true; const oi=+b.dataset.oi; if(oi===it.a) b.classList.add('ok'); else if(oi===this.sel) b.classList.add('ko'); });
+      const g=box.querySelector('.gap'); if(g) g.textContent = it.fill || it.opts[it.a];
+      const f=box.querySelector('.fb'); f.className='fb show '+(ok?'ok':'ko'); f.innerHTML=fbHTML(ok,it.why,it.opts[it.a]); return ok; } };
+  order.forEach((oi,pos)=>{ const b=document.createElement('button'); b.className='opt'; b.type='button'; b.dataset.oi=oi;
+    b.innerHTML='<span class="l">'+L[pos]+')</span><span>'+it.opts[oi]+'</span>';
+    b.onclick=()=>{ opts.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); item.sel=oi; };
     opts.appendChild(b); });
+  return item;
 }
 function renderOrder(box, it, n){
-  total++;
-  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+(it.q||'Remettez les mots dans l\'ordre.')+'</p><div class="answer"></div><div class="words"></div>'+
-    '<div class="actions"><button class="btn" type="button">Vérifier</button><button class="btn ghost" type="button">Effacer</button></div><div class="fb"></div>';
-  const ans = box.querySelector('.answer'), pool = box.querySelector('.words'), [chk, clr] = box.querySelectorAll('.actions button'), f = box.querySelector('.fb');
-  it.words.forEach((w,i)=>{ const c=document.createElement('button'); c.className='chip'; c.type='button'; c.textContent=w;
-    c.onclick=()=>{ c.classList.add('used'); const a=document.createElement('button'); a.className='chip'; a.type='button'; a.textContent=w;
-      a.onclick=()=>{ if(chk.disabled) return; a.remove(); c.classList.remove('used'); }; ans.appendChild(a); };
+  box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+(it.q||'Remettez les mots dans l\'ordre.')+'</p><div class="answer"></div><div class="words"></div><div class="actions"><button class="btn ghost" type="button">Effacer</button></div><div class="fb"></div>';
+  const ans=box.querySelector('.answer'), pool=box.querySelector('.words'), clr=box.querySelector('.actions button');
+  let locked=false;
+  it.words.forEach(w=>{ const c=document.createElement('button'); c.className='chip'; c.type='button'; c.textContent=w;
+    c.onclick=()=>{ if(locked) return; c.classList.add('used'); const a=document.createElement('button'); a.className='chip'; a.type='button'; a.textContent=w;
+      a.onclick=()=>{ if(locked) return; a.remove(); c.classList.remove('used'); }; ans.appendChild(a); };
     pool.appendChild(c); });
-  clr.onclick=()=>{ if(chk.disabled) return; ans.innerHTML=''; pool.querySelectorAll('.chip').forEach(c=>c.classList.remove('used')); };
-  chk.onclick=()=>{ const got = [...ans.children].map(x=>x.textContent).join(' ');
-    if(!got) return; const ok = norm(got)===norm(it.answer) || (it.alt||[]).some(a=>norm(a)===norm(got));
-    chk.disabled = true; clr.disabled = true; if(ok) score++; done++; fb(f, ok, it.why, it.answer); upd(); };
+  clr.onclick=()=>{ if(locked) return; ans.innerHTML=''; pool.querySelectorAll('.chip').forEach(c=>c.classList.remove('used')); };
+  return { box, answered(){ return ans.children.length>0; },
+    check(){ locked=true; clr.disabled=true; const got=[...ans.children].map(x=>x.textContent).join(' ');
+      const ok = !!got && (norm(got)===norm(it.answer) || (it.alt||[]).some(a=>norm(a)===norm(got)));
+      ans.classList.add(ok?'is-ok':'is-ko'); const f=box.querySelector('.fb'); f.className='fb show '+(ok?'ok':'ko'); f.innerHTML=fbHTML(ok,it.why,it.answer); return ok; } };
 }
 function renderTap(box, it, n){
-  total++;
   box.innerHTML = '<p class="q"><span class="n">'+n+'.</span>'+(it.q||'Touchez le mot demandé.')+'</p><p class="sent"></p><div class="fb"></div>';
-  const s = box.querySelector('.sent'), f = box.querySelector('.fb');
-  const toks = it.s.split(' ');
-  const btns = [];
-  toks.forEach((t,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='tok'; b.textContent=t; btns.push(b);
-    b.onclick=()=>{ const clean = norm(t); const ok = it.target.map(norm).includes(clean);
-      btns.forEach(x=>{ x.disabled=true; if(it.target.map(norm).includes(norm(x.textContent))) x.classList.add('ok'); });
-      if(!ok) b.classList.add('ko'); else score++; done++; fb(f, ok, it.why, null); upd(); };
+  const s=box.querySelector('.sent'); const T=it.target.map(norm); const item={ box, sel:null, answered(){ return this.sel!==null; },
+    check(){ const ok = this.sel!==null && T.includes(norm(this.sel.textContent));
+      s.querySelectorAll('.tok').forEach(x=>{ x.disabled=true; if(T.includes(norm(x.textContent))) x.classList.add('ok'); });
+      if(!ok && this.sel) this.sel.classList.add('ko');
+      const f=box.querySelector('.fb'); f.className='fb show '+(ok?'ok':'ko'); f.innerHTML=fbHTML(ok,it.why,null); return ok; } };
+  it.s.split(' ').forEach(t=>{ const b=document.createElement('button'); b.type='button'; b.className='tok'; b.textContent=t;
+    b.onclick=()=>{ s.querySelectorAll('.tok').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); item.sel=b; };
     s.appendChild(b); s.appendChild(document.createTextNode(' ')); });
+  return item;
 }
 const AUTO = {};
 function renderAuto(box, it, n){
@@ -200,12 +220,66 @@ function showRevoir(){ const r=document.getElementById('revoir'); if(!r) return;
   const list = Object.values(AUTO).filter(Boolean);
   if(!list.length){ r.hidden=true; return; }
   r.hidden=false; r.querySelector('ul').innerHTML = list.map(it=>'<li>'+it.q+' → '+it.go+'</li>').join(''); }
-document.querySelectorAll('[data-ex]').forEach(sec=>{
-  const ex = DATA[sec.dataset.ex]; let n=0;
-  ex.items.forEach(it=>{ n++; const box=document.createElement('div'); box.className='item'; sec.insertBefore(box, sec.querySelector('.sec-after'));
-    const t = it.type || ex.type;
-    if(t==='order') renderOrder(box,it,n); else if(t==='tap') renderTap(box,it,n); else if(t==='auto') renderAuto(box,it,n); else renderQcm(box,it,n); });
-});
+
+/* ---------- montage d'un exercice : « Vérifier » / « Recommencer » ---------- */
+function mount(sec, exIndex){
+  const ex = DATA[sec.dataset.ex]; const t0 = ex.type;
+  if(t0==='auto'){ let n=0; ex.items.forEach(it=>{ n++; const box=document.createElement('div'); box.className='item'; sec.insertBefore(box, sec.querySelector('.sec-after')); renderAuto(box,it,n); }); return; }
+  const holder=document.createElement('div'); sec.insertBefore(holder, sec.querySelector('.sec-after'));
+  const act=document.createElement('div'); act.className='ex-actions';
+  act.innerHTML='<button type="button" class="btn">Vérifier</button><button type="button" class="btn ghost">Recommencer</button><span class="ex-score" aria-live="polite"></span><p class="ex-msg" aria-live="polite"></p>';
+  sec.insertBefore(act, sec.querySelector('.sec-after'));
+  const [bV,bR]=act.querySelectorAll('button'), sc=act.querySelector('.ex-score'), msg=act.querySelector('.ex-msg');
+  const E = { titre: sec.querySelector('h2').textContent.replace(/^[A-Z]/,'').trim(), lettre: sec.querySelector('h2 .num').textContent, total: ex.items.length, score: null, items: [] };
+  EXOS[exIndex]=E;
+  function build(){
+    holder.innerHTML=''; E.items=[]; let n=0;
+    ex.items.forEach(it=>{ n++; const box=document.createElement('div'); box.className='item'; holder.appendChild(box);
+      const t = it.type || t0;
+      E.items.push(t==='order' ? renderOrder(box,it,n) : t==='tap' ? renderTap(box,it,n) : renderQcm(box,it,n,ex.fixe)); });
+  }
+  bV.onclick=()=>{
+    const empty = E.items.filter(i=>!i.answered()).length;
+    if(empty && !bV.dataset.warned){ msg.textContent='Il reste '+empty+' question(s) sans réponse. Touchez encore « Vérifier » pour corriger quand même.'; bV.dataset.warned='1'; return; }
+    delete bV.dataset.warned; msg.textContent='';
+    let p=0; E.items.forEach(i=>{ if(i.check()) p++; }); E.score=p; bV.disabled=true;
+    sc.textContent='Score : '+p+' / '+E.total;
+    if(FIRST[exIndex]===undefined){ FIRST[exIndex]=p; save(); }
+    else if(FIRST[exIndex]!==p) sc.textContent+=' · 1er essai : '+FIRST[exIndex]+' / '+E.total;
+    upd();
+  };
+  bR.onclick=()=>{ build(); E.score=null; bV.disabled=false; delete bV.dataset.warned; sc.textContent=''; msg.textContent=''; upd(); };
+  build();
+  if(FIRST[exIndex]!==undefined) sc.textContent='1er essai : '+FIRST[exIndex]+' / '+E.total;
+}
+
+/* ---------- résultats : premier essai de chaque exercice ---------- */
+function parts(){ return EXOS.filter(Boolean).map((E,k)=>({ t: E.lettre+' · '+E.titre, p: FIRST[EXOS.indexOf(E)], n: E.total })); }
+function save(){
+  const P=parts(), done=P.every(x=>x.p!==undefined);
+  const rec={ titre: TITRE, parts: P.map(x=>({t:x.t, p: x.p===undefined?null:x.p, n:x.n})), first: FIRST, complet: done,
+    points: P.reduce((a,x)=>a+(x.p||0),0), total: P.reduce((a,x)=>a+x.n,0), date: new Date().toISOString() };
+  try{ localStorage.setItem("fiche:"+PAGE, JSON.stringify(rec)); }catch(e){}
+}
+function upd(){
+  const P=parts(); const pts=P.reduce((a,x)=>a+(x.p||0),0), max=P.reduce((a,x)=>a+x.n,0), done=P.filter(x=>x.p!==undefined).length;
+  document.getElementById('score').textContent = pts+' / '+max;
+  const tb=document.querySelector('#resultats tbody');
+  tb.innerHTML = P.map(x=>'<tr><td>'+x.t+'</td><td>'+(x.p===undefined?'— / '+x.n:x.p+' / '+x.n)+'</td></tr>').join('') + '<tr class="tot"><td>Total</td><td>'+pts+' / '+max+'</td></tr>';
+  document.getElementById('res-etat').textContent = done===P.length ? 'Tous les exercices sont vérifiés.' : 'Exercices vérifiés : '+done+' / '+P.length+'. Vérifiez-les tous pour partager votre résultat.';
+  if(window.PB) PB.setEnabled(done===P.length);
+}
+document.querySelectorAll('[data-ex]').forEach((sec,i)=>mount(sec,i));
+(function(){
+  const inp=document.getElementById('nom');
+  try{ inp.value = localStorage.getItem('exos:nom') || ''; }catch(e){}
+  inp.addEventListener('input',()=>{ try{ localStorage.setItem('exos:nom', inp.value.trim()); }catch(e){} });
+  window.PB = Partage.render(document.getElementById('partage'), ()=>{
+    const nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:'Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat.'}; }
+    const P=parts();
+    return { activite:'Inspire 3 · Unité 6 · '+TITRE, nom, points:P.reduce((a,x)=>a+x.p,0), total:P.reduce((a,x)=>a+x.n,0), parts:P.map(x=>({t:x.t,p:x.p,n:x.n})) };
+  });
+})();
 upd();
 </script>
 </body>
