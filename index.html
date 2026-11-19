@@ -32,19 +32,6 @@ a.act:hover,a.act:focus-visible{border-color:var(--c);outline:none}
 .act.bientot{border-style:dashed;border-left-style:solid}
 .grid{display:grid;gap:0 12px;grid-template-columns:1fr}
 @media (min-width:640px){.grid{grid-template-columns:1fr 1fr}.grid .act{margin:6px 0}}
-.res{border:1px solid var(--line);border-left:6px solid var(--violet);border-radius:14px;padding:14px 16px;margin:12px 0}
-.res table{width:100%;border-collapse:collapse;font-size:.95rem}
-.res th{text-align:left;font-size:.85rem;color:var(--muted);border-bottom:2px solid var(--line);padding:6px}
-.res td{border-bottom:1px solid var(--line);padding:8px 6px;vertical-align:top}
-.res td:last-child,.res th:last-child{text-align:right;white-space:nowrap}
-.res tr.tot td{font-weight:800;color:var(--violet);border-bottom:none;border-top:2px solid var(--violet)}
-.res .detail{display:block;font-size:.82rem;color:var(--muted)}
-.res .etat{color:var(--muted);font-size:.92rem}
-.res label{display:block;font-weight:600;margin:8px 0 4px}
-.res input{display:block;width:100%;max-width:420px;font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px}
-.res .btn{margin-top:10px;font:inherit;font-weight:700;color:#fff;background:var(--violet);border:none;border-radius:10px;padding:10px 18px;min-height:44px;cursor:pointer}
-.res .btn:disabled{opacity:.45;cursor:default}
-.res .fbk{font-size:.92rem}
 footer{max-width:760px;margin:0 auto;padding:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </style>
 </head>
@@ -58,7 +45,6 @@ footer{max-width:760px;margin:0 auto;padding:16px;border-top:1px solid var(--lin
     <a href="#ecouter">2 · Écouter : la ville</a>
     <a href="#grammaire-u6">3 · Grammaire unité 6</a>
     <a href="#art">4 · Écouter : l'art</a>
-    <a href="#resultats">5 · Mes résultats</a>
   </nav>
 
   <!-- 1. PLUS-QUE-PARFAIT -->
@@ -124,46 +110,10 @@ footer{max-width:760px;margin:0 auto;padding:16px;border-top:1px solid var(--lin
       <a class="act" href="ecouter/impressionnisme.html#photo"><h3>3 · La photo</h3><p>Bernard Reignier · France TV · 1 min 25</p></a>
     </div>
   </section>
-
-  <!-- 5. MES RÉSULTATS -->
-  <section class="bloc" id="resultats" style="--c:var(--violet)">
-    <div class="bloc-head"><span class="n">5</span><h2>Mes résultats en grammaire</h2></div>
-    <p class="bloc-intro">Ce tableau reprend le premier essai de chaque activité faite sur cet appareil. Remettez-le dans Classroom quand votre professeure le demande.</p>
-    <div class="res">
-      <table id="recap"><thead><tr><th>Activité</th><th>Points</th></tr></thead><tbody></tbody></table>
-      <p class="etat" id="recap-etat"></p>
-      <label for="recap-nom">Votre nom et prénom</label>
-      <input id="recap-nom" type="text" autocomplete="name" maxlength="60">
-      <div id="recap-partage"></div>
-    </div>
-  </section>
 </main>
 <footer>
   <span><b>Inspire 3 · Unités 5 et 6</b> · FLE B1 · D'après Inspire 3, Hachette FLE</span>
   <span>Conception pédagogique : Nadia Aguilar Neri</span>
 </footer>
-<script src="partage.js"></script>
-<script>
-(function(){
-  var ACTS=[["pqp","Unité 5 · Le plus-que-parfait"],["u6-f1-passif","Unité 6 · Fiche 1 · La forme passive"],["u6-f2-adjectifs","Unité 6 · Fiche 2 · La place des adjectifs"],
-    ["u6-f3-y-en","Unité 6 · Fiche 3 · y et en"],["u6-f4-concession","Unité 6 · Fiche 4 · La concession"],["u6-f5-connecteurs","Unité 6 · Fiche 5 · Les connecteurs"],["u6-f6-bilan","Unité 6 · Fiche 6 · Bilan"]];
-  function get(k){ try{ return JSON.parse(localStorage.getItem("fiche:"+k)||"null"); }catch(e){ return null; } }
-  var tb=document.querySelector("#recap tbody"), inp=document.getElementById("recap-nom");
-  var pts=0,max=0,faits=0,lignes=[],parts=[];
-  tb.innerHTML = ACTS.map(function(a){ var r=get(a[0]);
-    if(r && r.complet){ pts+=r.points; max+=r.total; faits++; lignes.push(a[1]+" : "+r.points+" / "+r.total); parts.push({t:a[1],p:r.points,n:r.total});
-      return "<tr><td>"+a[1]+"<span class=\"detail\">"+r.parts.map(function(x){ return x.t+" : "+x.p+"/"+x.n; }).join(" · ")+"</span></td><td>"+r.points+" / "+r.total+"</td></tr>"; }
-    return "<tr><td>"+a[1]+"</td><td>"+(r ? "en cours" : "pas encore faite")+"</td></tr>"; }).join("")
-    + "<tr class=\"tot\"><td>Total des activités terminées</td><td>"+pts+" / "+max+"</td></tr>";
-  document.getElementById("recap-etat").textContent = "Activités terminées : "+faits+" / "+ACTS.length+".";
-  try{ inp.value=localStorage.getItem("exos:nom")||""; }catch(e){}
-  inp.addEventListener("input",function(){ try{ localStorage.setItem("exos:nom",inp.value.trim()); }catch(e){} });
-  var PB = Partage.render(document.getElementById("recap-partage"), function(){
-    var nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:"Écrivez votre nom et prénom pour que votre professeure reconnaisse vos résultats."}; }
-    return { activite:"Inspire 3 · Unités 5 et 6 · Mes résultats en grammaire", nom:nom, points:pts, total:max, parts:parts };
-  });
-  PB.setEnabled(faits>0);
-})();
-</script>
 </body>
 </html>

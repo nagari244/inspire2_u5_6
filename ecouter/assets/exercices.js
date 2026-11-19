@@ -1,7 +1,7 @@
 /* Moteur d'exercices autocorrigés — Écouter · Niveau B1
    Types : qcm (choix), conj (conjugaison avec diagnostic d'erreur), ordre (chronologie).
-   Le résultat du premier essai de chaque exercice est gardé dans le navigateur (localStorage),
-   pour le bilan à partager (Exos.bilan). Rien n'est envoyé sur Internet. */
+   On répond à tout l'exercice, puis « Vérifier » corrige et donne les points.
+   Exos.bilan affiche le tableau récapitulatif. Aucune donnée n'est enregistrée. */
 (function () {
   "use strict";
 
@@ -42,7 +42,44 @@
 
   var REG = [];
 
-  /* ---------- Bloc d'exercice (titre, consigne, score) ---------- */
+  /* ---------- Bloc d'exercice : on répond à tout, puis « Vérifier » ----------
+     Chaque item fournit { answered(), check() } ; check() corrige et renvoie true/false. */
+  function vshell(root, cfg, buildItems) {
+    root.classList.add("ex");
+    root.innerHTML = "";
+    var head = el("div", "ex-head");
+    head.appendChild(el("h3", null, (cfg.num ? '<span class="num ' + (cfg.color || "c-bleu") + '">' + esc(cfg.num) + "</span>" : "") + esc(cfg.titre)));
+    var sc = el("div", "score"); sc.setAttribute("aria-live", "polite"); head.appendChild(sc);
+    root.appendChild(head);
+    if (cfg.consigne) root.appendChild(el("p", "consigne", cfg.consigne));
+    var list = el("div", "items"); root.appendChild(list);
+    var row = el("div", "btn-row");
+    var verif = el("button", "btn primary", "Vérifier"); verif.type = "button";
+    var reset = el("button", "btn small", "Recommencer"); reset.type = "button";
+    row.appendChild(verif); row.appendChild(reset); root.appendChild(row);
+    var msg = el("p", "ex-msg"); msg.setAttribute("aria-live", "polite"); root.appendChild(msg);
+    var reg = { root: root, cfg: cfg, score: null, total: 0 }; REG.push(reg);
+    var items = [], warned = false;
+    function build() {
+      list.innerHTML = ""; items = buildItems(list); reg.total = items.length; reg.score = null;
+      verif.disabled = false; warned = false; msg.textContent = ""; sc.textContent = "— / " + reg.total;
+      document.dispatchEvent(new CustomEvent("exos:update"));
+    }
+    verif.addEventListener("click", function () {
+      var vides = items.filter(function (it) { return !it.answered(); }).length;
+      if (vides && !warned) { msg.textContent = "Il reste " + vides + " question(s) sans réponse. Touchez encore « Vérifier » pour corriger quand même."; warned = true; return; }
+      msg.textContent = "";
+      var p = 0; items.forEach(function (it) { if (it.check()) p++; });
+      reg.score = p; verif.disabled = true;
+      sc.textContent = "Score : " + p + " / " + reg.total;
+      document.dispatchEvent(new CustomEvent("exos:update"));
+    });
+    reset.addEventListener("click", build);
+    build();
+  }
+  function fbOk(it) { return '<b class="t">Correct !</b> ' + (it.ok || ""); }
+
+  /* Ancien bloc (correction immédiate), conservé pour Exos.conj */
   function shell(root, cfg) {
     root.classList.add("ex");
     root.innerHTML = "";
@@ -56,18 +93,8 @@
     var list = el("div", "items");
     root.appendChild(list);
     var state = { total: 0, done: 0, firstOk: 0 };
-    var reg = { root: root, cfg: cfg, state: state, first: null, key: "exos:" + location.pathname + "#" + (root.id || cfg.titre) };
-    try { var saved = JSON.parse(localStorage.getItem(reg.key) || "null"); if (saved && typeof saved.points === "number") reg.first = saved; } catch (e) {}
-    REG.push(reg);
     function update() {
-      if (state.total && state.done === state.total && !reg.first) {
-        reg.first = { points: state.firstOk, total: state.total, date: new Date().toISOString() };
-        try { localStorage.setItem(reg.key, JSON.stringify(reg.first)); } catch (e) {}
-      }
-      var txt = "Score : " + state.firstOk + " / " + state.total + (state.done === state.total && state.total ? " ✓ terminé" : "");
-      if (reg.first && !(state.done === state.total && state.firstOk === reg.first.points && state.total === reg.first.total)) txt += " · 1er essai : " + reg.first.points + " / " + reg.first.total;
-      sc.textContent = txt;
-      document.dispatchEvent(new CustomEvent("exos:update"));
+      sc.textContent = "Score : " + state.firstOk + " / " + state.total + (state.done === state.total && state.total ? " ✓ terminé" : "");
     }
     var row = el("div", "btn-row");
     var reset = el("button", "btn small", "Recommencer");
@@ -79,52 +106,43 @@
 
   /* ---------- QCM ---------- */
   function qcm(root, cfg) {
-    var s = shell(root, cfg);
-    function build() {
-      s.list.innerHTML = "";
-      s.state.total = cfg.items.length; s.state.done = 0; s.state.firstOk = 0;
-      cfg.items.forEach(function (it, idx) {
+    vshell(root, cfg, function (list) {
+      return cfg.items.map(function (it, idx) {
         var box = el("div", "item");
         box.appendChild(el("p", "q", '<span class="n">' + (idx + 1) + ".</span> " + it.q));
-        var opts = el("div", "opts");
-        var fb = el("p", "fb");
-        fb.setAttribute("aria-live", "polite");
-        var tries = 0, solved = false;
+        var opts = el("div", "opts"), fb = el("p", "fb"); fb.setAttribute("aria-live", "polite");
+        var sel = null, btns = [];
         var order = it.options.map(function (_, i) { return i; });
         if (cfg.melanger && !it.fixe) order = shuffle(order);
         order.forEach(function (oi, pos) {
           var b = el("button", "opt", '<span class="lettre" aria-hidden="true">' + "abcdefgh".charAt(pos) + ')</span> ' + it.options[oi]);
           b.setAttribute("aria-label", "abcdefgh".charAt(pos) + ") " + it.options[oi].replace(/<[^>]+>/g, ""));
-          b.type = "button";
+          b.type = "button"; b._oi = oi; btns.push(b);
           b.addEventListener("click", function () {
-            if (solved) return;
-            tries++;
-            if (oi === it.answer) {
-              solved = true;
-              b.classList.add("is-ok");
-              Array.prototype.forEach.call(opts.children, function (x) { x.disabled = true; });
-              if (tries === 1) s.state.firstOk++;
-              s.state.done++;
-              fb.className = "fb ok";
-              fb.innerHTML = '<b class="t">' + (tries === 1 ? "Bravo !" : "Oui, c'est ça.") + "</b> " + (it.ok || "");
-              s.update();
-            } else {
-              b.classList.add("is-ko");
-              b.disabled = true;
-              fb.className = "fb ko";
-              var msg = (it.fb && it.fb[oi]) || cfg.fbDefaut || "Ce n'est pas la bonne réponse. Relisez la phrase et essayez encore.";
-              fb.innerHTML = '<b class="t">Pas encore.</b> ' + msg;
-            }
+            btns.forEach(function (x) { x.classList.remove("is-sel"); x.setAttribute("aria-pressed", "false"); });
+            b.classList.add("is-sel"); b.setAttribute("aria-pressed", "true"); sel = oi;
           });
           opts.appendChild(b);
         });
-        box.appendChild(opts); box.appendChild(fb);
-        s.list.appendChild(box);
+        box.appendChild(opts); box.appendChild(fb); list.appendChild(box);
+        return {
+          answered: function () { return sel !== null; },
+          check: function () {
+            var ok = sel === it.answer;
+            btns.forEach(function (x) { x.disabled = true; x.classList.remove("is-sel"); if (x._oi === it.answer) x.classList.add("is-ok"); else if (x._oi === sel) x.classList.add("is-ko"); });
+            if (ok) { fb.className = "fb ok"; fb.innerHTML = fbOk(it); }
+            else {
+              fb.className = "fb ko";
+              fb.innerHTML = '<b class="t">' + (sel === null ? "Pas de réponse." : "Pas tout à fait.") + "</b> " +
+                ((sel !== null && it.fb && it.fb[sel]) ? it.fb[sel] + " " : "") +
+                ((it.ok && it.ok.replace(/<[^>]+>/g, "").indexOf(it.options[it.answer].replace(/<[^>]+>/g, "")) === 0) ? it.ok
+                  : "Réponse : <em>" + it.options[it.answer] + "</em>." + (it.ok ? " " + it.ok : ""));
+            }
+            return ok;
+          }
+        };
       });
-      s.update();
-    }
-    s.reset.addEventListener("click", build);
-    build();
+    });
   }
 
   /* ---------- Conjugaison avec diagnostic ---------- */
@@ -290,72 +308,60 @@
     build();
   }
 
-  /* ---------- Ordre chronologique ---------- */
+  /* ---------- Ordre (chronologique ou logique) ---------- */
   function ordre(root, cfg) {
-    var s = shell(root, cfg);
-    function build() {
-      s.list.innerHTML = "";
-      s.state.total = cfg.items.length; s.state.done = 0; s.state.firstOk = 0;
-      cfg.items.forEach(function (it, idx) {
+    vshell(root, cfg, function (list) {
+      return cfg.items.map(function (it, idx) {
         var box = el("div", "item");
         box.appendChild(el("p", "q", '<span class="n">' + (idx + 1) + ".</span> " + it.texte));
         box.appendChild(el("p", "consigne", it.consigne || "Touchez les actions de la <b>plus ancienne</b> à la <b>plus récente</b>."));
-        var picked = el("div", "order-picked");
-        var pool = el("div", "order-pool");
+        var picked = el("div", "order-picked"), pool = el("div", "order-pool");
         var fb = el("p", "fb"); fb.setAttribute("aria-live", "polite");
-        var chosen = [], tries = 0, solved = false;
+        var chosen = [], locked = false, good = null;
+        var mix = shuffle(it.etapes.map(function (_, i) { return i; }));
+        if (mix.every(function (v, i) { return v === i; })) mix.reverse();
         function render() {
           picked.innerHTML = ""; pool.innerHTML = "";
           chosen.forEach(function (ei, k) {
             var b = el("button", "opt", '<span class="rank">' + (k + 1) + "</span><span>" + it.etapes[ei] + "</span>");
             b.type = "button";
-            if (solved) { b.disabled = true; b.classList.add("is-ok"); }
-            b.addEventListener("click", function () { if (solved) return; chosen.splice(k, 1); render(); });
+            if (locked) { b.disabled = true; b.classList.add(ei === k ? "is-ok" : "is-ko"); }
+            b.addEventListener("click", function () { if (locked) return; chosen.splice(k, 1); render(); });
             picked.appendChild(b);
           });
-          it._ordre.forEach(function (ei) {
+          if (locked) return;
+          mix.forEach(function (ei) {
             if (chosen.indexOf(ei) > -1) return;
-            var b = el("button", "opt", it.etapes[ei]);
-            b.type = "button";
+            var b = el("button", "opt", it.etapes[ei]); b.type = "button";
             b.addEventListener("click", function () { chosen.push(ei); render(); });
             pool.appendChild(b);
           });
         }
-        it._ordre = shuffle(it.etapes.map(function (_, i) { return i; }));
-        // éviter de proposer directement le bon ordre
-        if (it._ordre.every(function (v, i) { return v === i; })) it._ordre.reverse();
         render();
         var row = el("div", "btn-row");
-        var check = el("button", "btn primary small", "Vérifier"); check.type = "button";
         var clear = el("button", "btn small", "Effacer"); clear.type = "button";
-        row.appendChild(check); row.appendChild(clear);
-        check.addEventListener("click", function () {
-          if (solved) return;
-          if (chosen.length < it.etapes.length) { fb.className = "fb ko"; fb.innerHTML = "Classez toutes les actions avant de vérifier."; return; }
-          tries++;
-          var good = chosen.every(function (v, i) { return v === i; });
-          if (good) {
-            solved = true; check.disabled = true; clear.disabled = true;
-            if (tries === 1) s.state.firstOk++;
-            s.state.done++; s.update();
-            fb.className = "fb ok";
-            fb.innerHTML = '<b class="t">' + (tries === 1 ? "Bravo !" : "Oui, c'est ça.") + "</b> " + (it.ok || "");
-            render();
-          } else {
-            var firstBad = chosen.findIndex(function (v, i) { return v !== i; });
-            var nb = chosen.filter(function (v, i) { return v === i; }).length;
-            fb.className = "fb ko";
-            fb.innerHTML = "<b>" + nb + " / " + it.etapes.length + "</b> à la bonne place. La position " + (firstBad + 1) + " n'est pas correcte. " + (it.indice || "Cherchez le repère au passé composé : les actions au plus-que-parfait sont antérieures.");
-          }
-        });
-        clear.addEventListener("click", function () { if (!solved) { chosen = []; render(); fb.className = "fb"; fb.innerHTML = ""; } });
+        clear.addEventListener("click", function () { if (!locked) { chosen = []; render(); } });
+        row.appendChild(clear);
         box.appendChild(picked); box.appendChild(pool); box.appendChild(row); box.appendChild(fb);
-        s.list.appendChild(box);
+        list.appendChild(box);
+        return {
+          answered: function () { return chosen.length === it.etapes.length; },
+          check: function () {
+            locked = true; clear.disabled = true;
+            good = chosen.length === it.etapes.length && chosen.every(function (v, i) { return v === i; });
+            render();
+            if (good) { fb.className = "fb ok"; fb.innerHTML = fbOk(it); }
+            else {
+              var nb = chosen.filter(function (v, i) { return v === i; }).length;
+              fb.className = "fb ko";
+              fb.innerHTML = '<b class="t">' + nb + " / " + it.etapes.length + " à la bonne place.</b> L'ordre correct : " +
+                it.etapes.map(function (e, i) { return (i + 1) + ". " + e; }).join(" · ") + (it.ok ? " " + it.ok : "");
+            }
+            return good;
+          }
+        };
       });
-      s.update();
-    }
-    s.reset.addEventListener("click", build);
-    build();
+    });
   }
 
   /* ---------- Lecteur audio : fichier enregistré, sinon synthèse vocale ---------- */
@@ -415,11 +421,8 @@
     return noAcc(norm(s)).replace(/\b(metres?|m|morts?|personnes)\b/g, " ").replace(/\./g, ",").replace(/\s+/g, "");
   }
   function saisie(root, cfg) {
-    var s = shell(root, cfg);
-    function build() {
-      s.list.innerHTML = "";
-      s.state.total = cfg.items.length; s.state.done = 0; s.state.firstOk = 0;
-      cfg.items.forEach(function (it, idx) {
+    vshell(root, cfg, function (list) {
+      return cfg.items.map(function (it, idx) {
         var box = el("div", "item");
         var parts = it.text.split("___");
         var line = el("div", "conj-line");
@@ -436,92 +439,43 @@
         if (parts[1]) line.appendChild(el("span", null, parts[1]));
         box.appendChild(line);
         if (!it.chiffre) addAccents(box, input);
-        var row = el("div", "btn-row");
-        var check = el("button", "btn primary small", "Vérifier"); check.type = "button";
-        var show = el("button", "btn small", "Voir la réponse"); show.type = "button"; show.hidden = true;
-        row.appendChild(check); row.appendChild(show); box.appendChild(row);
         var fb = el("p", "fb"); fb.setAttribute("aria-live", "polite"); box.appendChild(fb);
-        var tries = 0, solved = false;
-        var ok = it.answers.map(normSaisie);
-        function finish(byUser) {
-          solved = true; input.readOnly = true; check.disabled = true; show.hidden = true;
-          s.state.done++; if (byUser && tries === 1) s.state.firstOk++; s.update();
-        }
-        function verify() {
-          if (solved) return;
-          var v = normSaisie(input.value);
-          if (!v) { fb.className = "fb ko"; fb.innerHTML = "Écrivez votre réponse dans la case."; return; }
-          tries++;
-          if (ok.indexOf(v) > -1) {
-            input.classList.remove("is-ko"); input.classList.add("is-ok");
-            fb.className = "fb ok"; fb.innerHTML = '<b class="t">' + (tries === 1 ? "Bravo !" : "Oui, c'est ça.") + "</b> " + (it.ok || "");
-            finish(true);
-          } else {
-            input.classList.add("is-ko"); fb.className = "fb ko";
-            var key = Object.keys(it.fb || {}).find(function (k) { return normSaisie(k) === v; });
-            fb.innerHTML = key ? it.fb[key] : (it.indice || "Ce n'est pas ce que vous entendez. Réécoutez ce passage.");
-            show.hidden = false;
+        list.appendChild(box);
+        var okList = it.answers.map(normSaisie);
+        return {
+          answered: function () { return !!normSaisie(input.value); },
+          check: function () {
+            input.readOnly = true;
+            var v = normSaisie(input.value), ok = okList.indexOf(v) > -1;
+            input.classList.add(ok ? "is-ok" : "is-ko");
+            if (ok) { fb.className = "fb ok"; fb.innerHTML = fbOk(it); }
+            else {
+              var key = v && Object.keys(it.fb || {}).find(function (k) { return normSaisie(k) === v; });
+              fb.className = "fb ko";
+              fb.innerHTML = '<b class="t">' + (v ? "Pas tout à fait." : "Pas de réponse.") + "</b> " + (key ? it.fb[key] + " " : "") + "Réponse : <em>" + esc(it.answers[0]) + "</em>." + (it.ok ? " " + it.ok : "");
+            }
+            return ok;
           }
-        }
-        check.addEventListener("click", verify);
-        input.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); verify(); } });
-        show.addEventListener("click", function () {
-          input.value = it.answers[0]; input.classList.remove("is-ko");
-          fb.className = "fb ok"; fb.innerHTML = '<b class="t">Réponse :</b> ' + esc(it.answers[0]) + ". " + (it.ok || "");
-          finish(false);
-        });
-        s.list.appendChild(box);
+        };
       });
-      s.update();
-    }
-    s.reset.addEventListener("click", build);
-    build();
+    });
   }
 
-
-  /* ---------- Bilan à partager (un par onglet ou par page) ----------
-     Exos.bilan(element, { activite: "…", partie: "…", exos: ["id1", "id2"] })
-     Compte les points du PREMIER essai complet de chaque exercice.            */
+  /* ---------- Tableau récapitulatif ----------
+     Exos.bilan(element, { titre: "…", exos: ["id1", "id2"] }) */
   function bilan(root, cfg) {
     root.classList.add("bilan-res");
-    root.innerHTML =
-      '<h3>Mon résultat' + (cfg.partie ? " · " + esc(cfg.partie) : "") + '</h3>' +
-      '<p class="total"><span class="pts">0</span> / <span class="max">0</span> points</p>' +
-      '<p class="etat notice"></p><ul class="detail"></ul>' +
-      '<label class="nom">Votre nom et prénom <input type="text" autocomplete="name" maxlength="60"></label>' +
-      '<div class="partage-zone"></div>' +
-      '<p class="notice">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s\'entraîner.</p>';
-    var input = root.querySelector("input"), PB = null;
-    try { input.value = localStorage.getItem("exos:nom") || ""; } catch (e) {}
-    input.addEventListener("input", function () { try { localStorage.setItem("exos:nom", input.value.trim()); } catch (e) {} });
-    function regs() { return cfg.exos.map(function (id) { return REG.filter(function (r) { return r.root.id === id; })[0]; }).filter(Boolean); }
-    function compute() {
-      var pts = 0, max = 0, finis = 0, lignes = [];
-      regs().forEach(function (r) {
-        var tot = r.first ? r.first.total : r.state.total;
-        var p = r.first ? r.first.points : null;
-        max += tot; if (p !== null) { pts += p; finis++; }
-        lignes.push({ titre: (r.cfg.num ? r.cfg.num + ". " : "") + r.cfg.titre, p: p, tot: tot });
-      });
-      return { pts: pts, max: max, finis: finis, n: lignes.length, lignes: lignes };
-    }
     function render() {
-      var c = compute();
-      root.querySelector(".pts").textContent = c.pts;
-      root.querySelector(".max").textContent = c.max;
-      root.querySelector(".etat").textContent = c.finis === c.n ? "Tous les exercices sont terminés." : "Exercices terminés : " + c.finis + " / " + c.n + ". Terminez-les tous pour partager votre résultat.";
-      root.querySelector(".detail").innerHTML = c.lignes.map(function (l) {
-        return "<li>" + esc(l.titre.replace(/<[^>]+>/g, "")) + " : <b>" + (l.p === null ? "à terminer" : l.p + " / " + l.tot) + "</b></li>";
+      var regs = cfg.exos.map(function (id) { return REG.filter(function (r) { return r.root.id === id; })[0]; }).filter(Boolean);
+      var pts = 0, max = 0, faits = 0;
+      var rows = regs.map(function (r) {
+        max += r.total; if (r.score !== null) { pts += r.score; faits++; }
+        return "<tr><td>" + (r.cfg.num ? r.cfg.num + ". " : "") + esc(String(r.cfg.titre).replace(/<[^>]+>/g, "")) + "</td><td>" + (r.score === null ? "— / " + r.total : r.score + " / " + r.total) + "</td></tr>";
       }).join("");
-      if (PB) PB.setEnabled(c.finis === c.n);
-    }
-    if (window.Partage) {
-      PB = Partage.render(root.querySelector(".partage-zone"), function () {
-        var c = compute(), nom = input.value.trim();
-        if (!nom) { input.focus(); return { erreur: "Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat." }; }
-        return { activite: cfg.activite + (cfg.partie ? " · " + cfg.partie : ""), nom: nom, points: c.pts, total: c.max,
-                 parts: c.lignes.map(function (l) { return { t: l.titre.replace(/<[^>]+>/g, ""), p: l.p, n: l.tot }; }) };
-      });
+      root.innerHTML = "<h3>Récapitulatif" + (cfg.titre ? " · " + esc(cfg.titre) : "") + "</h3>" +
+        "<table><tbody>" + rows + '<tr class="tot"><td>Total</td><td>' + pts + " / " + max + "</td></tr></tbody></table>" +
+        '<p class="notice">' + (faits === regs.length ? "Tous les exercices sont vérifiés. Faites une capture d'écran de ce tableau et remettez-la dans Classroom."
+          : "Exercices vérifiés : " + faits + " / " + regs.length + ".") + "</p>";
     }
     document.addEventListener("exos:update", render);
     render();

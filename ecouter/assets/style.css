@@ -198,11 +198,15 @@ h2[id] { scroll-margin-top: 16px; }
 .galerie figcaption { position: absolute; top: 8px; left: 8px; width: 2rem; height: 2rem; border-radius: 50%; background: #fff; color: var(--texte); font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
 .box ol { padding-left: 1.2em; margin: 8px 0; } .box ol li { margin: 6px 0; }
 
-/* ---------- Bilan à partager ---------- */
+/* ---------- Sélection avant vérification ---------- */
+button.opt.is-sel { border-color: var(--violet-txt); background: #F4EDF8; }
+.ex-msg { margin: 6px 0 0; font-size: .95rem; color: var(--rouge-txt); }
+.ex-msg:empty { display: none; }
+
+/* ---------- Tableau récapitulatif ---------- */
 .bilan-res { border: 2px solid var(--violet-txt); border-radius: var(--rayon); padding: 16px; margin: 24px 0 8px; background: #fff; }
-.bilan-res h3 { margin: 0 0 4px; }
-.bilan-res .total { font-size: 1.6rem; font-weight: 700; color: var(--violet-txt); margin: 4px 0; }
-.bilan-res .detail { margin: 6px 0 12px; padding-left: 1.2em; font-size: .95rem; }
-.bilan-res .nom { display: block; font-weight: 600; margin: 8px 0; }
-.bilan-res .nom input { display: block; width: 100%; max-width: 420px; margin-top: 4px; font: inherit; padding: 10px 12px; border: 1.5px solid var(--bord); border-radius: 10px; }
-.bilan-res .btn:disabled { opacity: .45; cursor: default; }
+.bilan-res h3 { margin: 0 0 8px; }
+.bilan-res table { width: 100%; border-collapse: collapse; font-size: .97rem; }
+.bilan-res td { border-bottom: 1px solid var(--bord); padding: 9px 6px; vertical-align: top; }
+.bilan-res td:last-child { text-align: right; white-space: nowrap; font-weight: 700; }
+.bilan-res tr.tot td { border-bottom: none; border-top: 2px solid var(--violet-txt); color: var(--violet-txt); font-size: 1.15rem; font-weight: 800; }
