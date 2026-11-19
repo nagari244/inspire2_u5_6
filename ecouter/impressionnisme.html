@@ -295,7 +295,6 @@ button.onglet .sous{display:block;font-weight:400;font-size:.78rem;color:var(--t
   <p class="note-pied notice">Vidéos&nbsp;: montage de tableaux de Claude Monet sur le <i>Clair de lune</i> de Claude Debussy&nbsp;; France 3 Paris Île-de-France (19/20)&nbsp;; France Télévisions. Transcription de la partie 3 établie à partir des sous-titres de la vidéo. Utilisation pédagogique en classe. Conception pédagogique&nbsp;: Nadia Aguilar Neri.</p>
 </main>
 
-<script src="../partage.js"></script>
 <script src="assets/exercices.js"></script>
 <script>
 /* ---------- Onglets (#monet, #giverny, #photo) ---------- */
@@ -387,7 +386,7 @@ Exos.qcm(document.getElementById("ex-monet-video"), {
     { q: "Comment est la musique ?", options: ["lente et douce", "rapide et légère", "forte et dramatique"], answer: 0, ok: "Le <i>Clair de lune</i> de Debussy : calme, comme la lumière de la lune sur l'eau.", fb: { 1: "Réécoutez : le rythme est plutôt lent.", 2: "Réécoutez : la musique reste calme et légère." } }
   ]
 });
-Exos.bilan(document.getElementById("bilan-monet"), { activite: ACT, partie: "Onglet 1 · Chez Monet", exos: ["ex-notes", "ex-gram-notes", "ex-monet-video"] });
+Exos.bilan(document.getElementById("bilan-monet"), { titre: "Onglet 1 · Chez Monet", exos: ["ex-notes", "ex-gram-notes", "ex-monet-video"] });
 
 /* =============================== PARTIE 2 =============================== */
 Exos.qcm(document.getElementById("ex-g-vocab"), {
@@ -434,7 +433,7 @@ Exos.qcm(document.getElementById("ex-g-langue"), {
     { q: "Quelle phrase exprime une concession ?", options: ["Bien que le jardin soit très visité, il reste calme.", "Comme le jardin est très visité, il est célèbre.", "Le jardin est très visité, donc il est célèbre."], answer: 0, ok: "<i>bien que</i> + subjonctif : on reconnaît un fait, mais on maintient une idée contraire.", fb: { 1: "<i>comme</i> exprime une cause.", 2: "<i>donc</i> exprime une conséquence." } }
   ]
 });
-Exos.bilan(document.getElementById("bilan-giverny"), { activite: ACT, partie: "Onglet 2 · Giverny", exos: ["ex-g-vocab", "ex-g-global", "ex-g-detail", "ex-g-langue"] });
+Exos.bilan(document.getElementById("bilan-giverny"), { titre: "Onglet 2 · Giverny", exos: ["ex-g-vocab", "ex-g-global", "ex-g-detail", "ex-g-langue"] });
 
 /* =============================== PARTIE 3 =============================== */
 Exos.qcm(document.getElementById("ex-p-avant"), {
@@ -486,7 +485,7 @@ Exos.qcm(document.getElementById("ex-p-langue"), {
     { q: "« L'ancien chirurgien n'a jamais cessé de <b>soigner</b> le mouvement. » Pourquoi ce verbe est-il amusant ?", options: ["Avant, il soignait des patients.", "Il soigne encore des malades.", "Il photographie des hôpitaux."], answer: 0, ok: "Jeu de mots : <i>soigner</i> un patient / <i>soigner</i> son travail (le faire avec attention). Et le mouvement, c'était déjà sa spécialité d'orthopédiste !", fb: { 1: "Il est à la retraite : il est photographe maintenant.", 2: "Il photographie la nature : pensez plutôt à son ancien métier." } }
   ]
 });
-Exos.bilan(document.getElementById("bilan-photo"), { activite: ACT, partie: "Onglet 3 · La photographie", exos: ["ex-p-avant", "ex-p-global", "ex-p-detail", "ex-p-ordre", "ex-p-langue"] });
+Exos.bilan(document.getElementById("bilan-photo"), { titre: "Onglet 3 · La photographie", exos: ["ex-p-avant", "ex-p-global", "ex-p-detail", "ex-p-ordre", "ex-p-langue"] });
 
 </script>
 </body>
