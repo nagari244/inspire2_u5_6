@@ -146,25 +146,19 @@ Avec un infinitif, avant l'infinitif : <span class="ex">Je veux y aller.</span> 
   <section data-ex="ex1"><h2><span class="num">A</span>y ou en ?</h2><p class="consigne">Choisissez le pronom qui complète la réponse.</p></section><section data-ex="ex2"><h2><span class="num">B</span>Que remplace le pronom ?</h2><p class="consigne">Choisissez ce que remplace le pronom souligné.</p></section><section data-ex="ex3"><h2><span class="num">C</span>Remettez dans l'ordre</h2><p class="consigne">Attention à la place du pronom.</p></section>
   <section class="avous" style="margin-top:34px"><h2><span class="num">✎</span>À vous ! Sur votre cahier</h2><p>Répondez à ces questions sur votre cahier en utilisant <b>y</b> ou <b>en</b> :</p>
 <ol><li>Vous êtes déjà allé(e) à un festival de rue ?</li><li>Vous prenez des photos des graffitis de votre quartier ?</li><li>Vous pensez souvent à l'art dans votre vie quotidienne ?</li><li>Combien de musées avez-vous visités cette année ?</li></ol></section>
-  <section class="res" aria-labelledby="res-h"><h2 id="res-h"><span class="num">✓</span>Mes résultats</h2>
-    <p class="consigne">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner. Quand tout est vérifié, remettez votre résultat dans Classroom.</p>
+  <section class="res" aria-labelledby="res-h"><h2 id="res-h"><span class="num">✓</span>Récapitulatif</h2>
     <div class="tw"><table id="resultats"><tbody></tbody></table></div>
     <p class="consigne" id="res-etat"></p>
-    <label for="nom">Votre nom et prénom</label><input id="nom" type="text" autocomplete="name" maxlength="60">
-    <div id="partage"></div>
   </section>
   <p style="margin-top:24px"><a href="index.html#grammaire-u6">← Toutes les activités</a></p>
 </main>
 <footer class="site"><div class="inner"><div><b>Inspire 3 · Unité 6</b> · FLE B1 · classe inversée</div>
 <div>Conception pédagogique : Nadia Aguilar Neri<br>D'après Inspire 3, Hachette FLE</div></div></footer>
-<script src="partage.js"></script>
 <script>const DATA = {"ex1": {"fixe": true, "title": "y ou en ?", "consigne": "Choisissez le pronom qui complète la réponse.", "items": [{"q": "Tu vas souvent au musée ? — Oui, j'___ vais souvent.", "opts": ["y", "en"], "a": 0, "row": true, "why": "<em>au musée</em> : lieu introduit par à → <b>y</b>."}, {"q": "Tu as vu des Space Invaders à Paris ? — Oui, j'___ ai vu beaucoup.", "opts": ["y", "en"], "a": 1, "row": true, "why": "Quantité (<em>des</em> Space Invaders) → <b>en</b>."}, {"q": "Elle s'intéresse au street art ? — Oui, elle s'___ intéresse.", "opts": ["y", "en"], "a": 0, "row": true, "why": "s'intéresser <b>à</b> quelque chose → <b>y</b>."}, {"q": "Vous revenez du festival ? — Oui, nous ___ revenons.", "opts": ["y", "en"], "a": 1, "row": true, "why": "Lieu introduit par <b>de</b> (du = de + le) → <b>en</b>."}, {"q": "Il se sert de cette application ? — Oui, il s'___ sert tous les jours.", "opts": ["y", "en"], "a": 1, "row": true, "why": "se servir <b>de</b> quelque chose → <b>en</b>."}, {"q": "Tu penses à ton exposition ? — Oui, j'___ pense tout le temps.", "opts": ["y", "en"], "a": 0, "row": true, "why": "penser <b>à</b> quelque chose → <b>y</b>."}, {"q": "Combien de mosaïques y a-t-il ? — Il y ___ a 4 000.", "opts": ["y", "en"], "a": 1, "row": true, "why": "Quantité → <b>en</b>, et on garde le nombre."}, {"q": "Tu es fan de cette application ? — Oui, j'___ suis fan.", "opts": ["y", "en"], "a": 1, "row": true, "why": "être fan <b>de</b> + chose → <b>en</b>. Pour une personne, on dit : je suis fan <b>d'elle</b>."}]}, "ex2": {"title": "Que remplace le pronom ?", "consigne": "Choisissez ce que remplace le pronom souligné.", "items": [{"q": "« Invader se rend dans les grandes villes pour <u>y</u> coller ses mosaïques. »", "opts": ["ses mosaïques", "dans les grandes villes", "dans son atelier"], "a": 1, "why": "<b>y</b> remplace un lieu introduit par <em>dans</em>."}, {"q": "« Avec l'appli, on chasse les Space Invaders et on gagne des points. L'objectif est d'<u>en</u> prendre en photo. »", "opts": ["des photos", "des Space Invaders", "des points"], "a": 1, "why": "<b>en</b> remplace une quantité : <em>des</em> Space Invaders."}, {"q": "« Ces endroits insolites sont fermés : peu de personnes peuvent <u>y</u> avoir accès. »", "opts": ["de ces endroits", "à ces personnes", "à ces endroits"], "a": 2, "why": "avoir accès <b>à</b> + lieu → <b>y</b>."}]}, "ex3": {"title": "Remettez dans l'ordre", "consigne": "Attention à la place du pronom.", "type": "order", "items": [{"words": ["allé", "n'", "Je", "pas", "y", "suis"], "answer": "Je n'y suis pas allé"}, {"words": ["en", "Je", "parler", "veux"], "answer": "Je veux en parler"}, {"words": ["trois", "a", "Il", "en", "pris"], "answer": "Il en a pris trois"}]}};</script>
 <script>
 const L = "abcdefghij";
 const PAGE = document.body.dataset.key, TITRE = document.body.dataset.titre;
 const EXOS = [];               // un objet par exercice noté
-let FIRST = {};                // premier essai vérifié : { exIndex: points }
-try { FIRST = (JSON.parse(localStorage.getItem("fiche:" + PAGE) || "{}").first) || {}; } catch (e) {}
 function shuffleIdx(n){ const a=[...Array(n).keys()]; for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
 function norm(s){ return s.toLowerCase().replace(/[’']/g,"'").replace(/'\s+/g,"'").replace(/[.,;:!?«»]/g,'').replace(/\s+/g,' ').trim(); }
 function fbHTML(ok, why, right){ return '<span class="t">'+(ok?'Correct !':'Pas tout à fait.')+'</span>'+(right && !ok ? 'Réponse : <em>'+right+'</em>. ' : '')+(why||''); }
@@ -247,42 +241,20 @@ function mount(sec, exIndex){
     delete bV.dataset.warned; msg.textContent='';
     let p=0; E.items.forEach(i=>{ if(i.check()) p++; }); E.score=p; bV.disabled=true;
     sc.textContent='Score : '+p+' / '+E.total;
-    if(FIRST[exIndex]===undefined){ FIRST[exIndex]=p; save(); }
-    else if(FIRST[exIndex]!==p) sc.textContent+=' · 1er essai : '+FIRST[exIndex]+' / '+E.total;
     upd();
   };
   bR.onclick=()=>{ build(); E.score=null; bV.disabled=false; delete bV.dataset.warned; sc.textContent=''; msg.textContent=''; upd(); };
   build();
-  if(FIRST[exIndex]!==undefined) sc.textContent='1er essai : '+FIRST[exIndex]+' / '+E.total;
 }
 
-/* ---------- résultats : premier essai de chaque exercice ---------- */
-function parts(){ return EXOS.filter(Boolean).map((E,k)=>({ t: E.lettre+' · '+E.titre, p: FIRST[EXOS.indexOf(E)], n: E.total })); }
-function save(){
-  const P=parts(), done=P.every(x=>x.p!==undefined);
-  const rec={ titre: TITRE, parts: P.map(x=>({t:x.t, p: x.p===undefined?null:x.p, n:x.n})), first: FIRST, complet: done,
-    points: P.reduce((a,x)=>a+(x.p||0),0), total: P.reduce((a,x)=>a+x.n,0), date: new Date().toISOString() };
-  try{ localStorage.setItem("fiche:"+PAGE, JSON.stringify(rec)); }catch(e){}
-}
+/* ---------- tableau récapitulatif ---------- */
 function upd(){
-  const P=parts(); const pts=P.reduce((a,x)=>a+(x.p||0),0), max=P.reduce((a,x)=>a+x.n,0), done=P.filter(x=>x.p!==undefined).length;
+  const P=EXOS.filter(Boolean); const pts=P.reduce((a,E)=>a+(E.score||0),0), max=P.reduce((a,E)=>a+E.total,0), faits=P.filter(E=>E.score!==null).length;
   document.getElementById('score').textContent = pts+' / '+max;
-  const tb=document.querySelector('#resultats tbody');
-  tb.innerHTML = P.map(x=>'<tr><td>'+x.t+'</td><td>'+(x.p===undefined?'— / '+x.n:x.p+' / '+x.n)+'</td></tr>').join('') + '<tr class="tot"><td>Total</td><td>'+pts+' / '+max+'</td></tr>';
-  document.getElementById('res-etat').textContent = done===P.length ? 'Tous les exercices sont vérifiés.' : 'Exercices vérifiés : '+done+' / '+P.length+'. Vérifiez-les tous pour partager votre résultat.';
-  if(window.PB) PB.setEnabled(done===P.length);
+  document.querySelector('#resultats tbody').innerHTML = P.map(E=>'<tr><td>'+E.lettre+' · '+E.titre+'</td><td>'+(E.score===null?'— / '+E.total:E.score+' / '+E.total)+'</td></tr>').join('') + '<tr class="tot"><td>Total</td><td>'+pts+' / '+max+'</td></tr>';
+  document.getElementById('res-etat').textContent = faits===P.length ? "Tous les exercices sont vérifiés. Faites une capture d'écran de ce tableau et remettez-la dans Classroom." : 'Exercices vérifiés : '+faits+' / '+P.length+'.';
 }
 document.querySelectorAll('[data-ex]').forEach((sec,i)=>mount(sec,i));
-(function(){
-  const inp=document.getElementById('nom');
-  try{ inp.value = localStorage.getItem('exos:nom') || ''; }catch(e){}
-  inp.addEventListener('input',()=>{ try{ localStorage.setItem('exos:nom', inp.value.trim()); }catch(e){} });
-  window.PB = Partage.render(document.getElementById('partage'), ()=>{
-    const nom=inp.value.trim(); if(!nom){ inp.focus(); return {erreur:'Écrivez votre nom et prénom pour que votre professeure reconnaisse votre résultat.'}; }
-    const P=parts();
-    return { activite:'Inspire 3 · Unité 6 · '+TITRE, nom, points:P.reduce((a,x)=>a+x.p,0), total:P.reduce((a,x)=>a+x.n,0), parts:P.map(x=>({t:x.t,p:x.p,n:x.n})) };
-  });
-})();
 upd();
 </script>
 </body>
