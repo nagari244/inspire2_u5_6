@@ -116,6 +116,7 @@ button.onglet .sous{display:block;font-weight:400;font-size:.78rem;color:var(--t
       </ol>
       <p class="phrases">Cette musique me rend… · Ce tableau m'évoque… · C'est un magnifique jardin fleuri… · Même si je ne connais pas bien la peinture, je trouve que… · D'une part…, d'autre part…</p>
     </div>
+    <div id="bilan-monet"></div>
   </section>
 
   <!-- ===================================================== 2. GIVERNY -->
@@ -195,6 +196,7 @@ button.onglet .sous{display:block;font-weight:400;font-size:.78rem;color:var(--t
       <li>J'ai utilisé le passif et y ou en.</li>
       <li>J'ai nuancé mon avis avec une concession.</li>
     </ul></div>
+    <div id="bilan-giverny"></div>
   </section>
 
   <!-- ===================================================== 3. PHOTOGRAPHIE -->
@@ -268,6 +270,8 @@ button.onglet .sous{display:block;font-weight:400;font-size:.78rem;color:var(--t
         <p>Sur un forum de photographie, quelqu'un écrit&nbsp;: «&nbsp;Une photo floue est une photo ratée.&nbsp;» Répondez-lui avec un avis nuancé&nbsp;: deux concessions et trois connecteurs.</p>
       </article>
     </div>
+
+    <div id="bilan-photo"></div>
 
     <h2 id="transcription">Transcription</h2>
     <details>
@@ -345,114 +349,119 @@ document.querySelectorAll(".secours input").forEach(function (inp) {
   });
 })();
 
+/* Options : distracteurs plausibles, de longueur comparable ; la bonne réponse change de place (melanger). */
+var ACT = "Inspire 3 · L'impressionnisme";
+
 /* =============================== PARTIE 1 =============================== */
 Exos.qcm(document.getElementById("ex-notes"), {
   num: 1, color: "c-violet", titre: "Avez-vous bien lu ?",
   consigne: "Répondez d'après les notes.", melanger: true,
   items: [
-    { q: "D'où vient le mot « impressionnisme » ?", options: ["d'un tableau de Monet", "d'un livre sur la peinture", "d'un poème de Debussy"], answer: 0, ok: "Du tableau <i>Impression, soleil levant</i>. Un critique s'en est moqué, et le nom est resté.", fb: { 1: "Relisez la première note : le nom vient d'une œuvre de Monet.", 2: "Debussy est un musicien, et il est né après la naissance du mouvement." } },
-    { q: "Au début, le mot « impressionniste » était…", options: ["une moquerie", "un compliment", "le nom d'une école d'art"], answer: 0, ok: "« Même si le mot était d'abord une moquerie, les peintres l'ont adopté. »", fb: { 1: "Au contraire : le critique voulait se moquer.", 2: "Ce n'était pas une école : c'était le mot d'un critique." } },
-    { q: "Qu'est-ce qui intéresse surtout les impressionnistes ?", options: ["la lumière qui change", "les grands événements historiques", "les portraits de personnes célèbres"], answer: 0, ok: "C'est pour ça qu'ils peignent en plein air, vite, avec des couleurs claires.", fb: { 1: "Les impressionnistes peignent plutôt la nature et la vie de tous les jours.", 2: "Relisez la fin de la première note : « ce qui les intéresse, c'est… »." } },
-    { q: "Pourquoi Monet peint-il souvent le même sujet ?", options: ["pour montrer les changements de lumière", "parce qu'il n'a pas d'autres idées", "pour vendre plusieurs fois le même tableau"], answer: 0, ok: "Il peint à différentes heures : « ainsi, on voit la lumière changer ».", fb: { 1: "Au contraire, c'est une idée très originale : la lumière est son vrai sujet.", 2: "La note parle de lumière, pas d'argent." } },
-    { q: "Que pensait Debussy du mot « impressionniste » pour sa musique ?", options: ["Il ne l'aimait pas.", "Il l'avait inventé.", "Il le trouvait parfait."], answer: 0, ok: "« Pourtant, Debussy n'aimait pas ce mot ! » On l'utilise quand même.", fb: { 1: "Le mot a été inventé par un critique, pour la peinture.", 2: "Relisez la dernière note : le mot « pourtant » annonce une surprise." } }
+    { q: "D'où vient le mot « impressionnisme » ?", options: ["du titre d'un tableau de Monet", "d'un manifeste écrit par les peintres", "du nom d'une galerie parisienne"], answer: 0, ok: "Du tableau <i>Impression, soleil levant</i> : un critique a inventé le mot à partir de ce titre.", fb: { 1: "Les peintres n'ont pas choisi ce nom : relisez qui l'a inventé.", 2: "Il n'est pas question de galerie : le mot vient d'une œuvre." } },
+    { q: "Au début, le mot « impressionniste » était…", options: ["une moquerie d'un critique", "un titre choisi par Monet", "le nom d'une école d'art"], answer: 0, ok: "« Même si le mot était d'abord une moquerie, les peintres l'ont adopté. »", fb: { 1: "Monet a choisi le titre du tableau, pas le nom du mouvement.", 2: "Ce n'était pas une école : c'était le mot d'un critique." } },
+    { q: "Qu'est-ce qui intéresse surtout les impressionnistes ?", options: ["les effets de la lumière", "la précision du dessin", "les scènes historiques"], answer: 0, ok: "« Ce qui les intéresse, c'est la lumière qui change. » D'où les touches rapides et le plein air.", fb: { 1: "Au contraire : leurs touches sont rapides, pas précises.", 2: "Ils peignent plutôt la nature et la vie de tous les jours." } },
+    { q: "Pourquoi Monet peint-il souvent le même sujet ?", options: ["pour montrer la lumière qui change", "pour étudier chaque détail du lieu", "pour répondre aux demandes de clients"], answer: 0, ok: "Il peint à différentes heures : « ainsi, on voit la lumière changer ».", fb: { 1: "Le sujet ne change pas : c'est l'heure, donc la lumière, qui change.", 2: "La note parle de la lumière, pas de ses clients." } },
+    { q: "Que pensait Debussy du mot « impressionniste » pour sa musique ?", options: ["Il ne l'aimait pas.", "Il l'a rendu célèbre.", "Il l'employait souvent."], answer: 0, ok: "« Pourtant, Debussy n'aimait pas ce mot ! » On l'utilise quand même.", fb: { 1: "Le mot était déjà célèbre grâce aux peintres.", 2: "Relisez la dernière note : le mot « pourtant » annonce une surprise." } }
   ]
 });
 Exos.qcm(document.getElementById("ex-gram-notes"), {
   num: 2, color: "c-bleu", titre: "La grammaire de l'unité dans les notes",
   consigne: "Touchez « Montrer la grammaire » pour vous aider.", melanger: true,
   items: [
-    { q: "« Son nom <b>a été inventé par</b> un critique. » C'est…", options: ["une forme passive", "un passé composé actif", "un plus-que-parfait"], answer: 0, ok: "être (a été) + participe passé + <i>par</i> + l'agent : c'est le passif.", fb: { 1: "Qui fait l'action ? Le critique, introduit par « par » : c'est un passif.", 2: "Le plus-que-parfait se forme avec avais / étais. Ici : « a été » + participe." } },
-    { q: "« Il s'installe à Giverny, et il <b>y</b> vit jusqu'à sa mort. » <i>y</i> remplace…", options: ["à Giverny", "en 1883", "sa mort"], answer: 0, ok: "<i>y</i> remplace un lieu : il vit à Giverny.", fb: { 1: "<i>y</i> remplace un lieu, pas une date.", 2: "Relisez : où vit-il ?" } },
-    { q: "« Des nymphéas ? Il <b>en</b> a peint environ 250. » <i>en</i> remplace…", options: ["des nymphéas", "à Giverny", "le jardin"], answer: 0, ok: "<i>en</i> remplace une quantité : il a peint 250 nymphéas.", fb: { 1: "Pour un lieu avec « à », on utilise <i>y</i>.", 2: "Avec un nombre (250), <i>en</i> remplace la chose comptée." } },
-    { q: "« <b>Même si</b> le mot était d'abord une moquerie, les peintres l'ont adopté. » Cette phrase exprime…", options: ["une concession", "une cause", "une conséquence"], answer: 0, ok: "On reconnaît un fait (une moquerie), mais le résultat est inattendu (ils l'adoptent).", fb: { 1: "Une cause répond à « pourquoi ? ». Ici, on oppose deux idées.", 2: "Pour une conséquence, on dirait « donc » ou « ainsi »." } },
-    { q: "« Il peint le même sujet à différentes heures : <b>ainsi</b>, on voit la lumière changer. » <i>ainsi</i> introduit…", options: ["une conséquence", "une opposition", "une nouvelle idée"], answer: 0, ok: "<i>ainsi</i> = c'est pourquoi : voici le résultat.", fb: { 1: "Pour opposer, on utilise <i>pourtant</i> ou <i>néanmoins</i>.", 2: "Pour ajouter une idée, on utilise <i>par ailleurs</i> ou <i>de plus</i>." } },
-    { q: "Quelle expression a un adjectif placé <b>avant</b> le nom ?", options: ["un grand mouvement artistique", "des touches rapides", "des couleurs claires"], answer: 0, ok: "<i>grand</i> est un adjectif court et fréquent : avant le nom. <i>artistique</i>, après.", fb: { 1: "<i>rapides</i> est placé après le nom.", 2: "<i>claires</i> (une couleur) se place après le nom." } }
+    { q: "« Son nom <b>a été inventé par</b> un critique. » C'est…", options: ["une forme passive", "un passé composé actif", "un plus-que-parfait"], answer: 0, ok: "être (a été) + participe passé + <i>par</i> + l'agent : c'est le passif.", fb: { 1: "Le sujet (son nom) ne fait pas l'action : c'est le critique, introduit par « par ».", 2: "Le plus-que-parfait se forme avec avais / étais. Ici : « a été » + participe." } },
+    { q: "« Il s'installe à Giverny, et il <b>y</b> vit jusqu'à sa mort. » <i>y</i> remplace…", options: ["à Giverny", "en 1883", "au jardin"], answer: 0, ok: "<i>y</i> remplace un lieu introduit par <i>à</i> : il vit à Giverny.", fb: { 1: "<i>y</i> remplace un lieu, pas une date.", 2: "Le jardin vient après dans la phrase : <i>y</i> renvoie à un lieu déjà nommé." } },
+    { q: "« Des nymphéas ? Il <b>en</b> a peint environ 250. » <i>en</i> remplace…", options: ["des nymphéas", "des tableaux", "des étangs"], answer: 0, ok: "<i>en</i> remplace la chose comptée : il a peint 250 nymphéas.", fb: { 1: "Le mot « tableaux » n'est pas dans la phrase : regardez la question juste avant.", 2: "Il n'y a qu'un étang ; la question porte sur autre chose." } },
+    { q: "« <b>Même si</b> le mot était d'abord une moquerie, les peintres l'ont adopté. » Cette phrase exprime…", options: ["une concession", "une condition", "une cause"], answer: 0, ok: "On reconnaît un fait (une moquerie), mais le résultat est inattendu (ils l'adoptent).", fb: { 1: "Attention : <i>si</i> seul exprime une condition, mais <i>même si</i> exprime une concession.", 2: "Une cause répond à « pourquoi ? ». Ici, on oppose deux idées." } },
+    { q: "« Il peint le même sujet à différentes heures : <b>ainsi</b>, on voit la lumière changer. » <i>ainsi</i> introduit…", options: ["une conséquence", "une explication", "une opposition"], answer: 0, ok: "<i>ainsi</i> = c'est pourquoi : voici le résultat.", fb: { 1: "Pour expliquer, on utilise <i>en effet</i> ou <i>car</i>.", 2: "Pour opposer, on utilise <i>pourtant</i> ou <i>néanmoins</i>." } },
+    { q: "Dans quelle expression l'adjectif est-il placé <b>avant</b> le nom ?", options: ["un grand mouvement", "des touches rapides", "des couleurs claires"], answer: 0, ok: "<i>grand</i> est un adjectif court et fréquent : avant le nom.", fb: { 1: "<i>rapides</i> est placé après le nom.", 2: "<i>claires</i> est placé après le nom." } }
   ]
 });
 Exos.qcm(document.getElementById("ex-monet-video"), {
   num: 3, color: "c-vert", titre: "Qu'avez-vous vu ? Qu'avez-vous entendu ?",
   consigne: "Après avoir regardé la vidéo.", melanger: true,
   items: [
-    { q: "Dans la vidéo, on voit surtout…", options: ["des tableaux de jardins et d'étangs", "des photos de Paris au XIX<sup>e</sup> siècle", "des portraits de la famille de Monet"], answer: 0, ok: "Des allées fleuries, l'étang, les nymphéas : le jardin de Giverny peint par Monet.", fb: { 1: "Ce ne sont pas des photos, et on ne voit pas de ville.", 2: "On ne voit pas de portraits : regardez les sujets des tableaux." } },
-    { q: "Quel sujet revient le plus souvent ?", options: ["les nymphéas sur l'eau", "la mer et les bateaux", "la neige et l'hiver"], answer: 0, ok: "Les nymphéas : Monet en a peint environ 250.", fb: { 1: "Il n'y a pas de mer dans cette vidéo.", 2: "Les tableaux sont pleins de fleurs et de verdure : ce n'est pas l'hiver." } },
-    { q: "Le pont qu'on voit dans un tableau est…", options: ["un pont japonais au-dessus de l'étang", "un pont de pierre sur la Seine", "un pont de chemin de fer"], answer: 0, ok: "Monet l'a fait construire dans son jardin d'eau. Vous le verrez « en vrai » dans la partie 2.", fb: { 1: "Ce pont est en bois, peint, et passe au-dessus de l'étang du jardin.", 2: "Pas de train ici : c'est un petit pont de jardin." } },
-    { q: "Comment est la musique ?", options: ["lente et douce", "rapide et puissante", "une chanson avec des paroles"], answer: 0, ok: "Le <i>Clair de lune</i> de Debussy : une musique calme, comme la lumière de la lune sur l'eau.", fb: { 1: "Réécoutez : le rythme est plutôt lent.", 2: "Il n'y a pas de paroles : c'est une pièce instrumentale." } }
+    { q: "Dans la vidéo, on voit surtout…", options: ["des jardins et de l'eau", "des champs et des meules", "des rues et des gares"], answer: 0, ok: "Des allées fleuries, l'étang, les nymphéas : le jardin de Giverny.", fb: { 1: "Monet a peint des meules, mais pas dans cette vidéo.", 2: "Monet a peint des gares, mais pas dans cette vidéo." } },
+    { q: "Quel sujet revient le plus souvent ?", options: ["les nymphéas sur l'eau", "les coquelicots des champs", "les falaises au bord de la mer"], answer: 0, ok: "Les nymphéas : Monet en a peint environ 250.", fb: { 1: "Il y a des fleurs, mais regardez celles qui flottent.", 2: "Il n'y a pas de mer dans cette vidéo." } },
+    { q: "Le pont qu'on voit dans un tableau est…", options: ["un petit pont en bois", "un grand pont en pierre", "un pont moderne en fer"], answer: 0, ok: "Le pont japonais du jardin d'eau. Vous le verrez « en vrai » dans la partie 2.", fb: { 1: "Regardez sa taille et sa couleur : c'est un pont de jardin.", 2: "Ce pont est peint et courbé, comme dans les estampes japonaises." } },
+    { q: "Comment est la musique ?", options: ["lente et douce", "rapide et légère", "forte et dramatique"], answer: 0, ok: "Le <i>Clair de lune</i> de Debussy : calme, comme la lumière de la lune sur l'eau.", fb: { 1: "Réécoutez : le rythme est plutôt lent.", 2: "Réécoutez : la musique reste calme et légère." } }
   ]
 });
+Exos.bilan(document.getElementById("bilan-monet"), { activite: ACT, partie: "Onglet 1 · Chez Monet", exos: ["ex-notes", "ex-gram-notes", "ex-monet-video"] });
 
 /* =============================== PARTIE 2 =============================== */
 Exos.qcm(document.getElementById("ex-g-vocab"), {
   num: 1, color: "c-violet", titre: "Les mots du reportage",
   consigne: "Choisissez le sens du mot en gras.", melanger: true,
   items: [
-    { q: "Chaque année, des milliers de visiteurs <b>foulent</b> les allées du jardin.", options: ["marchent sur", "nettoient", "photographient"], answer: 0, ok: "<i>Fouler</i> = marcher sur (le sol, l'herbe, les allées).", fb: { 1: "Les visiteurs ne travaillent pas : ils se promènent.", 2: "Ils prennent sans doute des photos, mais <i>fouler</i> parle des pieds." } },
-    { q: "Les jardiniers plantent des tulipes dans les <b>plates-bandes</b>.", options: ["les parterres de fleurs", "les pots sur les fenêtres", "les serres"], answer: 0, ok: "Une <i>plate-bande</i> = un parterre : une bande de terre où on plante des fleurs.", fb: { 1: "Une plate-bande est dans le sol du jardin.", 2: "Une serre est une maison de verre ; une plate-bande est en plein air." } },
-    { q: "Depuis la fenêtre, Monet avait une belle <b>vue</b> sur le jardin.", options: ["un paysage, une perspective", "une lumière", "une photo"], answer: 0, ok: "Une <i>vue</i> = ce qu'on voit d'un endroit : un paysage, une perspective.", fb: { 1: "La lumière éclaire la vue, mais ce n'est pas le même mot.", 2: "Une vue n'est pas un objet : c'est ce qu'on voit." } },
-    { q: "Monet a peint plus de 250 <b>toiles</b> de nymphéas.", options: ["des tableaux", "des dessins au crayon", "des tissus pour le jardin"], answer: 0, ok: "Une <i>toile</i> = le tissu sur lequel on peint, et donc le tableau lui-même.", fb: { 1: "Monet peint à l'huile, sur toile, pas au crayon.", 2: "Le mot vient bien du tissu, mais ici il désigne la peinture." } },
-    { q: "Avec une <b>touche</b> de rose, le jardinier imite les couleurs de Monet.", options: ["une nuance de couleur", "une fleur rare", "un outil de jardin"], answer: 0, ok: "Une <i>touche</i> = une petite quantité de couleur, comme un coup de pinceau.", fb: { 1: "On parle de couleur, pas d'une plante.", 2: "Le jardinier « peint » avec les fleurs : la touche est une couleur." } },
-    { q: "Monet a fait creuser un <b>étang</b> au fond du jardin.", options: ["un bassin, un petit lac", "un puits", "un canal"], answer: 0, ok: "Un <i>étang</i> = une étendue d'eau calme, plus petite qu'un lac.", fb: { 1: "Un puits est profond et étroit ; on ne peut pas y faire pousser des fleurs.", 2: "Un canal est long et étroit ; l'eau de l'étang est calme et large." } },
-    { q: "Sur l'étang flottent des <b>nénuphars</b>, qu'on appelle aussi des <b>nymphéas</b>.", options: ["des plantes aquatiques aux feuilles flottantes", "des poissons colorés", "des petits bateaux"], answer: 0, ok: "Des plantes d'eau : leurs grandes feuilles rondes flottent, leurs fleurs sont blanches, roses ou jaunes.", fb: { 1: "Regardez la deuxième photo : ce sont des feuilles et une fleur.", 2: "Ce sont des plantes, pas des objets." } },
-    { q: "Après la mort de Monet, le jardin a été <b>en péril</b>.", options: ["en danger", "très célèbre", "fermé le dimanche"], answer: 0, ok: "<i>En péril</i> = en danger.", fb: { 1: "Le mot <i>péril</i> annonce un problème, pas un succès.", 2: "Le mot est beaucoup plus fort : le jardin risquait de disparaître." } }
+    { q: "Chaque année, des milliers de visiteurs <b>foulent</b> les allées du jardin.", options: ["marchent sur", "arrosent", "dessinent"], answer: 0, ok: "<i>Fouler</i> = marcher sur (le sol, l'herbe, les allées).", fb: { 1: "Ce sont des visiteurs, pas des jardiniers.", 2: "<i>Fouler</i> parle des pieds, pas des mains." } },
+    { q: "Les jardiniers plantent des tulipes dans les <b>plates-bandes</b>.", options: ["les parterres", "les allées", "les clôtures"], answer: 0, ok: "Une <i>plate-bande</i> = un parterre : une bande de terre où on plante des fleurs.", fb: { 1: "On marche dans les allées ; on plante à côté.", 2: "On ne plante pas des tulipes dans une clôture." } },
+    { q: "Depuis la fenêtre, Monet avait une belle <b>vue</b> sur le jardin.", options: ["une perspective", "un éclairage", "une ouverture"], answer: 0, ok: "Une <i>vue</i> = ce qu'on voit d'un endroit : un paysage, une perspective.", fb: { 1: "La lumière éclaire la vue, mais ce n'est pas le même mot.", 2: "L'ouverture, c'est la fenêtre ; la vue, c'est ce qu'on voit par la fenêtre." } },
+    { q: "Monet a peint plus de 250 <b>toiles</b> de nymphéas.", options: ["des tableaux", "des croquis", "des tapisseries"], answer: 0, ok: "Une <i>toile</i> = le tissu sur lequel on peint, et donc le tableau lui-même.", fb: { 1: "Un croquis est un dessin rapide ; Monet peint à l'huile, sur toile.", 2: "Le mot vient bien du tissu, mais ici il désigne la peinture." } },
+    { q: "Avec une <b>touche</b> de rose, le jardinier imite les couleurs de Monet.", options: ["une nuance", "une fleur", "une odeur"], answer: 0, ok: "Une <i>touche</i> = une petite quantité de couleur, comme un coup de pinceau. Ici, « rose » est une couleur.", fb: { 1: "Attention : ici « rose » est une couleur, pas la fleur.", 2: "On parle des couleurs de Monet, pas du parfum des fleurs." } },
+    { q: "Monet a fait creuser un <b>étang</b> au fond du jardin.", options: ["un bassin", "un ruisseau", "une fontaine"], answer: 0, ok: "Un <i>étang</i> = une étendue d'eau calme, plus petite qu'un lac.", fb: { 1: "L'eau d'un ruisseau coule ; celle d'un étang reste calme.", 2: "Une fontaine est petite ; sur un étang, on peut faire pousser des plantes." } },
+    { q: "Sur l'étang flottent des <b>nénuphars</b>, qu'on appelle aussi des <b>nymphéas</b>.", options: ["des plantes d'eau", "des poissons rouges", "des oiseaux d'eau"], answer: 0, ok: "Leurs grandes feuilles rondes flottent ; leurs fleurs sont blanches, roses ou jaunes.", fb: { 1: "Regardez la deuxième photo : ce sont des feuilles et une fleur.", 2: "Regardez la deuxième photo : ce sont des feuilles et une fleur." } },
+    { q: "Après la mort de Monet, le jardin a été <b>en péril</b>.", options: ["en danger", "en travaux", "en vente"], answer: 0, ok: "<i>En péril</i> = en danger : le jardin risquait de disparaître.", fb: { 1: "Les travaux sont venus plus tard, pour le sauver.", 2: "Le mot <i>péril</i> parle d'un risque, pas d'une vente." } }
   ]
 });
 Exos.qcm(document.getElementById("ex-g-global"), {
   num: 2, color: "c-bleu", titre: "Écoute 1 · De quoi parle le reportage ?",
   consigne: "Après une écoute complète.", melanger: true,
   items: [
-    { q: "Le reportage présente surtout…", options: ["le jardin et la maison de Monet à Giverny", "une exposition de tableaux de Monet à Paris", "la vie quotidienne du village de Giverny"], answer: 0, ok: "On visite la maison, le jardin de fleurs et le jardin d'eau.", fb: { 1: "On voit quelques tableaux, mais le reportage a été tourné à Giverny.", 2: "Le village n'est pas le sujet : écoutez qui parle et où." } },
-    { q: "Le reportage montre deux espaces différents :", options: ["un jardin de fleurs et un jardin d'eau", "un potager et un verger", "un parc public et une forêt"], answer: 0, ok: "Les allées fleuries d'abord, puis l'étang aux nymphéas et le pont japonais.", fb: { 1: "Ce jardin n'est pas fait pour les légumes ou les fruits : regardez les images.", 2: "C'est le jardin privé du peintre, pas un parc." } },
-    { q: "Qui parle dans le reportage ?", options: ["une journaliste, des visiteuses et un homme qui connaît bien le jardin", "seulement le présentateur du journal", "des peintres qui copient Monet"], answer: 0, ok: "Plusieurs voix : c'est typique d'un reportage télévisé.", fb: { 1: "Il y a d'autres voix après la présentation : écoutez bien.", 2: "On ne voit personne peindre dans ce reportage." } }
+    { q: "Le reportage présente surtout…", options: ["la maison et le jardin de Monet", "une exposition de Monet à Paris", "le village et ses habitants"], answer: 0, ok: "On visite la maison, le jardin de fleurs et le jardin d'eau.", fb: { 1: "On voit quelques tableaux, mais le reportage a été tourné à Giverny.", 2: "Le village n'est pas le sujet : écoutez qui parle, et de quoi." } },
+    { q: "Le reportage montre deux espaces :", options: ["des massifs de fleurs et un étang", "un potager et un grand verger", "une serre et un parc boisé"], answer: 0, ok: "Les allées fleuries d'abord, puis l'étang aux nymphéas et le pont japonais.", fb: { 1: "On ne voit ni légumes ni arbres fruitiers.", 2: "Il n'y a pas de serre dans le reportage." } },
+    { q: "Qui parle dans le reportage ?", options: ["une journaliste et plusieurs témoins", "un présentateur et un historien", "un guide du musée et des peintres"], answer: 0, ok: "Une journaliste sur place et des personnes interrogées : c'est typique d'un reportage.", fb: { 1: "Le présentateur parle seulement au début, en plateau.", 2: "On ne voit personne peindre dans ce reportage." } }
   ]
 });
-/* Réponses provisoires : à confirmer avec le corrigé du dossier (questions 1 et 2). */
+/* Réponses provisoires (questions 1 et 2) : à confirmer avec le corrigé du dossier. */
 Exos.qcm(document.getElementById("ex-g-detail"), {
   num: 3, color: "c-rouge", titre: "Écoute 2 · Les détails",
-  consigne: "Arrêtez la vidéo autant de fois que nécessaire.",
+  consigne: "Arrêtez la vidéo autant de fois que nécessaire.", melanger: true,
   items: [
-    { fixe: true, q: "Combien de visiteurs arrivent à Giverny chaque année ?", options: ["cinq mille", "cinq cent mille", "cent mille", "cinquante mille"], answer: 1, ok: "Un demi-million de visiteurs par an : c'est un des lieux les plus visités de la région.", fb: { 0: "Beaucoup plus ! Réécoutez le début.", 2: "Plus encore : écoutez bien le chiffre.", 3: "Attention aux chiffres : cinquante, cinq cents…" } },
+    { fixe: true, q: "Combien de visiteurs arrivent à Giverny chaque année ?", options: ["cinq mille", "cinq cent mille", "cent mille", "cinquante mille"], answer: 1, ok: "Un demi-million de visiteurs par an.", fb: { 0: "Beaucoup plus ! Réécoutez le début.", 2: "Plus encore : écoutez bien le chiffre.", 3: "Attention aux chiffres : cinquante, cinq cents…" } },
     { fixe: true, q: "Claude Monet y a vécu pendant combien de temps ?", options: ["34 ans", "44 ans", "43 ans", "40 ans"], answer: 2, ok: "De 1883 à sa mort, en 1926 : 43 ans.", fb: { 0: "Attention à l'ordre des chiffres : trente-quatre ou quarante-trois ?", 1: "Presque ! Réécoutez : quarante-…", 3: "Un peu plus que 40 : réécoutez." } },
-    { q: "Quelle œuvre a été inspirée par la vue de l'étang ?", options: ["les Nymphéas", "<i>Impression, soleil levant</i>", "les Meules"], answer: 0, ok: "Les Nymphéas : environ 250 tableaux de l'étang et de ses fleurs.", fb: { 1: "<i>Impression, soleil levant</i> montre un port, pas un étang.", 2: "Les Meules sont des tas de foin dans un champ." } },
-    { q: "Quelle culture intéressait les Européens à cette époque ?", options: ["la culture japonaise", "la culture chinoise", "la culture grecque"], answer: 0, ok: "C'est le « japonisme » : pensez au pont japonais et aux estampes de la maison de Monet.", fb: { 1: "Pensez au nom du pont vert de l'étang.", 2: "Le pont de l'étang porte le nom d'un pays d'Asie." } }
+    { q: "Quelle œuvre a été inspirée par la vue de l'étang ?", options: ["les Nymphéas", "les Meules", "les Peupliers"], answer: 0, ok: "Les Nymphéas : environ 250 tableaux de l'étang et de ses fleurs.", fb: { 1: "Les Meules sont des tas de foin dans un champ.", 2: "Les Peupliers sont des arbres au bord d'une rivière, pas l'étang." } },
+    { q: "Quelle culture intéressait les Européens à cette époque ?", options: ["japonaise", "chinoise", "indienne"], answer: 0, ok: "C'est le « japonisme » : le pont japonais, les estampes de la maison de Monet.", fb: { 1: "Pensez au nom du pont vert de l'étang.", 2: "Pensez au nom du pont vert de l'étang." } }
   ]
 });
 Exos.qcm(document.getElementById("ex-g-langue"), {
   num: 4, color: "c-vert", titre: "Écoute 3 · Présenter un lieu avec la grammaire de l'unité",
-  consigne: "Choisissez la phrase correcte.", melanger: true,
+  consigne: "Choisissez la phrase ou le mot correct.", melanger: true,
   items: [
-    { q: "Pour dire que le jardin a retrouvé son aspect d'origine :", options: ["Le jardin a été restauré.", "Le jardin a restauré.", "Le jardin est restaurant."], answer: 0, ok: "Passif : quelqu'un a restauré le jardin → le jardin <b>a été restauré</b>.", fb: { 1: "Le jardin ne fait pas l'action : il la subit. Il faut <i>être</i>.", 2: "Un restaurant n'a rien à voir ici !" } },
+    { q: "Pour dire que le jardin a retrouvé son aspect d'origine :", options: ["Le jardin a été restauré.", "Le jardin s'est restauré.", "Le jardin a restauré."], answer: 0, ok: "Passif : quelqu'un a restauré le jardin → le jardin <b>a été restauré</b>.", fb: { 1: "Le jardin ne s'est pas restauré tout seul : des personnes l'ont fait. Il faut le passif.", 2: "Le jardin ne fait pas l'action : il la subit. Il faut <i>être</i>." } },
     { q: "« Monet a vécu 43 ans <b>à Giverny</b>. » → « Monet ___ a vécu 43 ans. »", options: ["y", "en", "le"], answer: 0, ok: "<i>y</i> remplace un lieu introduit par <i>à</i>.", fb: { 1: "<i>en</i> remplace un lieu introduit par <i>de</i> (Il en revient).", 2: "<i>le</i> remplace un COD, pas un lieu." } },
     { q: "« Des visiteurs ? Il ___ vient un demi-million chaque année. »", options: ["en", "y", "les"], answer: 0, ok: "Avec une quantité, on utilise <i>en</i>.", fb: { 1: "Ici, on ne parle pas d'un lieu mais d'une quantité de visiteurs.", 2: "Avec une quantité (un demi-million), on utilise <i>en</i>." } },
-    { q: "Quelle phrase exprime une concession ?", options: ["Bien que le jardin soit très visité, il reste paisible.", "Le jardin est très visité, donc il est célèbre.", "Le jardin est très visité car il est célèbre."], answer: 0, ok: "<i>bien que</i> + subjonctif : on reconnaît un fait, mais on maintient une idée contraire.", fb: { 1: "<i>donc</i> exprime une conséquence.", 2: "<i>car</i> exprime une cause." } }
+    { q: "Quelle phrase exprime une concession ?", options: ["Bien que le jardin soit très visité, il reste calme.", "Comme le jardin est très visité, il est célèbre.", "Le jardin est très visité, donc il est célèbre."], answer: 0, ok: "<i>bien que</i> + subjonctif : on reconnaît un fait, mais on maintient une idée contraire.", fb: { 1: "<i>comme</i> exprime une cause.", 2: "<i>donc</i> exprime une conséquence." } }
   ]
 });
+Exos.bilan(document.getElementById("bilan-giverny"), { activite: ACT, partie: "Onglet 2 · Giverny", exos: ["ex-g-vocab", "ex-g-global", "ex-g-detail", "ex-g-langue"] });
 
 /* =============================== PARTIE 3 =============================== */
 Exos.qcm(document.getElementById("ex-p-avant"), {
   num: 1, color: "c-gris", titre: "Observez bien",
   consigne: "Regardez encore les images A, B et C.", melanger: true,
   items: [
-    { q: "Qu'ont en commun les trois images ?", options: ["Les formes sont floues, mais les couleurs sont fortes.", "Elles montrent toutes des personnes.", "Elles sont en noir et blanc."], answer: 0, ok: "Exactement : c'est tout le principe de ces photos, comme vous allez le découvrir.", fb: { 1: "On ne reconnaît pas de personnes : regardez les formes.", 2: "Au contraire : les couleurs sont très présentes." } },
-    { q: "Dans l'image B, les traînées orange en haut pourraient être…", options: ["le feuillage d'arbres en automne", "un incendie", "un coucher de soleil sur la mer"], answer: 0, ok: "Ce sont des arbres jaune-orangé : le photographe en parle dans la vidéo.", fb: { 1: "Regardez les lignes verticales en bas : on dirait des troncs.", 2: "Il n'y a pas d'horizon : les lignes sont verticales, comme des troncs d'arbres." } }
+    { q: "Qu'ont en commun les trois images ?", options: ["Les formes sont floues, les couleurs fortes.", "Les couleurs sont pâles, les formes nettes.", "On y voit des visages en mouvement."], answer: 0, ok: "C'est tout le principe de ces photos, comme vous allez le découvrir.", fb: { 1: "Regardez mieux : les contours sont-ils précis ?", 2: "On ne reconnaît pas de visages : regardez les formes." } },
+    { q: "Dans l'image B, les traînées orange pourraient être…", options: ["des arbres en automne", "un coucher de soleil", "un rideau de théâtre"], answer: 0, ok: "Ce sont des arbres jaune-orangé : le photographe en parle dans la vidéo.", fb: { 1: "Il n'y a pas d'horizon : les lignes sont verticales, comme des troncs.", 2: "Regardez le bas de l'image : on dirait des troncs." } }
   ]
 });
 Exos.qcm(document.getElementById("ex-p-global"), {
   num: 2, color: "c-bleu", titre: "Écoute 1 · Compréhension générale",
   consigne: "Après une écoute complète, sans sous-titres.", melanger: true,
   items: [
-    { q: "Bernard Reignier est…", options: ["un photographe, ancien chirurgien", "un peintre, ancien professeur", "un jardinier, ancien photographe"], answer: 0, ok: "« L'ancien chirurgien orthopédiste, aujourd'hui photographe ».", fb: { 1: "Il a un appareil photo dans les mains : ce n'est pas un peintre.", 2: "C'est l'inverse : il est photographe aujourd'hui." } },
-    { q: "Quelle est sa technique ?", options: ["Il bouge l'appareil pendant la prise de vue.", "Il retouche ses photos sur l'ordinateur.", "Il peint sur ses photos."], answer: 0, ok: "« En bougeant son appareil à l'instant de la prise de vue… »", fb: { 1: "Il dit justement le contraire : « non pas en travaillant sur l'ordinateur ».", 2: "Il ne touche pas au papier : tout se passe au moment de la photo." } },
-    { q: "Pourquoi l'appelle-t-on « photographe impressionniste » ?", options: ["Ses photos ressemblent à des coups de pinceau.", "Il photographie les tableaux des impressionnistes.", "Il expose au musée de Monet."], answer: 0, ok: "Il veut « un effet de coup de pinceau », comme les peintres impressionnistes.", fb: { 1: "Il photographie la nature, pas des tableaux.", 2: "La vidéo ne parle pas d'exposition chez Monet." } }
+    { q: "Bernard Reignier est…", options: ["un photographe, ancien chirurgien", "un photographe, ancien peintre", "un peintre, ancien photographe"], answer: 0, ok: "« L'ancien chirurgien orthopédiste, aujourd'hui photographe ».", fb: { 1: "Il travaille comme un peintre, mais ce n'était pas son métier : écoutez la fin.", 2: "C'est l'inverse : il est photographe aujourd'hui." } },
+    { q: "Quelle est sa technique ?", options: ["Il bouge l'appareil en prenant la photo.", "Il photographie des sujets en mouvement.", "Il retouche ses photos à l'ordinateur."], answer: 0, ok: "« En bougeant son appareil à l'instant de la prise de vue… » Le sujet, lui, ne bouge pas.", fb: { 1: "Attention : ce n'est pas le sujet qui bouge, c'est l'appareil.", 2: "Il dit justement le contraire : « non pas en travaillant sur l'ordinateur »." } },
+    { q: "Pourquoi l'appelle-t-on « photographe impressionniste » ?", options: ["Ses photos imitent des coups de pinceau.", "Il photographie des tableaux célèbres.", "Il travaille dans le jardin de Monet."], answer: 0, ok: "Il veut « un effet de coup de pinceau », comme les peintres impressionnistes.", fb: { 1: "Il photographie la nature, pas des tableaux.", 2: "On le voit dans un jardin, mais la vidéo ne dit pas que c'est celui de Monet." } }
   ]
 });
 Exos.qcm(document.getElementById("ex-p-detail"), {
   num: 3, color: "c-rouge", titre: "Écoute 2 · Vrai ou faux ?",
   consigne: "Toujours sans sous-titres. Arrêtez la vidéo si nécessaire.",
   items: [
-    { q: "Pour Bernard Reignier, il n'y a pas de vie sans mouvement.", options: ["Vrai", "Faux"], answer: 0, ok: "C'est sa première phrase et l'idée de toute sa démarche.", fb: { 1: "Réécoutez sa première phrase." } },
-    { q: "Pour photographier les arbres, il a bougé l'appareil une seule fois, très vite.", options: ["Vrai", "Faux"], answer: 1, ok: "Il a fait « un mouvement de va-et-vient » et il est passé « plusieurs fois au même endroit ».", fb: { 0: "Écoutez bien : combien de fois est-il passé au même endroit ?" } },
-    { q: "Il a saturé la couleur des arbres avec un logiciel.", options: ["Vrai", "Faux"], answer: 1, ok: "« Non pas en travaillant sur l'ordinateur, mais […] par le simple mouvement alterné. »", fb: { 0: "Il dit « non pas en travaillant sur l'ordinateur » : alors comment ?" } },
-    { q: "Selon lui, dans le mouvement, la forme disparaît mais la couleur reste.", options: ["Vrai", "Faux"], answer: 0, ok: "« Le mouvement déforme la forme, mais préserve la couleur. »", fb: { 1: "Réécoutez la fin : que devient la couleur ?" } },
-    { q: "Il a commencé la photographie dynamique quand il était étudiant.", options: ["Vrai", "Faux"], answer: 1, ok: "« Depuis sa retraite et la découverte de la photo dynamique… »", fb: { 0: "Écoutez la fin : depuis quand fait-il ces photos ?" } }
+    { fixe: true, q: "Pour Bernard Reignier, il n'y a pas de vie sans mouvement.", options: ["Vrai", "Faux"], answer: 0, ok: "C'est sa première phrase et l'idée de toute sa démarche.", fb: { 1: "Réécoutez sa première phrase." } },
+    { fixe: true, q: "Pour photographier les arbres, il a bougé l'appareil une seule fois, très vite.", options: ["Vrai", "Faux"], answer: 1, ok: "Il a fait « un mouvement de va-et-vient » et il est passé « plusieurs fois au même endroit ».", fb: { 0: "Écoutez bien : combien de fois est-il passé au même endroit ?" } },
+    { fixe: true, q: "Il a saturé la couleur des arbres avec un logiciel.", options: ["Vrai", "Faux"], answer: 1, ok: "« Non pas en travaillant sur l'ordinateur, mais […] par le simple mouvement alterné. »", fb: { 0: "Il dit « non pas en travaillant sur l'ordinateur » : alors comment ?" } },
+    { fixe: true, q: "Selon lui, dans le mouvement, la forme disparaît mais la couleur reste.", options: ["Vrai", "Faux"], answer: 0, ok: "« Le mouvement déforme la forme, mais préserve la couleur. »", fb: { 1: "Réécoutez la fin : que devient la couleur ?" } },
+    { fixe: true, q: "Il a commencé la photographie dynamique quand il était étudiant.", options: ["Vrai", "Faux"], answer: 1, ok: "« Depuis sa retraite et la découverte de la photo dynamique… »", fb: { 0: "Écoutez la fin : depuis quand fait-il ces photos ?" } }
   ]
 });
 Exos.ordre(document.getElementById("ex-p-ordre"), {
@@ -460,7 +469,7 @@ Exos.ordre(document.getElementById("ex-p-ordre"), {
   items: [
     { texte: "Remettez les étapes dans l'ordre.",
       consigne: "Touchez les étapes de la <b>première</b> à la <b>dernière</b>.",
-      etapes: ["Il veut accentuer la couleur jaune-orangé des arbres.", "Il fait un mouvement de va-et-vient avec l'appareil.", "Il passe plusieurs fois au même endroit.", "La couleur est saturée, comme avec plusieurs coups de pinceau."],
+      etapes: ["Il veut accentuer la couleur des arbres.", "Il fait un mouvement de va-et-vient.", "Il passe plusieurs fois au même endroit.", "La couleur est saturée, sans ordinateur."],
       ok: "D'abord l'intention, puis le geste répété, enfin le résultat.",
       indice: "Commencez par ce qu'il voulait faire, finissez par le résultat." }
   ]
@@ -469,13 +478,15 @@ Exos.qcm(document.getElementById("ex-p-langue"), {
   num: 5, color: "c-violet", titre: "Écoute 3 · La langue du reportage",
   consigne: "Maintenant, affichez les sous-titres.", melanger: true,
   items: [
-    { q: "« Comme si j'<b>avais donné</b> plusieurs coups de pinceau. » <i>avais donné</i> est…", options: ["un plus-que-parfait", "un passé composé", "un imparfait"], answer: 0, ok: "<i>comme si</i> + plus-que-parfait : on imagine une action qui n'a pas eu lieu. Il n'a pas utilisé de pinceau !", fb: { 1: "Le passé composé serait « j'ai donné ». Ici : « avais » + participe.", 2: "L'imparfait serait « je donnais ». Ici, il y a un auxiliaire + un participe." } },
-    { q: "« <b>En bougeant</b> son appareil, il ne fige pas une vision. » Le gérondif indique…", options: ["la manière, le moyen", "le lieu", "une opposition"], answer: 0, ok: "Comment fait-il ? En bougeant son appareil : c'est le moyen.", fb: { 1: "Le gérondif ne répond pas à « où ? », mais à « comment ? ».", 2: "Pour s'opposer, on utiliserait « pourtant » ou « même si »." } },
-    { q: "« Il fallait bouger l'appareil […], <b>puisque</b> c'est comme ça que les impressionnistes donnent de la vie à leur tableau. » <i>puisque</i> introduit…", options: ["une cause", "une conséquence", "une concession"], answer: 0, ok: "<i>puisque</i> = car, une cause que tout le monde connaît.", fb: { 1: "La conséquence serait introduite par « donc ».", 2: "Il n'y a pas d'opposition : il explique pourquoi." } },
-    { q: "« Dans le mouvement, la couleur <b>prend le pas sur</b> la forme. » Cela veut dire que la couleur…", options: ["devient plus importante que la forme", "disparaît derrière la forme", "suit la forme"], answer: 0, ok: "<i>Prendre le pas sur</i> = devenir plus important que, dominer.", fb: { 1: "C'est le contraire : la couleur reste, la forme se déforme.", 2: "La couleur ne suit pas : elle domine." } },
-    { q: "« L'ancien chirurgien n'a jamais cessé de <b>soigner</b> le mouvement. » Pourquoi ce verbe est-il amusant ?", options: ["Un chirurgien soigne les malades ; ici, il « soigne » ses photos.", "Il est encore malade.", "Il travaille toujours à l'hôpital."], answer: 0, ok: "Jeu de mots : <i>soigner</i> un patient / <i>soigner</i> son travail (le faire avec attention). Et le mouvement, c'était déjà sa spécialité d'orthopédiste !", fb: { 1: "Il n'est pas malade : pensez à son ancien métier.", 2: "Il est à la retraite : il est photographe maintenant." } }
+    { q: "« Comme si j'<b>avais donné</b> plusieurs coups de pinceau. » <i>avais donné</i> est…", options: ["un plus-que-parfait", "un passé composé", "un conditionnel passé"], answer: 0, ok: "<i>comme si</i> + plus-que-parfait : on imagine une action qui n'a pas eu lieu. Il n'a pas utilisé de pinceau !", fb: { 1: "Le passé composé serait « j'ai donné ». Ici : « avais » + participe.", 2: "Le conditionnel passé serait « j'aurais donné »." } },
+    { q: "« <b>En bougeant</b> son appareil, il ne fige pas une vision. » Le gérondif répond à la question…", options: ["Comment ?", "Pourquoi ?", "Quand ?"], answer: 0, ok: "Comment fait-il ? En bougeant son appareil : c'est la manière, le moyen.", fb: { 1: "Il ne donne pas la raison, mais la façon de faire.", 2: "Ici, le gérondif ne donne pas un moment, mais une façon de faire." } },
+    { q: "« Il fallait bouger l'appareil […], <b>puisque</b> c'est comme ça que les impressionnistes donnent de la vie à leur tableau. » <i>puisque</i> introduit…", options: ["une cause", "un but", "une condition"], answer: 0, ok: "<i>puisque</i> = car, une cause que tout le monde connaît.", fb: { 1: "Le but serait introduit par « pour » ou « afin de ».", 2: "La condition serait introduite par « si »." } },
+    { q: "« Dans le mouvement, la couleur <b>prend le pas sur</b> la forme. » Cela veut dire que la couleur…", options: ["devient plus importante qu'elle", "devient moins visible qu'elle", "devient aussi forte qu'elle"], answer: 0, ok: "<i>Prendre le pas sur</i> = devenir plus important que, dominer.", fb: { 1: "C'est le contraire : la couleur reste, la forme se déforme.", 2: "Ce n'est pas une égalité : la couleur domine." } },
+    { q: "« L'ancien chirurgien n'a jamais cessé de <b>soigner</b> le mouvement. » Pourquoi ce verbe est-il amusant ?", options: ["Avant, il soignait des patients.", "Il soigne encore des malades.", "Il photographie des hôpitaux."], answer: 0, ok: "Jeu de mots : <i>soigner</i> un patient / <i>soigner</i> son travail (le faire avec attention). Et le mouvement, c'était déjà sa spécialité d'orthopédiste !", fb: { 1: "Il est à la retraite : il est photographe maintenant.", 2: "Il photographie la nature : pensez plutôt à son ancien métier." } }
   ]
 });
+Exos.bilan(document.getElementById("bilan-photo"), { activite: ACT, partie: "Onglet 3 · La photographie", exos: ["ex-p-avant", "ex-p-global", "ex-p-detail", "ex-p-ordre", "ex-p-langue"] });
+
 </script>
 </body>
 </html>

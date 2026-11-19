@@ -593,6 +593,12 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font
         <tbody></tbody>
       </table>
     </div>
+    <p id="pqp-etat" style="color:var(--muted);font-size:.95rem"></p>
+    <p style="font-size:.95rem;color:var(--muted)">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s'entraîner.</p>
+    <label for="pqp-nom" style="display:block;font-weight:600;margin:10px 0 4px">Votre nom et prénom</label>
+    <input id="pqp-nom" type="text" autocomplete="name" maxlength="60" style="display:block;width:100%;max-width:420px;font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px">
+    <div class="ex-actions"><button type="button" class="btn primary" id="pqp-partager">Partager mon résultat</button></div>
+    <p id="pqp-fb" aria-live="polite" style="font-size:.95rem"></p>
   </div>
 
   <div class="next"><button class="btn ghost" data-go="5">Partie 5 : À l'oral →</button></div>
@@ -820,6 +826,19 @@ const DIAL = [
 
 const PART_NAMES = {1:"1 · Formation",2:"2 · Utilisation",3:"3 · Écriture",4:"4 · Compréhension orale"};
 const state = {};
+let FIRSTP = {};
+try { FIRSTP = (JSON.parse(localStorage.getItem("fiche:pqp") || "{}").first) || {}; } catch (e) {}
+function pqpParts(){
+  const parts = {1:[0,0,true],2:[0,0,true],3:[0,0,true],4:[0,0,true]};
+  Object.keys(EXS).forEach(id=>{ const p=id[1]; parts[p][1]+=EXS[id].total; if(FIRSTP[id]===undefined) parts[p][2]=false; else parts[p][0]+=FIRSTP[id]; });
+  return Object.keys(parts).map(p=>({ t: PART_NAMES[p], p: parts[p][2] ? parts[p][0] : null, n: parts[p][1] }));
+}
+function savePQP(){
+  const P=pqpParts();
+  const rec={ titre:"Le plus-que-parfait", parts:P, first:FIRSTP, complet:P.every(x=>x.p!==null),
+    points:P.reduce((a,x)=>a+(x.p||0),0), total:P.reduce((a,x)=>a+x.n,0), date:new Date().toISOString() };
+  try { localStorage.setItem("fiche:pqp", JSON.stringify(rec)); } catch (e) {}
+}
 
 /* ---------- utilitaires ---------- */
 const norm = s => s.toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*'\s*/g,"'").replace(/\s+/g," ").replace(/[.,;:!?…]+$/,"").trim();
@@ -939,6 +958,8 @@ function mount(id){
     const sc = ex.type==="choice" ? checkChoice(ex) : checkFill(ex);
     state[id] = sc; bCheck.disabled = true;
     scoreEl.textContent = "Score : "+sc+" / "+ex.total + praise(sc, ex.total);
+    if(FIRSTP[id]===undefined){ FIRSTP[id]=sc; savePQP(); }
+    else if(FIRSTP[id]!==sc) scoreEl.textContent += " · 1er essai : "+FIRSTP[id]+" / "+ex.total;
     updateScores();
     if(id==="p4") unlockAfterListening();
   });
@@ -976,8 +997,27 @@ function updateScores(){
     rows += "<tr><td>"+PART_NAMES[p]+"</td><td>"+(done ? a+" / "+b : "— / "+b)+"</td></tr>";
   });
   rows += "<tr><td><b>Total</b></td><td><b>"+s+" / "+t+"</b></td></tr>";
+  const P = pqpParts(), fp = P.reduce((a,x)=>a+(x.p||0),0), fdone = P.every(x=>x.p!==null);
+  rows += "<tr><td><b>Premier essai</b></td><td><b>"+(fdone ? fp+" / "+t : "à terminer")+"</b></td></tr>";
   tb.innerHTML = rows;
+  const etat = document.getElementById("pqp-etat");
+  if(etat){ etat.textContent = fdone ? "Toutes les parties sont vérifiées." : "Vérifiez tous les exercices des parties 1 à 4 pour partager votre résultat.";
+    document.getElementById("pqp-partager").disabled = !fdone; }
 }
+(function(){
+  const inp=document.getElementById("pqp-nom"), btn=document.getElementById("pqp-partager"), fb=document.getElementById("pqp-fb");
+  try{ inp.value = localStorage.getItem("exos:nom") || ""; }catch(e){}
+  inp.addEventListener("input",()=>{ try{ localStorage.setItem("exos:nom", inp.value.trim()); }catch(e){} });
+  btn.addEventListener("click",()=>{
+    const nom=inp.value.trim(); if(!nom){ fb.textContent="Écrivez votre nom pour que votre professeure reconnaisse votre résultat."; inp.focus(); return; }
+    const P=pqpParts(), pts=P.reduce((a,x)=>a+x.p,0), max=P.reduce((a,x)=>a+x.n,0), d=new Date();
+    const txt="Inspire 3 · Unité 5 · Le plus-que-parfait\nNom : "+nom+"\nRésultat : "+pts+" / "+max+" points (premier essai)\n"+P.map(x=>"· "+x.t+" : "+x.p+" / "+x.n).join("\n")+"\nLe "+d.toLocaleDateString("fr-FR")+" à "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+    const done=ok=>{ fb.textContent = ok ? "✓ Copié ! Collez votre résultat dans le message ou le devoir demandé par votre professeure." : "Copie impossible : faites une capture d'écran du bilan."; };
+    if(navigator.share){ navigator.share({title:"Le plus-que-parfait", text:txt}).then(()=>{ fb.textContent="✓ Votre résultat a été partagé."; }).catch(()=>{}); }
+    else if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false)); }
+    else done(false);
+  });
+})();
 updateScores();
 
 /* ---------- navigation ---------- */

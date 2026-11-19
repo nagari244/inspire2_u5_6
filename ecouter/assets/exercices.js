@@ -1,6 +1,7 @@
 /* Moteur d'exercices autocorrigés — Écouter · Niveau B1
    Types : qcm (choix), conj (conjugaison avec diagnostic d'erreur), ordre (chronologie).
-   Aucune donnée n'est enregistrée. */
+   Le résultat du premier essai de chaque exercice est gardé dans le navigateur (localStorage),
+   pour le bilan à partager (Exos.bilan). Rien n'est envoyé sur Internet. */
 (function () {
   "use strict";
 
@@ -39,6 +40,8 @@
     return e;
   }
 
+  var REG = [];
+
   /* ---------- Bloc d'exercice (titre, consigne, score) ---------- */
   function shell(root, cfg) {
     root.classList.add("ex");
@@ -53,8 +56,18 @@
     var list = el("div", "items");
     root.appendChild(list);
     var state = { total: 0, done: 0, firstOk: 0 };
+    var reg = { root: root, cfg: cfg, state: state, first: null, key: "exos:" + location.pathname + "#" + (root.id || cfg.titre) };
+    try { var saved = JSON.parse(localStorage.getItem(reg.key) || "null"); if (saved && typeof saved.points === "number") reg.first = saved; } catch (e) {}
+    REG.push(reg);
     function update() {
-      sc.textContent = "Score : " + state.firstOk + " / " + state.total + (state.done === state.total && state.total ? " ✓ terminé" : "");
+      if (state.total && state.done === state.total && !reg.first) {
+        reg.first = { points: state.firstOk, total: state.total, date: new Date().toISOString() };
+        try { localStorage.setItem(reg.key, JSON.stringify(reg.first)); } catch (e) {}
+      }
+      var txt = "Score : " + state.firstOk + " / " + state.total + (state.done === state.total && state.total ? " ✓ terminé" : "");
+      if (reg.first && !(state.done === state.total && state.firstOk === reg.first.points && state.total === reg.first.total)) txt += " · 1er essai : " + reg.first.points + " / " + reg.first.total;
+      sc.textContent = txt;
+      document.dispatchEvent(new CustomEvent("exos:update"));
     }
     var row = el("div", "btn-row");
     var reset = el("button", "btn small", "Recommencer");
@@ -465,5 +478,69 @@
     build();
   }
 
-  window.Exos = { qcm: qcm, conj: conj, ordre: ordre, saisie: saisie, audio: audio, diagnose: diagnose, expected: expected };
+
+  /* ---------- Bilan à partager (un par onglet ou par page) ----------
+     Exos.bilan(element, { activite: "…", partie: "…", exos: ["id1", "id2"] })
+     Compte les points du PREMIER essai complet de chaque exercice.            */
+  function bilan(root, cfg) {
+    root.classList.add("bilan-res");
+    root.innerHTML =
+      '<h3>Mon résultat' + (cfg.partie ? " · " + esc(cfg.partie) : "") + '</h3>' +
+      '<p class="total"><span class="pts">0</span> / <span class="max">0</span> points</p>' +
+      '<p class="etat notice"></p><ul class="detail"></ul>' +
+      '<label class="nom">Votre nom et prénom <input type="text" autocomplete="name" maxlength="60"></label>' +
+      '<div class="btn-row"><button type="button" class="btn partager">Partager mon résultat</button></div>' +
+      '<p class="fb" aria-live="polite"></p>' +
+      '<p class="notice">Seul le <b>premier essai</b> de chaque exercice compte. « Recommencer » sert à s\'entraîner.</p>';
+    var input = root.querySelector("input"), btn = root.querySelector(".partager"), fb = root.querySelector(".fb");
+    try { input.value = localStorage.getItem("exos:nom") || ""; } catch (e) {}
+    input.addEventListener("input", function () { try { localStorage.setItem("exos:nom", input.value.trim()); } catch (e) {} });
+    function regs() { return cfg.exos.map(function (id) { return REG.filter(function (r) { return r.root.id === id; })[0]; }).filter(Boolean); }
+    function compute() {
+      var pts = 0, max = 0, finis = 0, lignes = [];
+      regs().forEach(function (r) {
+        var tot = r.first ? r.first.total : r.state.total;
+        var p = r.first ? r.first.points : null;
+        max += tot; if (p !== null) { pts += p; finis++; }
+        lignes.push({ titre: (r.cfg.num ? r.cfg.num + ". " : "") + r.cfg.titre, p: p, tot: tot });
+      });
+      return { pts: pts, max: max, finis: finis, n: lignes.length, lignes: lignes };
+    }
+    function render() {
+      var c = compute();
+      root.querySelector(".pts").textContent = c.pts;
+      root.querySelector(".max").textContent = c.max;
+      root.querySelector(".etat").textContent = c.finis === c.n ? "Tous les exercices sont terminés." : "Exercices terminés : " + c.finis + " / " + c.n + ". Terminez-les tous pour partager votre résultat.";
+      root.querySelector(".detail").innerHTML = c.lignes.map(function (l) {
+        return "<li>" + esc(l.titre.replace(/<[^>]+>/g, "")) + " : <b>" + (l.p === null ? "à terminer" : l.p + " / " + l.tot) + "</b></li>";
+      }).join("");
+      btn.disabled = c.finis !== c.n;
+    }
+    btn.addEventListener("click", function () {
+      var c = compute(), nom = input.value.trim();
+      if (!nom) { fb.className = "fb ko"; fb.innerHTML = '<b class="t">Votre nom ?</b> Écrivez votre nom pour que votre professeure reconnaisse votre résultat.'; input.focus(); return; }
+      var d = new Date();
+      var txt = cfg.activite + (cfg.partie ? " · " + cfg.partie : "") + "\n" +
+        "Nom : " + nom + "\n" +
+        "Résultat : " + c.pts + " / " + c.max + " points (premier essai)\n" +
+        c.lignes.map(function (l) { return "· " + l.titre.replace(/<[^>]+>/g, "") + " : " + l.p + " / " + l.tot; }).join("\n") + "\n" +
+        "Le " + d.toLocaleDateString("fr-FR") + " à " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+      function copied(ok) {
+        fb.className = ok ? "fb ok" : "fb ko";
+        fb.innerHTML = ok ? '<b class="t">Copié !</b> Collez votre résultat dans le message ou le devoir demandé par votre professeure.'
+                          : '<b class="t">Copie impossible.</b> Faites une capture d\'écran de ce cadre.';
+      }
+      if (navigator.share) {
+        navigator.share({ title: cfg.activite, text: txt }).then(function () {
+          fb.className = "fb ok"; fb.innerHTML = '<b class="t">Envoyé.</b> Votre résultat a été partagé.';
+        }).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(txt).then(function () { copied(true); }, function () { copied(false); });
+      } else { copied(false); }
+    });
+    document.addEventListener("exos:update", render);
+    render();
+  }
+
+  window.Exos = { bilan: bilan, qcm: qcm, conj: conj, ordre: ordre, saisie: saisie, audio: audio, diagnose: diagnose, expected: expected };
 })();
